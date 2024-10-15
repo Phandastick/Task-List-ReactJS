@@ -37,6 +37,10 @@ body * {
     border-radius: 10px;
 }
 
+.navbar-today {
+    background-color: rgb(252, 235, 210);
+}
+
 .navbar-item:hover {
     margin: 10px;
     background-color: #e9e9f1;
