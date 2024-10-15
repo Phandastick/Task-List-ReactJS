@@ -1,6 +1,7 @@
 body {
     display:flex;
     flex-wrap: wrap;
+    flex-direction: row;
 }
 
 body * {
@@ -8,23 +9,38 @@ body * {
     border: 5px solid rgb(231, 217, 196); */
 }
 
+.sidebar h1 {
+    font-size:56px;
+    margin-top:10px;
+
+}
+
 .header {
     /* width: 100vw;
      */
-        display:flex;
-        flex: 1;
-    height:150px;
+    display:flex;
+    flex: 1;
+    max-height:150px;
+
+    margin:10px 0;
 }
 
 .header-seperator {
     border-width: 2.5px;
-    width: 100vw;
+    width:100%;
 }
 
-.vertical-seperator {
+.vertical-seperator {   
     border-width: 2.5px;
-    height: 500px;
     margin: 0;
+}
+
+.header-main-wrapper {
+    display:flex;
+    flex-direction: column;
+    
+    flex:1;
+    width: 100%;
 }
 
 .navbar-item {
@@ -47,10 +63,8 @@ body * {
 }
 
 .sidebar {
-    width: 20vw;
-    height: fit-content;
-
-    height: 500px;
+    width: 16vw;
+    min-height: 100vh;
 }
 
 .main-content {
