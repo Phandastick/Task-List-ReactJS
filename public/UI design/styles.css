@@ -4,15 +4,15 @@ body {
 }
 
 body * {
-    /* debugging border*/
-    border: 5px solid rgb(231, 217, 196);
+    /* debugging border
+    border: 5px solid rgb(231, 217, 196); */
 }
 
 .header {
     /* width: 100vw;
      */
-    display:flex;
-    flex-basis:100%;
+        display:flex;
+        flex: 1;
     height:150px;
 }
 
@@ -28,12 +28,18 @@ body * {
 }
 
 .navbar-item {
-    margin: 10px;
+    margin: 20px;
     
     flex: 1;
+    transition-duration: 350ms;
 
     border: 5px solid lightcoral;
-    border-radius: 5px;
+    border-radius: 10px;
+}
+
+.navbar-item:hover {
+    margin: 10px;
+    background-color: #e9e9f1;
 }
 
 .sidebar {
