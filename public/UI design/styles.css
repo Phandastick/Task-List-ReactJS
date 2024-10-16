@@ -1,28 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+/* change color scheme here so it wont be so mafan tqvm */
+:root{
+    --accent: #E75A5F;
+    --light: #FAFADC;
+    --standard: #FEE698;
+    --dark: #FDB15D;
+
+    --bg-color: var(--light);
+    --outline: var(--accent);
+    --bg-highlight: var(--dark);
+}
+
+html{
+    min-height:100vh;
+    height: -webkit-fill-available;
+}
+
 body {
     display:flex;
     flex-wrap: wrap;
     flex-direction: row;
-}
 
-body * {
-    /* debugging border
-    border: 5px solid rgb(231, 217, 196); */
+    font-family: "Open Sans", sans-serif;
+    height:inherit;
+
+    background-color: var(--bg-color);
 }
 
 .sidebar h1 {
     font-size:56px;
-    margin-top:10px;
-
+    margin-top:10px;    
 }
 
-.header {
-    /* width: 100vw;
-     */
-    display:flex;
-    flex: 1;
-    max-height:150px;
-
-    margin:10px 0;
+.freepik-credit {
+    margin-top: auto;
 }
 
 .header-seperator {
@@ -35,33 +47,52 @@ body * {
     margin: 0;
 }
 
+/* #region sidebar */
 .sidebar {
-    width: 20vw;
-    height: fit-content;
+    width: 18vw;
     min-height: 500px;
 
+    display:flex;
+    flex-direction: column;
+}
+
+.sidebar-divider {
+    width: inherit;
+    border-width: 1.5px;
+    margin:0;
+}
+
+.sidebar-preset {
+    padding: 0 0 5px 10px;
 }
 
 .sidebar-item {
     border:0;
     border-radius: 5px;
 
-    margin: 7.5px;
+    margin: 15px 7.5px;
     padding-left: 10px;
-    height: 2em;
+    height: 2.5em;
     display: flex;
     align-items: center;
 
     color:black;
     font-size: 24px;
-    transition-duration: 300ms;
+    transition-duration: 250ms;
 }
 
 .sidebar-item:hover {
-    background-color: rgb(243, 172, 172);
+    background-color: var(--dark);
     cursor: pointer;
+}
+
+.sidebar-item-icon {
+    width: 2em;
+}
   
-  
+/* #endregion */
+
+/* #region header */
 .header-main-wrapper {
     display:flex;
     flex-direction: column;
@@ -70,25 +101,38 @@ body * {
     width: 100%;
 }
 
+.header {
+    display:flex;
+    flex: 1;
+    max-height:150px;
+
+    margin:10px 0;
+}
+
 .navbar-item {
     margin: 20px;
     
     flex: 1;
     transition-duration: 350ms;
 
-    border: 5px solid lightcoral;
+    border: 5px solid var(--outline);
     border-radius: 10px;
 }
 
 .navbar-today {
-    background-color: rgb(252, 235, 210);
+    background-color: var(--standard);
 }
 
 .navbar-item:hover {
-    margin: 10px;
-    background-color: #e9e9f1;
+    margin: 13px;
+    background-color: var(--bg-highlight);
 }
 
+/* #endregion */
+
+/* #region main content WRITE CSS HERE TASHA */
 .main-content {
     flex: 1;
 }
+
+/* #endregion */
