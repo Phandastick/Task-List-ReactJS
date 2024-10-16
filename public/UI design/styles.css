@@ -12,19 +12,13 @@
     --bg-highlight: var(--dark);
 }
 
-html{
-    min-height:100vh;
-    height: -webkit-fill-available;
-}
-
 body {
     display:flex;
     flex-wrap: wrap;
     flex-direction: row;
 
     font-family: "Open Sans", sans-serif;
-    height:inherit;
-
+    min-height: 100vh;
     background-color: var(--bg-color);
 }
 
