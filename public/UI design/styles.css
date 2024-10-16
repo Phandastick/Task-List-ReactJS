@@ -35,6 +35,33 @@ body * {
     margin: 0;
 }
 
+.sidebar {
+    width: 20vw;
+    height: fit-content;
+    min-height: 500px;
+
+}
+
+.sidebar-item {
+    border:0;
+    border-radius: 5px;
+
+    margin: 7.5px;
+    padding-left: 10px;
+    height: 2em;
+    display: flex;
+    align-items: center;
+
+    color:black;
+    font-size: 24px;
+    transition-duration: 300ms;
+}
+
+.sidebar-item:hover {
+    background-color: rgb(243, 172, 172);
+    cursor: pointer;
+  
+  
 .header-main-wrapper {
     display:flex;
     flex-direction: column;
@@ -60,11 +87,6 @@ body * {
 .navbar-item:hover {
     margin: 10px;
     background-color: #e9e9f1;
-}
-
-.sidebar {
-    width: 16vw;
-    min-height: 100vh;
 }
 
 .main-content {
