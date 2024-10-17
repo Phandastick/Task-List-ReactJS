@@ -1,18 +1,18 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import Navbar from './components/navbar'
+import MainContent from './components/mainContent'
+import Sidebar from './components/sidebar'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <div className="header navbar containers"></div>
-      <hr className = "header-seperator"> </hr>
-      <div className="sidebar containers"></div>
-      <hr className="vertical-seperator"></hr>
-      <div className="main-content containers"></div>
+      <Navbar className="containers" />
+      <hr className = "header-seperator" />
+      <Sidebar className = "containers" />
+      <hr className="vertical-seperator" />
+      <MainContent className="containers" />
     </>
   )
 }
