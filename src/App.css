@@ -1,5 +1,38 @@
+.app-wrapper {
+  display: grid;
+  grid-template-columns: 18vw auto;
+  grid-template-rows: 150px auto;
+  min-height: 100vh;
+}
+
+.sidebar h1 {
+  font-size:56px;
+  margin-top:10px;    
+}
+
+.header-seperator {
+  grid-row:2/3;
+  grid-column: 2/3;
+
+  border-width: 2.5px;
+  margin:0;
+  width:100%;
+}
+
+.vertical-seperator {
+  grid-row:1/4;
+  grid-column: 2;
+
+  border-width: 2.5px 0 0 2.5px;
+  margin: 0;
+  width:0px;
+}
+
 /* #region sidebar */
 .sidebar {
+  grid-column: 1;
+  grid-row:1/2;
+
   width: 18vw;
   min-height: 500px;
 
@@ -44,15 +77,10 @@
 /* #endregion */
 
 /* #region header */
-.header-main-wrapper {
-  display:flex;
-  flex-direction: column;
-  
-  flex:1;
-  width: 100%;
-}
-
 .header {
+  grid-column: 2/3;
+  grid-row: 1/2;
+
   display:flex;
   flex: 1;
   max-height:150px;
@@ -83,7 +111,8 @@
 
 /* #region main content WRITE CSS HERE TASHA */
 .main-content {
-  flex: 1;
+  grid-row: 2;
+  grid-column: 2;
 }
 
 /* #endregion */

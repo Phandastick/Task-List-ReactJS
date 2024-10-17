@@ -7,13 +7,13 @@ import Sidebar from './components/sidebar'
 function App() {
 
   return (
-    <>
-      <Navbar className="containers" />
+    <div className='app-wrapper'>
+      <Sidebar/>
       <hr className = "header-seperator" />
-      <Sidebar className = "containers" />
+      <Navbar/>
       <hr className="vertical-seperator" />
       <MainContent className="containers" />
-    </>
+    </div>
   )
 }
 

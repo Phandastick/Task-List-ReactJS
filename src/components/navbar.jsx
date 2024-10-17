@@ -1,27 +1,28 @@
 function Navbar () {
-    const dates = [1,2,3,4,5,6,7]
+    const todaydate = new Date();
+
     return (
         <div class="header navbar containers">
             <div class="navbar-item">
-                <a class="navbar-dates"></a>
+                <a class="navbar-dates">123</a>
             </div>
             <div class="navbar-item">
-                <a class="navbar-dates"></a>
+                <a class="navbar-dates">123</a>
             </div>
             <div class="navbar-item">
-                <a class="navbar-dates"></a>
+                <a class="navbar-dates">123</a>
             </div>
             <div class="navbar-item navbar-today">
-                <a class="navbar-dates"></a>
+                <a class="navbar-dates">123</a>
             </div>
             <div class="navbar-item">
-                <a class="navbar-dates"></a>
+                <a class="navbar-dates">123</a>
             </div>
             <div class="navbar-item">
-                <a class="navbar-dates"></a>
+                <a class="navbar-dates">123</a>
             </div>
             <div class="navbar-item">
-                <a class="navbar-dates"></a>
+                <a class="navbar-dates">123</a>
             </div>
         </div>
     );

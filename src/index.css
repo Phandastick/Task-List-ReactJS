@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
 /* change color scheme here so it wont be so mafan tqvm */
 :root{
   --accent: #E75A5F;
@@ -8,37 +10,10 @@
   --bg-color: var(--light);
   --outline: var(--accent);
   --bg-highlight: var(--dark);
-}
 
-body * {
-  border-color: #E75A5F;
+  font-family: "Open Sans", sans-serif;
 }
 
 body {
-  display:flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-
-  font-family: "Open Sans", sans-serif;
-  min-height: 100vh;
   background-color: var(--bg-color);
-}
-
-.sidebar h1 {
-  font-size:56px;
-  margin-top:10px;    
-}
-
-.freepik-credit {
-  margin-top: auto;
-}
-
-.header-seperator {
-  border-width: 2.5px;
-  width:100%;
-}
-
-.vertical-seperator {   
-  border-width: 2.5px;
-  margin: 0;
 }
