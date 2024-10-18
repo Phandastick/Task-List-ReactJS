@@ -2,7 +2,7 @@ const preset_menu = {
     'Home':'/src/assets/home.svg', 
     'Upcoming':'/src/assets/upcoming.svg',
     'Filters':'/src/assets/filters.svg'
-    }
+}
 
 
 const sidebar_menu = document.getElementsByClassName('sidebar-presets')[0]
@@ -35,7 +35,7 @@ function initSidebar(){
     }
 }
 
-async function initDateList(){
+async function initNavbar(){
     let today = todaydate.getDate();
     var dateList = []; 
 
@@ -50,7 +50,7 @@ async function initDateList(){
 // ADD CODE HERE IF NEED TASHA
 
 document.addEventListener('DOMContentLoaded', () => {
-    initDateList().then(
+    initNavbar().then(
         (dateList)=>{
             for(var i = 0; i < dateList.length; i++){
                 dates[i].innerHTML = dateList[i];
