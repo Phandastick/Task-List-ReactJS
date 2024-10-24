@@ -82,6 +82,7 @@
   grid-row: 1/2;
 
   display:flex;
+  justify-content: space-between;
   flex: 1;
   max-height:150px;
 
