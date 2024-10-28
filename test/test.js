@@ -1,3 +1,6 @@
+import { readFile } from 'fs';
+import { parse } from 'csv';
+
 function getDateList(){
     var date = new Date()
     let today = date.getDate();
@@ -19,4 +22,18 @@ function getDateList(){
     return dateList
 }
 
-getDateList();
+const getDefaultLists = async function(){
+        let list;
+
+        const data = parse('./public/mockdb/defaultLists'); // Await the Promise
+
+        return data
+};
+
+// getDefaultLists().then((result) => {
+//     console.log(result)
+// });
+
+(() => {})();
+
+// getDateList();

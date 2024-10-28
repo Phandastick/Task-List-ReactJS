@@ -2,13 +2,11 @@ import { readFile } from 'fs';
 import { parse } from 'csv';
 
 const getDefaultLists = async function(){
-        let list;
+	let list;
 
-        const data = await readFile('./public/mockdb/lists.csv', 'utf8'); // Await the Promise
-        const records = data.split('\n');
-        r
-
-        return list
+	const data = readFile('./public/mockdb/defaultLists.csv', 'utf8'); // Await the Promise
+	const records = data.split('\n')
+	return list
 };
 
 export default { getDefaultLists }
