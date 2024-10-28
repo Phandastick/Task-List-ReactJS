@@ -1,12 +1,20 @@
 import { readFile } from 'fs';
-import { parse } from 'csv';
+import { parse } from 'csv-parse';
 
-const getDefaultLists = async function(){
-	let list;
-
-	const data = readFile('./public/mockdb/defaultLists.csv', 'utf8'); // Await the Promise
-	const records = data.split('\n')
-	return list
+export const getDefaultLists = () => {
+    return new Promise((resolve, reject) => {
+        readFile('./public/mockdb/defaultLists.csv', (err, buf) => {
+            parse(buf, {columns: true, trim: true}, (err, rows) =>{
+                // console.log(rows)
+                // console.log(JSON.stringify(rows))
+                if(err){
+                    reject(err)
+                } else {
+                    resolve(rows)
+                }
+            });
+        })
+    })
 };
 
-export default { getDefaultLists }
+// export default { getDefaultLists }

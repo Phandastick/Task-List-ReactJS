@@ -17,14 +17,17 @@ This command might take a while
 npm install
 or
 npm i
+```
 
+build the frontend and start the server
+
+```
+npm build
 npm run dev
 ```
 
-### Compilation/building
-```
-npm run build
-```
+http://localhost:6969
+port is usually 6969
 
 Ongoing project from 2023 btw 👍
 ( ´･･)ﾉ (._.`)
