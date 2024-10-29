@@ -3,8 +3,13 @@ import { getDefaultLists } from '../classes/records.js'
 import { Router } from 'express'
 
 export const listsRouter = Router()
-
+    
 listsRouter.get('/doGetDefaultLists', async (req, res) => {
-    const data = await getDefaultLists();
-    res.send(data)
+    const payload = await getDefaultLists();
+    
+    if(payload) {
+        res.json({ message: 'GET request received!', data: payload })
+    } else {
+        res.sendStatus(400);
+    }
 })
