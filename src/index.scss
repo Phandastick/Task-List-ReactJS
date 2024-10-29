@@ -1,0 +1,14 @@
+@use 'stylesheets/css-reset';
+@use 'stylesheets/app';
+
+@use 'stylesheets/variables' as *;
+@import 'https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap';
+
+/* change color scheme here so it wont be so mafan tqvm */
+:root{
+  font-family: "Open Sans", sans-serif;
+}
+
+body {
+  background-color: $bg-color;
+}
