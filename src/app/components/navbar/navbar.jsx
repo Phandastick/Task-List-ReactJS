@@ -9,6 +9,7 @@ function getDateList(){
 
     //find sunday's date
     todayDate = todayDate-dayofweek
+    date.setDate(todayDate)
     // console.log(date.getDate())
     
     for(var i = 0; i < 7; i++){
