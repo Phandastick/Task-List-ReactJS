@@ -1,6 +1,8 @@
-import Navbar from './components/navbar'
-import MainContent from './components/mainContent'
-import Sidebar from './components/sidebar'
+import { useState } from 'react'
+import './App.css'
+import Navbar from './components/navbar/navbar'
+import MainContent from './components/mainContent/mainContent'
+import Sidebar from './components/sidebar/sidebar'
 
 function App() {
 

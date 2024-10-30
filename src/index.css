@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+/* change color scheme here so it wont be so mafan tqvm */
+:root{
+  --accent: #E75A5F;
+  --light: #FAFADC;
+  --standard: #FEE698;
+  --dark: #FDB15D;
+
+  --bg-color: var(--light);
+  --outline: var(--accent);
+  --bg-highlight: var(--dark);
+
+  font-family: "Open Sans", sans-serif;
+}
+
+body {
+  background-color: var(--bg-color);
+}
