@@ -1,7 +1,7 @@
 const preset_menu = {
-    'Home':'/src/assets/home.svg', 
-    'Upcoming':'/src/assets/upcoming.svg',
-    'Filters':'/src/assets/filters.svg'
+    'Home':'.//assets/home.svg', 
+    'Upcoming':'./assets/upcoming.svg',
+    'Filters':'./assets/filters.svg'
 }
 
 
