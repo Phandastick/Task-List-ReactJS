@@ -1,7 +1,14 @@
 const preset_menu = {
-    'Home':'./assets/home.svg', 
-    'Upcoming':'./assets/upcoming.svg',
-    'Filters':'./assets/filters.svg'
+    'Home':'./assets/defaultlist/home.svg', 
+    'Upcoming':'./assets/defaultlist/upcoming.svg',
+    'Filters':'./assets/defaultlist/filters.svg'
+}
+
+const user_menu = {
+    'MyList': './assets/userlist/',
+    'Projects': './assets/userlist/writing',
+    'Personal': '',
+    'Today': './assets/userlist/checkmark'
 }
 
 

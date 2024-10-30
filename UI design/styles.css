@@ -58,12 +58,6 @@ body {
     flex-direction: column;
 }
 
-.sidebar-divider {
-    width: inherit;
-    border-width: 1.5px;
-    margin:0;
-}
-
 .sidebar-preset {
     padding: 0 0 5px 10px;
 }
@@ -90,6 +84,22 @@ body {
 
 .sidebar-item-icon {
     width: 2em;
+}
+
+.sidebar-divider-wrapper {
+    display:flex;
+    align-items: center;
+    width:93%;
+}
+
+.sidebar-divider {
+    flex: 1;
+    width:98%;
+}
+
+.sidebar-divider-wrapper h2 {
+    color: #a9a9a9;
+    margin-right: 5px;
 }
   
 /* #endregion */
@@ -143,3 +153,14 @@ body {
 }
 
 /* #endregion */
+
+.logger {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    width:100px;
+    height: 100px;
+}
+
+
