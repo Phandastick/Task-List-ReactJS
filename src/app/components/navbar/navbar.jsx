@@ -1,3 +1,6 @@
+//import css with a variable for it to be a module
+import styles from './Navbar.module.css';
+
 function getDateList(){
     const date = new Date()
     var today = date.getDate();
@@ -15,7 +18,7 @@ function getDateList(){
         dateList[i] = today+i;
     }
 
-    console.log(dateList)
+    // console.log(dateList)
     return dateList
 }
 
@@ -25,7 +28,7 @@ function Navbar () {
     let navbarClass;
 
     return (
-        <div className="navbar header">
+        <div className={`${styles.navbar} ${styles.header} containers`}>
             {
                 dateList.map((dateNum) => {
                     if(dateNum == today){
@@ -35,8 +38,8 @@ function Navbar () {
                     }
 
                     return (
-                        <div className = {navbarClass}>
-                            <a className="navbar-dates">{dateNum}</a>
+                        <div className = {styles[navbarClass]}>
+                            <a className={styles["navbar-dates"]}>{dateNum}</a>
                         </div>
                     )
                 })

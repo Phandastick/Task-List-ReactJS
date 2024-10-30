@@ -1,6 +1,8 @@
+import styles from './MainContent.module.css'
+
 function MainContent () {
 
-    return <div class="main-content containers">main content</div>
+    return <div className={`${styles['main-content']} containers`}>main content</div>
 }
 
 export default MainContent

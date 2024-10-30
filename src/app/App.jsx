@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import './App.css'
-import Navbar from './components/navbar/navbar'
-import MainContent from './components/mainContent/mainContent'
-import Sidebar from './components/sidebar/sidebar'
+import Navbar from './components/Navbar/Navbar.jsx'
+import MainContent from './components/MainContent/MainContent.jsx'
+import Sidebar from './components/Sidebar/Sidebar.jsx'
 
 function App() {
 
