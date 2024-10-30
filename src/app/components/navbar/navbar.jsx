@@ -2,23 +2,21 @@
 import styles from './Navbar.module.css';
 
 function getDateList(){
-    const date = new Date()
-    var today = date.getDate();
-    var weekday = date.getDay();
+    var date = new Date()
+    let todayDate = date.getDate();
+    let dayofweek = date.getDay();
     var dateList = []; 
 
-    today = today-weekday
-    date.setDate(today)
-    // console.log(date.getDate())
-
-    date.setDate(date.getDate()+6)
+    //find sunday's date
+    todayDate = todayDate-dayofweek
     // console.log(date.getDate())
     
     for(var i = 0; i < 7; i++){
-        dateList[i] = today+i;
+        //Increment starting from monday idk how
+        dateList[i] = date.getDate(date.setDate(date.getDate()+1));
     }
 
-    // console.log(dateList)
+    console.log(dateList)
     return dateList
 }
 

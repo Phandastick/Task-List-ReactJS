@@ -8,7 +8,7 @@ function listFactory(text, icon, className, idName){
             src={`/assets/${icon}.svg`} />
 
         <a className={`${className} sidebar-item-text`}>{text}</a>
-    </div>
+    </div>  
 }
 
 

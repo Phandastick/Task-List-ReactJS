@@ -3,19 +3,18 @@ import { parse } from 'csv-parse';
 
 function getDateList(){
     var date = new Date()
-    let today = date.getDate();
-    let weekday = date.getDay();
+    let todayDate = date.getDate();
+    let dayofweek = date.getDay();
     var dateList = []; 
 
-    today = today-weekday
-    date.setDate(today)
-    // console.log(date.getDate())
-
-    date.setDate(date.getDate()+6)
+    //find sunday's date
+    todayDate = todayDate-dayofweek
+    date.setDate(todayDate)
     // console.log(date.getDate())
     
     for(var i = 0; i < 7; i++){
-        dateList[i] = today+i;
+        //Increment starting from monday idk how
+        dateList[i] = date.getDate(date.setDate(date.getDate()+1));
     }
 
     console.log(dateList)
@@ -39,9 +38,9 @@ const getDefaultLists = () => {
 };
 
 
-getDefaultLists().then((data) => {
-    console.log(data)
-})
+// getDefaultLists().then((data) => {
+//     console.log(data)
+// })
 
 
-// getDateList();
+getDateList();

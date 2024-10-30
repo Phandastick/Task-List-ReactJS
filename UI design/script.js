@@ -1,5 +1,5 @@
 const preset_menu = {
-    'Home':'.//assets/home.svg', 
+    'Home':'./assets/home.svg', 
     'Upcoming':'./assets/upcoming.svg',
     'Filters':'./assets/filters.svg'
 }
@@ -35,22 +35,30 @@ function initSidebar(){
     }
 }
 
-async function initNavbar(){
-    let today = todaydate.getDate();
+async function getDateList(){
+    var date = new Date()
+    let todayDate = date.getDate();
+    let dayofweek = date.getDay();
     var dateList = []; 
 
+    //find sunday's date
+    todayDate = todayDate-dayofweek
+    date.setDate(todayDate)
+    // console.log(date.getDate())
+    
     for(var i = 0; i < 7; i++){
-        dateList[i] = today-3+i;
+        //Increment starting from monday idk how
+        dateList[i] = date.getDate(date.setDate(date.getDate()+1));
     }
 
-    return dateList;
-    // console.log(dateList);
+    console.log(dateList)
+    return dateList
 }
 
 // ADD CODE HERE IF NEED TASHA
 
 document.addEventListener('DOMContentLoaded', () => {
-    initNavbar().then(
+    getDateList().then(
         (dateList)=>{
             for(var i = 0; i < dateList.length; i++){
                 dates[i].innerHTML = dateList[i];
