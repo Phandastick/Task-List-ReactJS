@@ -48,35 +48,45 @@ function getDateList(){
                 }
             ]
 
-    console.log(dateDict)
+    // console.log(dateDict)
     return dateDict
 }
 
-function Navbar () {
-    const dateDict = getDateList()
-    let today = new Date().getDate();
-    let navbarClass;
+function Navbox({day}){
+    let navbarClass, today = new Date().getDate();
+    // let day = props.day;
+    if(day.date == today){
+        navbarClass = 'navbar-item-today';
+    } else {
+        navbarClass = 'navbar-item';
+    }
+
+    // console.log(day);
 
     return (
-        <div className={`${styles.navbar} ${styles.header} containers`}>
-            {
-                dateDict.map((date) => {
-                    if(date.datenum == today){
-                        navbarClass = 'navbar-item-today';
-                    } else {
-                        navbarClass = 'navbar-item';
-                    }
-
-                    return (
-                        <div className = {styles[navbarClass]} key = {date.datenum || index}>
-                            <a className={styles["navbar-dates"]}>{date.datenum}</a>
-                            <a className={styles["navbar-days"]}>{date.dayname}</a>
-                        </div>
-                    )
-                })
-            }
+        <div className = {styles[navbarClass]} key = {day.date}>
+            <a className={styles["navbar-dates"]}>{day.date}</a>
+            <a className={styles["navbar-days"]}>{day.name}</a>
         </div>
     )
-}
+};
+
+function Navbar () {
+    const dateDict = getDateList()
+
+    return (<div className={`${styles.navbar} ${styles.header} containers`}>
+                {
+                    dateDict.map((key) => {
+                        return <Navbox 
+                            day = {{
+                                'name': key.dayname,
+                                'date': key.datenum
+                            }}
+                        />
+                    })
+                }
+            </div>
+    )
+};
 
 export default Navbar

@@ -8,7 +8,7 @@ app.use('/', express.static('./dist'));
 app.use(express.json())
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
-app.use(listsRouter)
+// app.use(listsRouter)
 app.use('/api', listsRouter)
 
 //logging calls

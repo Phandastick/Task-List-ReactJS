@@ -27,9 +27,10 @@
 .sidebar-item {
     border: 0;
     border-radius: 5px;
-
-    margin: 15px 7.5px;
-    padding-left: 10px;
+    width: 95%;
+  
+    padding: 15px 7.5px;
+    margin: 10px 0;
     height: 2.5em;
     display: flex;
     align-items: center;

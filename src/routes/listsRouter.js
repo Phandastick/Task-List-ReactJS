@@ -13,3 +13,13 @@ listsRouter.get('/doGetDefaultLists', async (req, res) => {
         res.sendStatus(400);
     }
 })
+
+listsRouter.get('/doGetUserLists', async (req, res) => {
+    const payload = await getUserLists();
+    
+    if(payload) {
+        res.json({ message: 'GET request received!', data: payload })
+    } else {
+        res.sendStatus(400);
+    }
+})
