@@ -13,6 +13,7 @@
 .navbar-item, .navbar-item-today {
     margin: 20px;
     padding: 0px 7.5px;
+    position: relative;
 
     flex: 1;
     transition-duration: 350ms;
@@ -30,4 +31,20 @@
 .navbar-item:hover,.navbar-item-today:hover {
     margin: 13px;
     background-color: var(--bg-highlight);
+}
+
+.navbar-dates{
+    position: absolute;
+    right:10px;
+}
+
+.navbar-days {
+    position: absolute;
+    bottom:0;
+    left:0;
+
+    padding: 5px 10px;
+
+    font-size: 1.5em;
+    font-weight: 400;
 }

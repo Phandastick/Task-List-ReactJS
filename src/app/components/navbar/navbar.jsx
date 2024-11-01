@@ -17,28 +17,60 @@ function getDateList(){
         dateList[i] = date.getDate(date.setDate(date.getDate()+1));
     }
 
-    console.log(dateList)
-    return dateList
+    let dateDict = [
+                {
+                    "dayname":"Mon",
+                    "datenum": dateList[0]
+                },
+                {
+                    "dayname":"Tue",
+                    "datenum": dateList[1]
+                },
+                {
+                    "dayname":"Wed",
+                    "datenum": dateList[2]
+                },
+                {
+                    "dayname":"Thu",
+                    "datenum": dateList[3]
+                },
+                {
+                    "dayname":"Fri",
+                    "datenum": dateList[4]
+                },
+                {
+                    "dayname":"Sat",
+                    "datenum": dateList[5]
+                },
+                {
+                    "dayname":"Sun",
+                    "datenum": dateList[6]
+                }
+            ]
+
+    console.log(dateDict)
+    return dateDict
 }
 
 function Navbar () {
-    const dateList = getDateList()
+    const dateDict = getDateList()
     let today = new Date().getDate();
     let navbarClass;
 
     return (
         <div className={`${styles.navbar} ${styles.header} containers`}>
             {
-                dateList.map((dateNum) => {
-                    if(dateNum == today){
+                dateDict.map((date) => {
+                    if(date.datenum == today){
                         navbarClass = 'navbar-item-today';
                     } else {
                         navbarClass = 'navbar-item';
                     }
 
                     return (
-                        <div className = {styles[navbarClass]}>
-                            <a className={styles["navbar-dates"]}>{dateNum}</a>
+                        <div className = {styles[navbarClass]} key = {date.datenum || index}>
+                            <a className={styles["navbar-dates"]}>{date.datenum}</a>
+                            <a className={styles["navbar-days"]}>{date.dayname}</a>
                         </div>
                     )
                 })
