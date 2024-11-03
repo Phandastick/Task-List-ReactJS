@@ -11,7 +11,8 @@
 
 .sidebar h1 {
     font-size:56px;
-    margin-top:10px;    
+    margin-top:10px;
+    padding-right: 5px;
 }
 
 .sidebar-divider {
@@ -47,4 +48,5 @@
 
 .sidebar-item-icon {
     width: 2em;
+    padding-right: 10px;
 }

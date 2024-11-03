@@ -1,11 +1,14 @@
-import { SidebarRow } from './SidebarRow.jsx';
+import SidebarRow from './SidebarRow';
+import React, { useState, useEffect } from 'react';
+import styles from './Sidebar.module.css'
 
-function Sidebar_Presets(){
+
+export default function SidebarPresets(){
     const [list, setlist] = useState([])
 
     try {
         // const port = 6969
-        const url = `/doGetDefaultLists`
+        const url = `/api/doGetLists`
         
         useEffect(() => {
             fetch(url)
@@ -15,13 +18,15 @@ function Sidebar_Presets(){
             .then((data) => {
                 console.log('Data Received!: ')
                 console.log(data)
-                setlist(data.data)
+                setlist(data.data)  
             })
-            .catch((error) => console.log(error)
-            );
+            .catch((error) => {
+                console.error('Fetch error:',error)
+                setlist([{"name":"Error Fetching Lists","file":"error"}])
+            });
         }, [])
     } catch (err){
-        console.error(err.stack)
+        console.error('SOMETHING WENT WRONG: ',err.stack)
     }
 
     return (
@@ -31,15 +36,13 @@ function Sidebar_Presets(){
                     const className = `sidebar-preset-${index + 1}`;
                     return <SidebarRow
                         text={item.name}
-                        icon={`default/${item.file}`}
+                        icon={item.file}
                         className={className}
                         idName={className}
-                        index={index + 1}
+                        key={index + 1}
                     />
                 })
             }
         </div>
     )
 }
-
-export default Sidebar_Presets

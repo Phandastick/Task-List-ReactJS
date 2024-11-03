@@ -1,6 +1,6 @@
 import styles from './Sidebar.module.css'
-import { SidebarPresets } from './SidebarPresets.jsx'
-import { SidebarUser } from './SidebarUser.jsx'
+import SidebarPresets from './SidebarPresets'
+import SidebarUser from './SidebarUser'
 
 
 function Sidebar() {

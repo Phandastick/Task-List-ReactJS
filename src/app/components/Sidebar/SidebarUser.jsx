@@ -1,28 +1,29 @@
-import { SidebarRow } from './SidebarRow.jsx'
+import SidebarRow from './SidebarRow';
+import React, { useState, useEffect } from 'react';
+import styles from './Sidebar.module.css'
 
-function SidebarUser({username}){
+
+export default function SidebarUser({_username}){
     const [list, setlist] = useState([])
+    const [username, setusername] = useState(_username)
 
-    try {
-        // const port = 6969
-        const url = `/doGetUserList?${username}`
+    const url = `/doGetLists?username=${username}`
         
-        useEffect(() => {
-            fetch(url)
-            .then((response) => {
-                return response.json()
-            })
-            .then((data) => {
-                console.log('Data Received!: ')
-                console.log(data)
-                setlist(data.data)
-            })
-            .catch((error) => console.log(error)
-            );
-        }, [])
-    } catch (err){
-        console.error(err.stack)
-    }
+    useEffect(() => {
+        fetch(url)
+        .then((response) => {
+            return response.json()
+        })
+        .then((data) => {
+            console.log('Data Received!: ')
+            console.log(data)
+            setlist(data.data)  
+        })
+        .catch((error) => {
+            console.error('Fetch error:',error)
+            setlist([{"name":`Error Fetching Icons for ${username}`,"file":"error"}])
+        });
+    }, [username])
 
     return (
         <div className={styles["sidebar-custom"]}>
@@ -31,10 +32,10 @@ function SidebarUser({username}){
                     const className = `sidebar-preset-${index + 1}`;
                     return <SidebarRow
                         text={item.name}
-                        icon={`default/${item.file}`}
+                        icon={item.file}
                         className={className}
                         idName={className}
-                        index={index + 1}
+                        key={item.name}
                     />
                 })
             }

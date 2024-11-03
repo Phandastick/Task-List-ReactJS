@@ -1,5 +1,7 @@
-function SidebarRow({ text, icon, className, idName, index }) {
-    return <div id={idName} className={styles['sidebar-item']} key={index}>
+import styles from './Sidebar.module.css'
+
+function SidebarRow({ text, icon, className, idName }) {
+    return <div id={idName} className={styles['sidebar-item']}>
         <embed
             className={`${className} ${styles['sidebar-item-icon']}`}
             src={`/assets/${icon}.svg`}

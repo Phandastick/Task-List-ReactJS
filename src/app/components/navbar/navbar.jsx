@@ -58,7 +58,7 @@ function Navbox({day}){
     if(day.date == today){
         navbarClass = 'navbar-item-today';
     } else {
-        navbarClass = 'navbar-item';
+        navbarClass = 'navbar-item';    
     }
 
     // console.log(day);
@@ -76,12 +76,13 @@ function Navbar () {
 
     return (<div className={`${styles.navbar} ${styles.header} containers`}>
                 {
-                    dateDict.map((key) => {
+                    dateDict.map((key,index) => {
                         return <Navbox 
                             day = {{
                                 'name': key.dayname,
                                 'date': key.datenum
                             }}
+                            key = {index}
                         />
                     })
                 }

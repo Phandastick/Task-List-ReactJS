@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import Navbar from './components/Navbar/Navbar.jsx'
 import MainContent from './components/MainContent/MainContent.jsx'
-import Sidebar from './components/Sidebar/Sidebar.jsx'
+import Sidebar from './components/sidebar/Sidebar.jsx'
 
 function App() {
 
