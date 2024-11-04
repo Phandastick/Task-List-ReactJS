@@ -37,10 +37,39 @@ const getDefaultLists = () => {
     })
 };
 
+const getTaskLists = (username) => {
+    if(username === undefined){
+        username = 'error';
+    }
+
+    return new Promise((resolve, reject) => {
+        readFile('./public/mockdb/tasklists.json', (err,data)=>{
+
+            if(err) throw err;
+
+            let json = JSON.parse(data);
+            for(var k in json){
+                let jsonelem = json[k]
+                if(jsonelem.groupname == 'Personal Development Goals'){
+                    console.log(json[k])
+                }
+            }
+            
+
+            resolve(json)
+        })
+    })
+}
+
+// getUserLists('bob').then((result) => {
+//     console.log('Result \n',result)
+// })
 
 // getDefaultLists().then((data) => {
 //     console.log(data)
 // })
 
 
-getDateList();
+// getDateList();
+
+getTaskLists();
