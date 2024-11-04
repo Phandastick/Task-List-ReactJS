@@ -36,13 +36,13 @@
     display: flex;
     align-items: center;
 
-    color: black;
+    color: var(--text-color);
     font-size: 24px;
     transition-duration: 250ms;
 }
 
 .sidebar-item:hover {
-    background-color: var(--dark);
+    background-color: var(--item-highlight);
     cursor: pointer;
 }
 

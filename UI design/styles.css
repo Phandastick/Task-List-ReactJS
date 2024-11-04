@@ -6,6 +6,7 @@
     --light: #FAFADC;
     --standard: #FEE698;
     --dark: #FDB15D;
+    --pink: #f6b8db;
 
     --bg-color: var(--light);
     --outline: var(--accent);
@@ -151,6 +152,10 @@ body {
 .main-content {
     grid-row: 2;
     grid-column: 2;
+}
+
+.main-content-group {
+    min-height: 100px;
 }
 
 /* #endregion */

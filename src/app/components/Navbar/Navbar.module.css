@@ -10,6 +10,7 @@
     margin:10px 0;
 }
 
+
 .navbar-item, .navbar-item-today {
     margin: 20px;
     padding: 0px 7.5px;
@@ -18,19 +19,21 @@
     flex: 1;
     transition-duration: 350ms;
 
-    border: 5px solid var(--outline);
+    background-color: var(--bg-item);
+
+    border: 5px solid var(--accent);
     border-radius: 10px;
 
     font-size: 24px;
 }
 
 .navbar-item-today {
-    background-color: var(--standard);
+    background-color: var(--bg-item2);
 }
 
 .navbar-item:hover,.navbar-item-today:hover {
     margin: 13px;
-    background-color: var(--bg-highlight);
+    background-color: var(--item-highlight);
 }
 
 .navbar-dates{

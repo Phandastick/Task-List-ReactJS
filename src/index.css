@@ -2,14 +2,23 @@
 
 /* change color scheme here so it wont be so mafan tqvm */
 :root{
-  --accent: #E75A5F;
-  --light: #FAFADC;
-  --standard: #FEE698;
-  --dark: #FDB15D;
+  --c1: #DEE1DD;
+  --c2: #c4cdc1;
+  --c3: #99AEAD;
+  --c4: #6D9197;
+  --c5: #658B6F;
+  --c6: #2F575D;
+  --c7: #28363D;
 
-  --bg-color: var(--light);
-  --outline: var(--accent);
-  --bg-highlight: var(--dark);
+  --bg-color: var(--c1);
+  --bg-item: var(--c2);
+  --bg-item2: var(--c4);
+  --item-outline: var(--c5);
+  --item-highlight: var(--c5);
+
+  --accent: var(--c5);
+
+  --text-color: var(--c7);
 
   font-family: "Open Sans", sans-serif;
 }
