@@ -16,9 +16,18 @@
 }
 
 .sidebar-divider {
-    width: 97%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.Sidebar-divider hr {
+    flex: 1;
     border-width: 1.5px;
     margin: 0;
+}
+
+#addBtn {
+    width: 1.5rem;
 }
 
 .sidebar-preset {

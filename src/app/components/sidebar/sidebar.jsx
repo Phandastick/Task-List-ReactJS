@@ -12,7 +12,11 @@ function Sidebar() {
         <div className={`${styles.sidebar} containers`}>
             <h1>To-do List</h1>
             <SidebarPresets />
-            <hr className={styles["sidebar-divider"]}></hr>
+            <div className={styles['Sidebar-divider']}>
+                <hr className={styles["sidebar-divider-line"]} />
+                <embed id={styles['addBtn']} 
+                src='./assets/add_square.svg'/>
+            </div>
             <SidebarUser username={username}/>
         </div>
     );
