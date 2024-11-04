@@ -17,20 +17,28 @@ export const getDefaultLists = () => {
     })
 };
 
-export const getUserLists = () => {
+export const getUserLists = (username) => {
     return new Promise((resolve, reject) => {
         readFile('./public/mockdb/userLists.csv', (err, buf) => {
             parse(buf, {columns: true, trim: true}, (err, rows) =>{
-                // console.log(rows)
-                // console.log(JSON.stringify(rows))
+                console.log(rows)
+                console.log(JSON.stringify(rows))
                 if(err){
                     reject(err)
                 } else {
-                    resolve(rows)
+                    let resultArray = []
+                    rows.forEach(item => {
+                        if(item.username == username){
+                            resultArray.push(item)
+                        }
+                    });
+                    resolve(resultArray)
                 }
             });
         })
     })
 };
 
-// export default { getDefaultLists }
+// getUserLists('bob').then((result) => {
+//     console.log('Result \n',result)
+// })

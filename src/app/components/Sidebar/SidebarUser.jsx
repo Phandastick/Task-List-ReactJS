@@ -3,13 +3,14 @@ import React, { useState, useEffect } from 'react';
 import styles from './Sidebar.module.css'
 
 
-export default function SidebarUser({_username}){
+export default function SidebarUser({username = 'Bob'}){
     const [list, setlist] = useState([])
-    const [username, setusername] = useState(_username)
+    const [currentUsername, setcurrentUsername] = useState(username)
 
-    const url = `/doGetLists?username=${username}`
+    const url = `/api/doGetLists?username=${currentUsername}`
         
     useEffect(() => {
+        console.log('Fetchin url', url) 
         fetch(url)
         .then((response) => {
             return response.json()
@@ -17,13 +18,13 @@ export default function SidebarUser({_username}){
         .then((data) => {
             console.log('Data Received!: ')
             console.log(data)
-            setlist(data.data)  
+            setlist(data.data)
         })
         .catch((error) => {
             console.error('Fetch error:',error)
-            setlist([{"name":`Error Fetching Icons for ${username}`,"file":"error"}])
+            setlist([{"name":`Error Fetching Icons for ${currentUsername}`,"file":"error"}])
         });
-    }, [username])
+    }, [currentUsername])
 
     return (
         <div className={styles["sidebar-custom"]}>

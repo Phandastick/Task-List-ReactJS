@@ -1,6 +1,6 @@
 import SidebarRow from './SidebarRow';
-import React, { useState, useEffect } from 'react';
 import styles from './Sidebar.module.css'
+import React, { useState, useEffect } from 'react';
 
 
 export default function SidebarPresets(){
