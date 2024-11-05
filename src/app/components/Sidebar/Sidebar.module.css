@@ -17,17 +17,24 @@
 
 .sidebar-divider {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
 }
 
-.Sidebar-divider hr {
+.sidebar-divider-line {   
+    border-width: 2px;
+    height: 2px;
     flex: 1;
-    border-width: 1.5px;
     margin: 0;
+    width: 80%;
+}
+
+.sidebar-addBtn {
+    
 }
 
 #addBtn {
-    width: 1.5rem;
+    width: 3rem;
+    padding-right: 10px;
 }
 
 .sidebar-preset {
