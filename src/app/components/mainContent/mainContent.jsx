@@ -1,20 +1,22 @@
+import { useContext } from 'react'
 import Daylist from './Daylist'
 import styles from './MainContent.module.css'
 import { useState } from 'react'
+import { usernameContext } from '../../contexts'
 
 
 function chooseMode(mode,username,onSetLoading){
     if(mode == 'daylist'){
         return <Daylist 
-        username={username}
         onSetLoading={onSetLoading}
         />
     }
 }
 
-function MainContent({username}) {
+function MainContent() {
     const [listmode, setmode] = useState('daylist')
     const [loading, setloading] = useState(false)
+    const username = useContext(usernameContext)
 
     const onSetLoading = (value)  => {
         setloading(value)

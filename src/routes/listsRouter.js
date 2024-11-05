@@ -43,3 +43,10 @@ listsRouter.get('/doGetTaskLists', async (req,res) => {
         res.sendStatus(400);
     }
 })
+
+listsRouter.post('/doPostNewTaskList', (req,res) => {
+    data = req.params
+    console.log(data);
+
+    res.send(data)
+})

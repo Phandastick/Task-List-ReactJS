@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import Todo from './Todo/Todo.jsx'
+import { useContext } from 'react';
+import { usernameContext } from '../../contexts.jsx';
 
-export default function Daylist({username,onSetLoading}) {
-    //TODO: getlist
-    
+export default function Daylist({onSetLoading}) {
+    //TODO: getlist with username
+
+    const username = useContext(usernameContext);
 
     let resJson = returnJson();
     let props = resJson;

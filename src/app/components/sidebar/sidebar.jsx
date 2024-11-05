@@ -4,16 +4,22 @@ import SidebarPresets from './SidebarPresets'
 import SidebarUser from './SidebarUser'
 import { useState } from 'react';
 
-const handleNewList =  function(setModal) {
-    console.log('Clicked new list!')
-    setModal(true);
-}
-
-
-function Sidebar() {
+export default function Sidebar() {
     const [isModalOpen, setModal] = useState(false);
     const [username, setuser] = useState('lucas')
     // console.log(username);
+
+
+    function openModal(){
+        console.log('Opening modal...')
+        setModal(true)
+    }
+
+    function closeModal(){
+        console.log('Closing modal...')
+        setModal(false)
+    }
+
 
     return (
         <>
@@ -22,19 +28,19 @@ function Sidebar() {
                 <SidebarPresets />
                 <div className={styles["sidebar-divider"]}>
                     <hr className={styles["sidebar-divider-line"]} />
-                    <div className={styles["sidebar-addBtn"]}
-                        onClick= {() => handleNewList(setModal)}>
+                    <button className={styles["sidebar-addBtn"]}
+                        onClick={() => openModal()}
+                    >
                         <embed id={styles["addBtn"]} 
                         src='./assets/add_square.svg'/>
-                    </div>
+                    </button>
                 </div>
                 <SidebarUser username={username}/>
             </div>
             <ModalAddList 
                 isModalOpen={isModalOpen}
+                onRequestClose={closeModal}
             />
         </>
     );
 };
-
-export default Sidebar;

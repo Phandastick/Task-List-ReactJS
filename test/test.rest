@@ -1,1 +1,8 @@
 GET http://localhost:6969/api/doGetTaskLists?username=error
+
+
+
+
+
+POST http://localhost:6969/api/doPostNewTaskList?Name=1&Description=2&Date=3
+
