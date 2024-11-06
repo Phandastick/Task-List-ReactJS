@@ -1,4 +1,5 @@
-import ModalAddList from './modalAddList';
+
+import { Tooltip } from 'react-tooltip';
 import styles from './Sidebar.module.css'
 import SidebarPresets from './SidebarPresets'
 import SidebarUser from './SidebarUser'
@@ -29,11 +30,19 @@ export default function Sidebar() {
                 <div className={styles["sidebar-divider"]}>
                     <hr className={styles["sidebar-divider-line"]} />
                     <button className={styles["sidebar-addBtn"]}
-                        onClick={() => openModal()}
+                        data-tooltip-id='add-list-tooltip'
                     >
                         <embed id={styles["addBtn"]} 
                         src='./assets/add_square.svg'/>
                     </button>
+                    <Tooltip 
+                        id='add-list-tooltip'
+                        content={addListContent}
+                    >
+                        <input 
+                            type="text" maxLength=16;
+                        />
+                    </Tooltip> 
                 </div>
                 <SidebarUser username={username}/>
             </div>

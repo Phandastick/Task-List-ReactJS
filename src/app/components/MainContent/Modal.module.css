@@ -3,7 +3,7 @@
     inset :0;
     margin: 10rem auto auto auto;
     width: 38rem;
-    height: 30rem;
+    height: fit-content;
 
     border-radius: 5px;
     background-color: var(--bg-color);
@@ -57,6 +57,7 @@ form label {
 
 .modal-tf {
     height: 2rem;
+    margin: 20px 0;
 }
 
 .modal-closeBtn {

@@ -3,6 +3,11 @@ GET http://localhost:6969/api/doGetTaskLists?username=error
 
 
 
+### Post req
+POST http://localhost:6969/api/doPostNewList
+Content-Type: application/json
 
-POST http://localhost:6969/api/doPostNewTaskList?Name=1&Description=2&Date=3
-
+{
+    "name": "Task Name",
+    "username": "error"
+}

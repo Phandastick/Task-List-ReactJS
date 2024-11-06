@@ -1,4 +1,4 @@
-import { getDefaultLists, getTaskLists, getUserLists } from '../classes/records.js'
+import { getDefaultLists, getUserLists, addList } from '../classes/records.js'
 
 import { Router } from 'express'
 
@@ -27,26 +27,10 @@ listsRouter.get('/doGetLists', async (req, res) => {
     }
 })
 
-listsRouter.get('/doGetTaskLists', async (req,res) => {
-    let username = req.query.username
+listsRouter.post('/doPostNewList', (req,res) => {
+    console.log("Received POST req at /doPostNewTaskList")
+    console.log('Body is ',req.body);
+    let data = req.body
 
-    console.log('Fetched task lists from username:',username)
-    var payload;
-
-    
-    console.log('Getting User ' + username + ' Tasks Lists')
-    payload = await getTaskLists(username);
-
-    if(payload) {
-        res.json({ message: 'GET doGetTaskLists request received!', data: payload })
-    } else {
-        res.sendStatus(400);
-    }
-})
-
-listsRouter.post('/doPostNewTaskList', (req,res) => {
-    data = req.params
-    console.log(data);
-
-    res.send(data)
+    const response = addList(data);
 })

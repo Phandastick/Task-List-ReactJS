@@ -39,13 +39,17 @@ export const getUserLists = (username) => {
     })
 };
 
-export const getTaskLists = (username) => {
+export const addList = (data) =>{
+    
+}
+
+export const getTasks = (username) => {
     if(username === undefined){
         username = 'error';
     }
 
     return new Promise((resolve, reject) => {
-        readFile('./public/mockdb/tasklists.json', (err,data)=>{
+        readFile('./public/mockdb/tasks.json', (err,data)=>{
 
             if(err) throw err;
 
@@ -55,8 +59,6 @@ export const getTaskLists = (username) => {
                     console.log(json[k])
                 }
             }
-            
-            
 
             resolve(json)
         })
@@ -66,5 +68,3 @@ export const getTaskLists = (username) => {
 // getUserLists('bob').then((result) => {
 //     console.log('Result \n',result)
 // })
-
-getTaskLists();

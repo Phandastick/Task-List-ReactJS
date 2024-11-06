@@ -1,5 +1,6 @@
 import express from 'express'
 import { listsRouter } from './src/routes/listsRouter.js';
+import { tasksRouter } from './src/routes/tasksRouter.js';
 
 const app = express()
 
@@ -10,6 +11,7 @@ app.use(express.urlencoded({ extended: true })) // for parsing application/x-www
 
 // app.use(listsRouter)
 app.use('/api', listsRouter)
+app.use('/api', tasksRouter)
 
 //logging calls
 app.use((req,res,next) => {
