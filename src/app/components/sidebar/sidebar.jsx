@@ -21,6 +21,11 @@ export default function Sidebar() {
         setModal(false)
     }
 
+    function focusField(){
+        let tf = document.getElementById('input-addList');
+        tf.focus()
+    }
+
 
     return (
         <>
@@ -31,25 +36,24 @@ export default function Sidebar() {
                     <hr className={styles["sidebar-divider-line"]} />
                     <button className={styles["sidebar-addBtn"]}
                         data-tooltip-id='add-list-tooltip'
+                        onClick={focusField}
                     >
                         <embed id={styles["addBtn"]} 
                         src='./assets/add_square.svg'/>
                     </button>
                     <Tooltip 
-                        id='add-list-tooltip'
-                        content={addListContent}
-                    >
-                        <input 
-                            type="text" maxLength=16;
-                        />
+                        id="add-list-tooltip"
+                        className={styles['add-list-tooltip']}
+                        openOnClick={true}
+                        place="right"
+                        data-tooltip-position-strategy="fixed"
+                    >   
+                    <p className={styles["add-list-header"]}>Add List:</p>
+                        <input type="text" maxLength="20" className={styles["input-addList"]} id="input-addList"/>
                     </Tooltip> 
                 </div>
                 <SidebarUser username={username}/>
             </div>
-            <ModalAddList 
-                isModalOpen={isModalOpen}
-                onRequestClose={closeModal}
-            />
         </>
     );
 };

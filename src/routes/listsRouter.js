@@ -28,7 +28,7 @@ listsRouter.get('/doGetLists', async (req, res) => {
 })
 
 listsRouter.post('/doPostNewList', (req,res) => {
-    console.log("Received POST req at /doPostNewTaskList")
+    console.log("Received POST req at /doPostNewList")
     console.log('Body is ',req.body);
     let data = req.body
 
