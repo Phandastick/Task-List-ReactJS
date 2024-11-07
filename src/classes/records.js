@@ -28,9 +28,9 @@ export const getUserLists = (username) => {
                 } else {
                     let resultArray = []
                     rows.forEach(item => {
-                        if(item.username == username){
+                        // if(item.username == username){
                             resultArray.push(item)
-                        }
+                        // }
                     });
                     resolve(resultArray)
                 }

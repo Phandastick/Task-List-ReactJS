@@ -55,6 +55,10 @@
     pointer-events: none;
 }
 
+.add-list-tooltip {
+    z-index: 99;
+}
+
 :hover#addBtn {
     width: 3.2rem;
     z-index: 0;
