@@ -1,15 +1,18 @@
 import SidebarRow from './SidebarRow';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styles from './Sidebar.module.css'
+import { usernameContext } from '../../contexts';
 
 
-export default function SidebarUser({username = 'Bob'}){
+export default function SidebarUser(props){
     const [list, setlist] = useState([])
-    const [currentUsername, setcurrentUsername] = useState(username)
+    const username = useContext(usernameContext);
+    const setUpdateFlag = props.updateUserLists;
 
-    const url = `/api/doGetLists?username=${currentUsername}`
+    const url = `/api/doGetLists?username=${username}`
         
-    useEffect(() => {
+    useEffect(() => {   
+        setUpdateFlag(false);
         console.log('Fetchin url', url) 
         fetch(url)
         .then((response) => {
@@ -22,9 +25,9 @@ export default function SidebarUser({username = 'Bob'}){
         })
         .catch((error) => {
             console.error('Fetch error:',error)
-            setlist([{"name":`Error Fetching Icons for ${currentUsername}`,"file":"error"}])
+            setlist([{"name":`Error Fetching Icons for ${username}`,"file":"error"}])
         });
-    }, [currentUsername])
+    }, [props.updateFlag, username])
 
     return (
         <div className={styles["sidebar-custom"]}>
@@ -43,3 +46,4 @@ export default function SidebarUser({username = 'Bob'}){
         </div>
     )
 }
+

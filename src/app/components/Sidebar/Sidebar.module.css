@@ -28,6 +28,16 @@
     width: 80%;
 }
 
+.add-list-header {
+    font-size: 14px;
+    margin-top :0;
+    margin-bottom: 5px;
+}
+
+.input-addList {
+    margin: 5px 0;
+}
+
 .sidebar-addBtn {
     padding:0;
     margin:0;
