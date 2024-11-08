@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import './App.css'
-import Navbar from './components/Navbar/navbar'
-import MainContent from './components/MainContent/mainContent'
-import Sidebar from './components/Sidebar/sidebar'
+import Navbar from './components/Navbar/Navbar'
+import MainContent from './components/MainContent/MainContent'
+import Sidebar from './components/Sidebar/Sidebar'
 import { usernameContext } from './contexts'
 
 
