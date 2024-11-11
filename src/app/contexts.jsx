@@ -1,3 +1,6 @@
 import { createContext } from "react";
 
-export const usernameContext = createContext(null)
+export const TasksContext = createContext(null);
+export const TasksDispatchContext = createContext(null);
+
+export const usernameContext = createContext('error')

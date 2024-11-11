@@ -22,5 +22,11 @@ dist-ssr
 *.ntvs*
 *.njsproj
 *.sln
-*.sw?*.sw?
+<<<<<<< Updated upstream
+*.sw?
+=======
+*.sw?
+# Local Netlify folder
+.netlify
 .vercel
+>>>>>>> Stashed changes

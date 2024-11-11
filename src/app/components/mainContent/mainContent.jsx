@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { usernameContext } from '../../contexts'
 
 
-function chooseMode(mode,username,onSetLoading){
+function chooseMode(mode,onSetLoading){
     if(mode == 'daylist'){
         return <Daylist 
         onSetLoading={onSetLoading}
@@ -24,7 +24,7 @@ function MainContent() {
 
     return <div className={`${styles['main-content']} containers`}>
         {
-            chooseMode(listmode,username,onSetLoading)
+            chooseMode(listmode,onSetLoading)
         }
         
         {

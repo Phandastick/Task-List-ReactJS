@@ -1,14 +1,14 @@
 import SidebarRow from './SidebarRow';
 import styles from './Sidebar.module.css'
 import React, { useState, useEffect } from 'react';
-
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export default function SidebarPresets(){
     const [list, setlist] = useState([])
 
     try {
         // const port = 6969
-        const url = `/api/doGetLists`
+        const url = `${BASE_URL}/api/doGetLists`
         
         useEffect(() => {
             fetch(url)
@@ -21,7 +21,7 @@ export default function SidebarPresets(){
                 setlist(data.data)  
             })
             .catch((error) => {
-                console.error('Fetch error:',error)
+                console.error('Fetch error in sidebarPresets:',error)
                 setlist([{"name":"Error Fetching Lists","file":"error"}])
             });
         }, [])

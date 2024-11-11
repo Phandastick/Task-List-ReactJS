@@ -34,6 +34,10 @@
     margin-bottom: 5px;
 }
 
+.add-list-tooltip {
+    z-index: 99;
+}
+
 .input-addList {
     margin: 5px 0;
 }

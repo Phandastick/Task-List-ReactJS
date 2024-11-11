@@ -1,23 +1,23 @@
 import { useState } from 'react'
 import './App.css'
-import Navbar from './components/Navbar/Navbar.jsx'
-import MainContent from './components/MainContent/MainContent.jsx'
-import Sidebar from './components/sidebar/Sidebar.jsx'
-import { usernameContext } from './contexts.jsx'
+import Navbar from './components/navbar/Navbar'
+import MainContent from './components/mainContent/MainContent'
+import Sidebar from './components/sidebar/Sidebar'
+import { usernameContext } from './contexts'
 
 
 function App() {
-  const [user, setuser] = useState('error')
+  const [username, setUsername] = useState(null);
 
   return (
-    <usernameContext.Provider value={user}>
-    <div className='app-wrapper'>
-      <Sidebar/>
-      <hr className = "header-seperator" />
-      <Navbar/>
-      <hr className="vertical-seperator" />
-      <MainContent/>
-    </div>
+    <usernameContext.Provider value={{username, setUsername}}>
+        <div className='app-wrapper'>
+          <Sidebar/>
+          <hr className = "header-seperator" />
+          <Navbar/>
+          <hr className="vertical-seperator" />
+          <MainContent/>
+        </div>
     </usernameContext.Provider>
   )
 }

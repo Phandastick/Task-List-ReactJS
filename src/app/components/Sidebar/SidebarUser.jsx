@@ -2,32 +2,39 @@ import SidebarRow from './SidebarRow';
 import React, { useState, useEffect, useContext } from 'react';
 import styles from './Sidebar.module.css'
 import { usernameContext } from '../../contexts';
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 
 export default function SidebarUser(props){
     const [list, setlist] = useState([])
-    const username = useContext(usernameContext);
+    const {username, setUsername} = useContext(usernameContext);
     const setUpdateFlag = props.updateUserLists;
 
-    const url = `/api/doGetLists?username=${username}`
-        
-    useEffect(() => {   
+    setUsername("lucas")
+
+    const url = `${BASE_URL}/api/doGetLists?username=${username}`
+    useEffect(() => {
         setUpdateFlag(false);
-        console.log('Fetchin url', url) 
+        console.log('Fetchin GET url', url) 
         fetch(url)
         .then((response) => {
             return response.json()
         })
         .then((data) => {
-            console.log('Data Received!: ')
+            console.log('SidebarUsers.jsx> Data Received!: ')
             console.log(data)
-            setlist(data.data)
+            if(data.data !== undefined && data.data.length != 0){
+                setlist(data.data)
+            } else {
+                setlist([{"name":`Error Fetching Icons for ${username}`,"file":"error"}])
+                console.log("Error processing data in SidebarUser")
+            }
         })
         .catch((error) => {
-            console.error('Fetch error:',error)
+            console.error('Fetch error in sidebarUser:',error)
             setlist([{"name":`Error Fetching Icons for ${username}`,"file":"error"}])
         });
-    }, [props.updateFlag, username])
+    }, [username])
 
     return (
         <div className={styles["sidebar-custom"]}>

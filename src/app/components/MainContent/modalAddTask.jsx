@@ -23,8 +23,9 @@ export default function ModalAddList(props) {
         data['username'] = username;
     
         console.log(data);
-    
-        const url = "/api/doPostNewTasks";
+        
+        const BASE_URL = process.env.BASE_URL;
+        const url = `${BASE_URL}/api/doPostNewTasks`;
         fetch(
             url,
             {

@@ -21,8 +21,8 @@ export const getUserLists = (username) => {
     return new Promise((resolve, reject) => {
         readFile('./public/mockdb/userLists.csv', (err, buf) => {
             parse(buf, {columns: true, trim: true}, (err, rows) =>{
-                console.log(rows)
-                console.log(JSON.stringify(rows))
+                // console.log(rows)
+                // console.log(JSON.stringify(rows))
                 if(err){
                     reject(err)
                 } else {
@@ -32,6 +32,7 @@ export const getUserLists = (username) => {
                             resultArray.push(item)
                         }
                     });
+                    console.log('Resolving', resultArray)
                     resolve(resultArray)
                 }
             });

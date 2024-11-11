@@ -3,7 +3,9 @@ import { Tooltip } from 'react-tooltip';
 import styles from './Sidebar.module.css'
 import SidebarPresets from './SidebarPresets'
 import SidebarUser from './SidebarUser'
-import { useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
+import { usernameContext } from '../../contexts';
+const BASE_URL = import.meta.env.VITE_BASE_URL
 
 export default function Sidebar() {
     const [username, setuser] = useState('lucas')
@@ -65,7 +67,7 @@ export default function Sidebar() {
 };
 
 function postList(listname) {
-    const url = '/api/doPostNewList'
+    const url = `${BASE_URL}/api/doPostNewList`
     const headers = {
         'content-type': 'application/json'
     }
@@ -73,7 +75,7 @@ function postList(listname) {
         "groupname":listname
     }
 
-    console.log(`Posting list: ${listname}...`)
+    console.log(`Posting list: ${listname}`)
 
     fetch(url,
         {
