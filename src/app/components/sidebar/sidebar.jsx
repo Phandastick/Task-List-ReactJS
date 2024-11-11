@@ -3,13 +3,9 @@ import { Tooltip } from 'react-tooltip';
 import styles from './Sidebar.module.css'
 import SidebarPresets from './SidebarPresets'
 import SidebarUser from './SidebarUser'
-import { useContext, useState } from 'react';
-import { usernameContext } from '../../contexts';
 const BASE_URL = import.meta.env.VITE_BASE_URL
 
 export default function Sidebar() {
-    const [username, setuser] = useState('lucas')
-    const [isUpdateList, setUpdate] = useState(false)
     // console.log(username);
 
     function handleSubmit(e) {
@@ -26,11 +22,6 @@ export default function Sidebar() {
         let tf = document.getElementById('input-addList');
         tf.focus()
     }
-
-    const updateUserLists = bool => {
-        setUpdate(bool)
-    }
-
     return (
         <div className={`${styles.sidebar} containers`}>
             <h1>To-do List</h1>
@@ -58,10 +49,7 @@ export default function Sidebar() {
                     </form>
                 </Tooltip>
             </div>
-            <SidebarUser 
-                username={username} 
-                updateUserLists={updateUserLists} 
-                updateFlag={isUpdateList}/>
+            <SidebarUser />
         </div>
     );
 };

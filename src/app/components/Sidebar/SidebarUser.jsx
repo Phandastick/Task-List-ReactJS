@@ -5,16 +5,14 @@ import { usernameContext } from '../../contexts';
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 
-export default function SidebarUser(props){
+export default function SidebarUser(){
     const [list, setlist] = useState([])
-    const {username, setUsername} = useContext(usernameContext);
-    const setUpdateFlag = props.updateUserLists;
+    const {username, setUsername} = useContext(usernameContext)
 
-    setUsername("lucas")
+    // setUsername("lucas")
 
     const url = `${BASE_URL}/api/doGetLists?username=${username}`
     useEffect(() => {
-        setUpdateFlag(false);
         console.log('Fetchin GET url', url) 
         fetch(url)
         .then((response) => {
