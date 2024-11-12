@@ -7,11 +7,15 @@ const app = express()
 const BASE_URL = process.env.BASE_URL
 
 //server static files (react frontend)
-app.use('/', express.static('./dist'));
+app.use('/', express.static('./public'));
 app.use(express.json())
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
-app.use(cors());
+app.use(
+    cors({
+        origin:"http://localhost:5173", 
+    }
+));
 // app.use(listsRouter)
 app.use('/api', listsRouter)
 app.use('/api', tasksRouter)

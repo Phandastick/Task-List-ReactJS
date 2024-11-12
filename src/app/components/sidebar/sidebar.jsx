@@ -3,10 +3,13 @@ import { Tooltip } from 'react-tooltip';
 import styles from './Sidebar.module.css'
 import SidebarPresets from './SidebarPresets'
 import SidebarUser from './SidebarUser'
+import { useState } from 'react';
 const BASE_URL = import.meta.env.VITE_BASE_URL
 
 export default function Sidebar() {
     // console.log(username);
+
+    const [userListsFlag, updateUserLists] = useState(false);
 
     function handleSubmit(e) {
         //stop redirect 
@@ -49,7 +52,9 @@ export default function Sidebar() {
                     </form>
                 </Tooltip>
             </div>
-            <SidebarUser />
+            <SidebarUser 
+                updateFlag={userListsFlag}
+            />
         </div>
     );
 };
@@ -69,10 +74,13 @@ function postList(listname) {
         {
             "method": "post",
             "headers": headers,
-            "body": data
+            "body": JSON.stringify(data)
         }
     )
     .then((res) => {
+        if (res.status == 204) {
+            updateUserLists();
+        }
         return res.json()
     })
     .then((data) => {
@@ -81,4 +89,8 @@ function postList(listname) {
     }).catch((err) => {
         console.error('Error with post request!', err)
     })
+}
+
+function updateUserLists() {
+    updateUserLists(true);
 }

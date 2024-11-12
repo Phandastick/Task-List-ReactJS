@@ -29,8 +29,13 @@ listsRouter.get('/doGetLists', async (req, res) => {
 
 listsRouter.post('/doPostNewList', (req,res) => {
     console.log("Received POST req at /doPostNewList")
-    console.log('Body is ',req.body);
+    console.log(req.body);
     let data = req.body
+    let name = data.groupname;
+
+    console.log(name)
 
     const response = addList(data);
+
+    res.send(data);
 })

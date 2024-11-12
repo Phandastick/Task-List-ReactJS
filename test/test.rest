@@ -8,6 +8,5 @@ POST http://localhost:6969/api/doPostNewList
 Content-Type: application/json
 
 {
-    "name": "Task Name",
-    "username": "error"
+    "groupname": "Task Name"
 }

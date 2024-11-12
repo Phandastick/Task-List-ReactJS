@@ -1,4 +1,4 @@
-import { readFile } from 'fs';
+import { readFile, readFileSync, writeFileSync } from 'fs';
 import { parse } from 'csv-parse';
 
 export const getDefaultLists = () => {
@@ -40,8 +40,30 @@ export const getUserLists = (username) => {
     })
 };
 
-export const addList = (data) =>{
-    
+export const addList = (listName) =>{
+    console.log('Records.js> running add list...')
+    var listJson = {};
+
+    var response = {
+        "status_code": undefined
+    }
+
+    // const check = checkList(listName);
+    const check =true
+    if(!check){
+        response.status_code = 412;
+        return response;
+    }
+
+    const data = readFileSync('./public/mockdb/userLists.csv', 'utf-8')
+    console.log(data)
+    parse(data, {columns: true, trim: true}, (err, rows) =>{
+        // console.log(rows)
+        listJson = rows;
+        addJson()
+    })
+
+    // console.log(currentLists)
 }
 
 export const getTasks = (username) => {
@@ -69,3 +91,5 @@ export const getTasks = (username) => {
 // getUserLists('bob').then((result) => {
 //     console.log('Result \n',result)
 // })
+
+addList("NewList")

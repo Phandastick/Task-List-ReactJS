@@ -5,9 +5,10 @@ import { usernameContext } from '../../contexts';
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 
-export default function SidebarUser(){
+export default function SidebarUser(props){
     const [list, setlist] = useState([])
     const {username, setUsername} = useContext(usernameContext)
+    const updateFlag = props.updateFlag;
 
     // setUsername("lucas")
 
@@ -32,7 +33,7 @@ export default function SidebarUser(){
             console.error('Fetch error in sidebarUser:',error)
             setlist([{"name":`Error Fetching Icons for ${username}`,"file":"error"}])
         });
-    }, [username])
+    }, [username,updateFlag])
 
     return (
         <div className={styles["sidebar-custom"]}>
