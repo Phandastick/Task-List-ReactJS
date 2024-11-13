@@ -1,22 +1,19 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import './MainPage.css'
 import Navbar from './components/Navbar/navbar'
 import MainContent from './components/MainContent/mainContent'
 import Sidebar from './components/Sidebar/sidebar'
-import { usernameContext } from '../providers/AuthContext'
+import { usernameContext } from './contexts/Contexts'
 
 
 function MainPage() {
-  const [username, setUsername] = useState('error');
-  const [loginStatus, setLoginStatus] = useState(false);
+  const {username, setUsername} = useContext(usernameContext)
 
   useEffect(() => {
     window.sessionStorage.setItem('username',username);
   }, [username])
 
   return (
-    <usernameContext.Provider value={{username, setUsername}}>
-        {
           <div className='app-wrapper'>
             <Sidebar/>
             <hr className = "header-seperator" />
@@ -24,8 +21,6 @@ function MainPage() {
             <hr className="vertical-seperator" />
             <MainContent/>
           </div>
-        }
-    </usernameContext.Provider>
   )
 }
 

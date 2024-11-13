@@ -1,13 +1,4 @@
-import { createContext, useCallback, useContext } from "react";
-
-export const TasksContext = createContext(null);
-export const TasksDispatchContext = createContext(null);
-
-export const usernameContext = createContext('error')
-
-export const loginContext = createContext(false);
-
-// #region Auth
+// #region Fetch API
 /* 
 Inserts username and other infoin header for you
 //TODO: Add security here

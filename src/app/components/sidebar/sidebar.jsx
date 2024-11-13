@@ -5,7 +5,7 @@ import SidebarPresets from './SidebarPresets'
 import SidebarUser from './SidebarUser'
 
 import { useCallback, useEffect, useState } from 'react';
-import { tasksFetch } from '../../../providers/AuthContext';
+import { tasksFetch } from '../../hooks/fetchAPI';
 const BASE_URL = import.meta.env.VITE_BASE_URL
 
 export default function Sidebar() {

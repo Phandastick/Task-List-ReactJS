@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import Daylist from './Daylist'
 import styles from './MainContent.module.css'
 import { useState } from 'react'
-import { usernameContext } from '../../../providers/AuthContext.jsx';
+import { usernameContext } from '../../contexts/Contexts.jsx';
 
 
 function chooseMode(mode,onSetLoading){

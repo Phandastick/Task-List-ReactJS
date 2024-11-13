@@ -1,7 +1,7 @@
 import SidebarRow from './SidebarRow';
 import React, { useState, useEffect, useContext } from 'react';
 import styles from './Sidebar.module.css'
-import { usernameContext } from '../../../providers/AuthContext';
+import { usernameContext } from '../../contexts/Contexts';
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 
