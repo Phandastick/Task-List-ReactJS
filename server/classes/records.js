@@ -1,70 +1,73 @@
 import { readFile, readFileSync, writeFileSync } from 'fs';
-import { parse } from 'csv-parse';
+import { parse } from 'csv-parse/sync';
+import { readCSV, writeCSV } from './readwrite.js';
 
 export const getDefaultLists = () => {
     return new Promise((resolve, reject) => {
-        readFile('./public/mockdb/defaultLists.csv', (err, buf) => {
-            parse(buf, {columns: true, trim: true}, (err, rows) =>{
-                // console.log(rows)
-                // console.log(JSON.stringify(rows))
-                if(err){
-                    reject(err)
-                } else {
-                    resolve(rows)
-                }
-            });
-        })
+        resolve(readCSV('./public/mockdb/defaultLists.csv'))
     })
 };
 
-export const getUserLists = (username) => {
+export const getUserLists = (username) => { 
     return new Promise((resolve, reject) => {
-        readFile('./public/mockdb/userLists.csv', (err, buf) => {
-            parse(buf, {columns: true, trim: true}, (err, rows) =>{
-                // console.log(rows)
-                // console.log(JSON.stringify(rows))
-                if(err){
-                    reject(err)
-                } else {
-                    let resultArray = []
-                    rows.forEach(item => {
-                        if(item.username == username){
-                            resultArray.push(item)
-                        }
-                    });
-                    console.log('Resolving', resultArray)
-                    resolve(resultArray)
-                }
-            });
-        })
+        const results = readCSV('./public/mockdb/userLists.csv')
+        let resultArray = []
+        results.forEach(item => {
+            if(item.username == username){
+                resultArray.push(item)
+            }
+        });
+        // console.log('Resolving', resultArray)
+        resolve(resultArray)
     })
 };
 
-export const addList = (listName) =>{
+export async function addList(data){
     console.log('Records.js> running add list...')
-    var listJson = {};
+    let listname = data.name
+    let filename = data.filename
+    let username = data.username
 
-    var response = {
-        "status_code": undefined
+    let response = {
+        status_code: 500
     }
 
-    // const check = checkList(listName);
-    const check =true
-    if(!check){
-        response.status_code = 412;
+    if(listname === undefined || username === undefined || filename=== undefined){
+        console.log("Missing data found:",listname,filename,username)
+        response.status_code = 404;
+        response.error_message = "missing data"
         return response;
     }
 
-    const data = readFileSync('./public/mockdb/userLists.csv', 'utf-8')
-    console.log(data)
-    parse(data, {columns: true, trim: true}, (err, rows) =>{
-        // console.log(rows)
-        listJson = rows;
-        addJson()
-    })
+    const records = readCSV('./public/mockdb/userLists.csv')
+
+    let array = [];
+    array.push('name,file,username\n');
+    for (const row of records){
+        if(row.name == listname && row.username == username){
+            console.log("Caught duplicate data: ", row.name, row.username)
+            response.status_code = 412;
+            response.error_message = "duplicate data"
+            return response;
+        } else {
+            array.push(`${row.name},${row.file},${row.username}\n`)
+        }
+    };
+    
+    array.push(`${listname},${filename},${username}\n`)
+    // console.log("New lists: ",array)
+    writeCSV('./public/mockdb/userLists.csv',array)
+
+    response.status_code = 200
+    response.error_message = "Sucessfully added new list"
+    response.data = data
+
+    // console.log(res)
+    return response;
+}
+
 
     // console.log(currentLists)
-}
 
 export const getTasks = (username) => {
     if(username === undefined){
@@ -92,4 +95,4 @@ export const getTasks = (username) => {
 //     console.log('Result \n',result)
 // })
 
-addList("NewList")
+// addList("NewList")

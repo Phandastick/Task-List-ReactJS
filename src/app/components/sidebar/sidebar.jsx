@@ -3,28 +3,60 @@ import { Tooltip } from 'react-tooltip';
 import styles from './Sidebar.module.css'
 import SidebarPresets from './SidebarPresets'
 import SidebarUser from './SidebarUser'
-import { useState } from 'react';
+
+import { useCallback, useEffect, useState } from 'react';
+import { tasksFetch } from '../../../providers/AuthContext';
 const BASE_URL = import.meta.env.VITE_BASE_URL
 
 export default function Sidebar() {
     // console.log(username);
 
     const [userListsFlag, updateUserLists] = useState(false);
+    const [newList, setNewList] = useState('');
 
     function handleSubmit(e) {
         //stop redirect 
         e.preventDefault();
         
-        let list = e.target[0].value;
-        console.log(`New List ${list}Submitted!`)
-        postList(list);
-        updateUserLists(true); //TODO add a new list
+        let listName = e.target[0].value;
+        console.log(`New list ${listName}Submitted!`)
+        // setNewList(listName);
+        handlePost(listName);
     }
 
     function focusField(){
         let tf = document.getElementById('input-addList');
         tf.focus()
-    }
+    }    
+
+    const handlePost = async (newList) => {
+        console.log(`Posting list: ${newList}`)
+        
+        const url = `${BASE_URL}/api/doPostNewList`
+        const data = {
+            "groupname":newList
+        }
+
+        tasksFetch(url,
+            {
+                "method": "post",
+                "body": JSON.stringify(data)
+            }
+        )
+        .then((res) => {
+            if (res.status == 200) {
+                updateUserLists(true);
+            }
+            return res.json()
+        })
+        .then((data) => {
+            console.log('Received response!!')
+            console.log(data);
+        }).catch((err) => {
+            console.error('Error with post request!', err)
+        })
+    }   
+
     return (
         <div className={`${styles.sidebar} containers`}>
             <h1>To-do List</h1>
@@ -58,39 +90,3 @@ export default function Sidebar() {
         </div>
     );
 };
-
-function postList(listname) {
-    const url = `${BASE_URL}/api/doPostNewList`
-    const headers = {
-        'content-type': 'application/json'
-    }
-    const data = {
-        "groupname":listname
-    }
-
-    console.log(`Posting list: ${listname}`)
-
-    fetch(url,
-        {
-            "method": "post",
-            "headers": headers,
-            "body": JSON.stringify(data)
-        }
-    )
-    .then((res) => {
-        if (res.status == 204) {
-            updateUserLists();
-        }
-        return res.json()
-    })
-    .then((data) => {
-        console.log('Received response!!')
-        console.log(data);
-    }).catch((err) => {
-        console.error('Error with post request!', err)
-    })
-}
-
-function updateUserLists() {
-    updateUserLists(true);
-}

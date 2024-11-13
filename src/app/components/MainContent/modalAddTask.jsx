@@ -1,7 +1,7 @@
 import Modal from 'react-modal';
 import styles from './Modal.module.css'
 import { useContext } from 'react';
-import { usernameContext } from '../../contexts'
+import { usernameContext } from '../../providers/AuthContext.jsx';
 
 
 export default function ModalAddList(props) {

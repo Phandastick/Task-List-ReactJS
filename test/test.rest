@@ -6,7 +6,9 @@ GET http://localhost:6969/api/doGetTaskLists?username=error
 ### Post req
 POST http://localhost:6969/api/doPostNewList
 Content-Type: application/json
+username: mysterio
 
 {
-    "groupname": "Task Name"
+    "groupname": "Questionable list",
+    "filename": "question"
 }

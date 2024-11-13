@@ -1,7 +1,7 @@
 import SidebarRow from './SidebarRow';
 import React, { useState, useEffect, useContext } from 'react';
 import styles from './Sidebar.module.css'
-import { usernameContext } from '../../contexts';
+import { usernameContext } from '../../../providers/AuthContext';
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 
@@ -20,8 +20,8 @@ export default function SidebarUser(props){
             return response.json()
         })
         .then((data) => {
-            console.log('SidebarUsers.jsx> Data Received!: ')
-            console.log(data)
+            // console.log('SidebarUsers.jsx> Data Received!: ')
+            // console.log(data)
             if(data.data !== undefined && data.data.length != 0){
                 setlist(data.data)
             } else {

@@ -11,13 +11,14 @@ export default function SidebarPresets(){
         const url = `${BASE_URL}/api/doGetLists`
         
         useEffect(() => {
+            console.log('Fetchin GET url', url) 
             fetch(url)
             .then((response) => {
                 return response.json()
             })
             .then((data) => {
-                console.log('Data Received!: ')
-                console.log(data)
+                // console.log('Data Received!: ')
+                // console.log(data)
                 setlist(data.data)  
             })
             .catch((error) => {

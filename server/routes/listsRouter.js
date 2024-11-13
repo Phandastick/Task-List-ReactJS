@@ -6,16 +6,16 @@ export const listsRouter = Router()
     
 listsRouter.get('/doGetLists', async (req, res) => {
     let username = req.query.username
-    console.log('Fetched username:',username)
+    // console.log('Fetched username:',username)
     var payload;
 
     if(username === undefined){
         //default list
-        console.log('Getting Default sidebar Lists')
+        // console.log('Getting Default sidebar Lists')
         payload = await getDefaultLists();
     } else {
         // has username
-        console.log('Getting User ' + username + ' Sidebar Lists')
+        // console.log('Getting User ' + username + ' Sidebar Lists')
         payload = await getUserLists(username);
     }
 
@@ -27,15 +27,25 @@ listsRouter.get('/doGetLists', async (req, res) => {
     }
 })
 
-listsRouter.post('/doPostNewList', (req,res) => {
-    console.log("Received POST req at /doPostNewList")
-    console.log(req.body);
+listsRouter.post('/doPostNewList', async (req,res) => {
+    console.log("\nReceived POST req at /doPostNewList")
+    // console.log(req.body);
+    // console.log(req.headers);
     let data = req.body
+
     let name = data.groupname;
+    let filename = data.filename;
+    let username = req.headers.username;
 
-    console.log(name)
+    let newList = {
+        name: name,
+        filename: filename,
+        username: username
+    }
 
-    const response = addList(data);
+    console.log('Adding list:',name,', for account', username)
 
-    res.send(data);
+    let response = await addList(newList);
+    console.log("Response: ",response)
+    // res.sendStatus(response.status_code);
 })
