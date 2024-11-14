@@ -52,12 +52,15 @@
 form label {
     font-weight: 450;
     font-size: 1.5rem;
-    padding: 20px 0 10px;
 }
 
-.modal-tf {
+.modal-tf, .modal-tfdate {
     height: 2rem;
-    margin: 20px 0;
+    margin: 10px 0 20px 0;
+    padding: 0;
+}
+.modal-tfdate {
+    height: 4rem;
 }
 
 .modal-closeBtn {

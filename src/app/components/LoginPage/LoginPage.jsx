@@ -1,10 +1,11 @@
 //TODO: Develop login page maybe with auth
+import styles from './LoginPage.module.css';
 
 import { useContext } from "react";
 import { loginContext } from "../../contexts/Contexts";
 
 function LoginPage() {
-    const {isLogin, setLogin} = useContext(loginContext)
+    const {setLogin} = useContext(loginContext)
 
     const handleClick = () => {
         console.log("Confirming login...")
@@ -12,8 +13,8 @@ function LoginPage() {
     }
 
     return (
-        <div className="Page"> Login Page 
-            <button onClick={handleClick} style={width="500px"}/>
+        <div className="Page">
+            <button onClick={handleClick} className={styles.button}/>
         </div>
     )   
 }

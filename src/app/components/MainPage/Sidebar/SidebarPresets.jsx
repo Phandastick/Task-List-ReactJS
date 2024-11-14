@@ -19,7 +19,7 @@ export default function SidebarPresets(){
             .then((data) => {
                 // console.log('Data Received!: ')
                 // console.log(data)
-                setlist(data.data)  
+                setlist(data.data)
             })
             .catch((error) => {
                 console.error('Fetch error in sidebarPresets:',error)

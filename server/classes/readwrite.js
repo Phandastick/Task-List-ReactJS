@@ -22,3 +22,17 @@ export  const writeCSV = async (filepath, array) => {
 
     writeFileSync(filepath,string)
 }
+
+export const readJSON = (filepath) => {
+    const readData = readFileSync(filepath, 'utf-8')
+    // return readData
+    return (JSON.parse(readData))
+}
+
+export const writeJSON = (filepath, jsonData) => {
+    console.log('Writing json data:')
+    console.log(jsonData)
+    writeFileSync(filepath,JSON.stringify(jsonData))
+}
+
+// readJSON('./public/mockdb/tasks.json')

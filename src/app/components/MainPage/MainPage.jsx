@@ -1,9 +1,11 @@
-import { useContext, useEffect, useState } from 'react'
+
 import './MainPage.css'
-import Navbar from './components/Navbar/navbar'
-import MainContent from './components/MainContent/mainContent'
-import Sidebar from './components/Sidebar/sidebar'
-import { usernameContext } from './contexts/Contexts'
+import Navbar from './Navbar/navbar'
+import MainContent from './MainContent/mainContent'
+import Sidebar from './Sidebar/sidebar'
+
+import { usernameContext } from '../../contexts/Contexts'
+import { useContext, useEffect, useState } from 'react'
 
 
 function MainPage() {

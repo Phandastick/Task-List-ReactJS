@@ -1,15 +1,11 @@
-import { useContext, useEffect } from "react";
-import MainPage from "./app/MainPage";
+import { useContext } from "react";
+import MainPage from "./app/components/MainPage/MainPage";
 import LoginPage from "./app/components/LoginPage/LoginPage";
-import { loginContext, Providers } from "./app/contexts/Contexts";
-
+import { loginContext } from "./app/contexts/Contexts";
 export default function App() {
-    const { isLogin, setLogin } = useContext(loginContext)
+    const { isLogin } = useContext(loginContext)
 
-    return (<Providers>
-        {
-            isLogin ? <MainPage /> : <LoginPage />
-        }
-        </Providers>
+    return (
+        isLogin ? <MainPage /> : <LoginPage />
     )
 }

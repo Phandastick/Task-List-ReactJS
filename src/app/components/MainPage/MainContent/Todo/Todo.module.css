@@ -69,3 +69,27 @@
 
     transition: 500ms;
 }
+
+.addBtn {
+    padding:25px;
+    margin:20px;
+    width:10vw;
+    transition:150ms;
+
+    position: sticky;
+    bottom: 0;
+    margin-left: auto;
+    outline: none;
+    border:0;
+    background-color: transparent;
+}
+
+.addBtn:hover{
+    width: 12vw;
+}
+
+#embed-addTask{
+    width: 100%;
+    padding-right: 10px;
+    pointer-events: none;
+}

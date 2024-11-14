@@ -1,10 +1,20 @@
 import styles from './Todo.module.css'
 import Task from './Task.jsx'
+import BtnAddTask from './BtnAddTask'
+import ModalAddTask from '../ModalAddTask.jsx'
+import { useState } from 'react'
 
 export default function Todo(props){
     const tasks = props.tasks;
+    const [isModelOpen, setModalState] = useState(false);
+    const openModal = () => {
+        setModalState(true)
+    }
+    const closeModal = () => {
+        setModalState(close)
+    }
 
-    return (
+    return (<>
         <div className={styles["Task-wrapper"]} id={styles[`Task-group-${props.groupname}`]}>
             <div className={styles["Task-header"]}>
                 {props.groupname}
@@ -16,7 +26,15 @@ export default function Todo(props){
                     )
                 })
             }
+            <BtnAddTask 
+                openAddTaskModal={openModal}
+            />
         </div>
+        <ModalAddTask 
+            setModalState = {setModalState}
+            modalState = {isModelOpen}
+        />
+        </>
     )
 }
 

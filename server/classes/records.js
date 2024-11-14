@@ -1,6 +1,7 @@
 import { readFile, readFileSync, writeFileSync } from 'fs';
 import { parse } from 'csv-parse/sync';
-import { readCSV, writeCSV } from './readwrite.js';
+import { readCSV, writeCSV, readJSON, writeJSON } from './readwrite.js';
+import { response } from 'express';
 
 export const getDefaultLists = () => {
     return new Promise((resolve, reject) => {
@@ -65,8 +66,6 @@ export async function addList(data){
     // console.log(res)
     return response;
 }
-
-
     // console.log(currentLists)
 
 export const getTasks = (username) => {
@@ -91,8 +90,60 @@ export const getTasks = (username) => {
     })
 }
 
+export const addTask = (newList, username) => {
+    const response = {} 
+    let newUser = false;
+    
+    //fetch json object
+    const data = readJSON('./public/mockdb/tasks.json')
+    const keys = Object.keys(data)
+    // console.log(data)
+    if(!keys.includes(username)){ //check if username is in database
+        console.log("New User detected")
+        newUser = true
+    }
+
+    const userList = data[username].lists;
+    // console.log(userList,'\n\n')
+    // console.log('----------------------------------')
+    let count = 0, found = false;
+
+    for (let list of userList) {
+        if (list.groupname == newList.groupname) {
+            let poppedList = userList.splice(count, 1)[0];
+            poppedList.tasks.push(newList.tasks);
+            userList.push(poppedList)
+            found = true; 
+            break;
+        }
+        count++;
+    }
+
+    if(!found){
+        userList.push(newList) 
+    }
+
+    data[username].lists = userList
+
+    // console.log(userList)
+    writeJSON('./public/mockdb/tasks.json',data)
+
+    return response
+}
+
 // getUserLists('bob').then((result) => {
 //     console.log('Result \n',result)
 // })
 
 // addList("NewList")
+
+// addTask({
+//     "groupname": "Project Management Tasks",
+//     "tasks": [
+//       {
+//         "name": "New Meeting",
+//         "date": "2024-11-10",
+//         "desc": "Schedule and conduct the project kickoff meeting with all stakeholders to outline project goals and expectations."
+//       }
+//     ]
+//   }, 'User1')

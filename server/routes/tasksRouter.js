@@ -1,4 +1,4 @@
-import { getTasks } from '../classes/records.js'
+import { getTasks, addTask } from '../classes/records.js'
 
 import { Router } from 'express'
 
@@ -18,4 +18,16 @@ tasksRouter.get('/doGetTasks', async (req,res) => {
     } else {
         res.sendStatus(400);
     }
+})
+
+tasksRouter.post('/doPostNewTask', (req, res) => {
+    console.log('Received POST request at /doPostTask wtih:')
+    console.log(req.body)
+    let data = req.body
+
+    let username = req.headers.username
+
+    const res = addTask(data, username);
+
+    res.send(res)
 })

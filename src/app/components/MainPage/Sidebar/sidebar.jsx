@@ -5,7 +5,7 @@ import SidebarPresets from './SidebarPresets'
 import SidebarUser from './SidebarUser'
 
 import { useCallback, useEffect, useState } from 'react';
-import { tasksFetch } from '../../hooks/fetchAPI';
+import { tasksFetch } from '../../../hooks/fetchAPI';
 const BASE_URL = import.meta.env.VITE_BASE_URL
 
 export default function Sidebar() {
@@ -67,7 +67,7 @@ export default function Sidebar() {
                     data-tooltip-id='add-list-tooltip'
                     onClick={focusField}
                 >
-                    <embed id={styles["addBtn"]} 
+                    <embed id={styles["embed-addBtn"]} 
                     src='./assets/add_square.svg'/>
                 </button>
                 <Tooltip 
