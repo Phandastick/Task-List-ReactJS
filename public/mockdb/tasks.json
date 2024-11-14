@@ -1,102 +1,154 @@
 {
-  "error": {
-    "groupname": "Project Management Tasks",
-    "tasks": [
+  "User1": {
+    "lists": [
       {
-        "name": "Kickoff Meeting",
-        "date": "2024-11-10",
-        "desc": "Schedule and conduct the project kickoff meeting with all stakeholders to outline project goals and expectations."
+        "groupname": "Project Management Tasks",
+        "tasks": [
+          {
+            "name": "Kickoff Meeting",
+            "date": "2024-11-10",
+            "desc": "Schedule and conduct the project kickoff meeting with all stakeholders to outline project goals and expectations."
+          },
+          {
+            "name": "Requirements Gathering",
+            "date": "2024-11-15",
+            "desc": "Collect and document all project requirements from stakeholders to ensure clarity and alignment."
+          }
+        ]
       },
       {
-        "name": "Requirements Gathering",
-        "date": "2024-11-15",
-        "desc": "Collect and document all project requirements from stakeholders to ensure clarity and alignment."
+        "groupname": "Personal Development Goals",
+        "tasks": [
+          {
+            "name": "Read 'Atomic Habits'",
+            "date": "2024-11-20",
+            "desc": "Finish reading 'Atomic Habits' by James Clear to gain insights into building effective habits."
+          },
+          {
+            "name": "Online Course on Time Management",
+            "date": "2024-12-05",
+            "desc": "Complete an online course focused on improving time management skills."
+          }
+        ]
       },
       {
-        "name": "Design Phase",
-        "date": "2024-11-30",
-        "desc": "Complete the design phase of the project, including wireframes and prototypes for review."
-      },
-      {
-        "name": "Development Sprint 1",
-        "date": "2024-12-15",
-        "desc": "Initiate the first development sprint, focusing on core features as defined in the project scope."
-      },
-      {
-        "name": "User Acceptance Testing",
-        "date": "2025-01-10",
-        "desc": "Conduct user acceptance testing to validate that the project meets the agreed-upon requirements."
+        "groupname": "Health and Wellness",
+        "tasks": [
+          {
+            "name": "Weekly Meal Prep",
+            "date": "2024-11-17",
+            "desc": "Plan and prepare meals for the week to maintain a healthy diet."
+          },
+          {
+            "name": "Daily Meditation Practice",
+            "date": "2024-11-18",
+            "desc": "Incorporate daily meditation into my routine for mental well-being."
+          }
+        ]
       }
     ]
   },
-  "personal_development": {
-    "groupname": "Personal Development Goals",
-    "tasks": [
+  "User2": {
+    "lists": [
       {
-        "name": "Read 'Atomic Habits'",
-        "date": "2024-11-20",
-        "desc": "Finish reading 'Atomic Habits' by James Clear to gain insights into building effective habits."
+        "groupname": "Fitness Goals",
+        "tasks": [
+          {
+            "name": "Join a Gym",
+            "date": "2024-11-25",
+            "desc": "Sign up for a local gym to start a regular workout routine."
+          },
+          {
+            "name": "30-Day Yoga Challenge",
+            "date": "2024-12-01",
+            "desc": "Participate in a 30-day yoga challenge for flexibility and mindfulness."
+          }
+        ]
       },
       {
-        "name": "Online Course Completion",
-        "date": "2024-12-05",
-        "desc": "Complete the online course on data analysis to enhance my skills in interpreting data sets."
+        "groupname": "Nutrition Goals",
+        "tasks": [
+          {
+            "name": "Track Daily Water Intake",
+            "date": "2024-11-22",
+            "desc": "Monitor water consumption to ensure proper hydration."
+          },
+          {
+            "name": "Try a New Healthy Recipe",
+            "date": "2024-12-03",
+            "desc": "'Experiment with a new healthy recipe each week to diversify my diet.'"
+          }
+        ]
       },
       {
-        "name": "Weekly Reflection Journal",
-        "date": "2024-12-01",
-        "desc": "Maintain a weekly reflection journal to track personal growth and areas for improvement."
-      },
-      {
-        "name": "Networking Event Participation",
-        "date": "2024-12-15",
-        "desc": "Attend a local networking event to connect with professionals in my field and expand my network."
-      },
-      {
-        "name": "Fitness Challenge",
-        "date": "2025-01-01",
-        "desc": "Participate in a 30-day fitness challenge to improve physical health and well-being."
+        "groupname": "Outdoor Activities",
+        "tasks": [
+          {
+            "name": "'Hiking Trip Planning'",
+            "date": "'2024-12-10'",
+            "desc": "Plan a hiking trip with friends for the upcoming weekend."
+          },
+          {
+            "name": "Join a Running Club",
+            "date": "2024-12-15",
+            "desc": "Register for a local running club to meet new people and stay active."
+          }
+        ]
       }
     ]
   },
-  "event_planning": {
-    "groupname": "Event Planning Tasks",
-    "tasks": [
+  "User3": {
+    "lists": [
       {
-        "name": "Venue Booking",
-        "date": "2024-11-15",
-        "desc": "Secure a venue for the upcoming corporate event, ensuring it meets capacity and technical requirements."
+        "groupname": "'Event Planning Tasks",
+        "tasks": [
+          {
+              "name": "Venue Booking",
+              "date": "2024-11-15",
+              "desc": "Secure a venue for the upcoming corporate event, ensuring it meets capacity and technical requirements."
+          },
+          {
+              "name": "Catering Service Selection",
+              "date": "2024-11-20",
+              "desc": "Choose a catering service that offers a diverse menu suitable for all dietary restrictions."
+          },
+          {
+              "name": "Guest List Finalization",
+              "date": "2024-11-25",
+              "desc": "Finalize the guest list and send out invitations to ensure timely RSVPs."
+          }
+        ]
       },
       {
-        "name": "Catering Service Selection",
-        "date": "2024-11-20",
-        "desc": "Choose a catering service that offers a diverse menu suitable for all dietary restrictions."
+        "groupname": "Marketing Tasks",
+        "tasks": [
+          {
+              "name": "Create Event Promotion Plan",
+              "date": "2024-12-01",
+              "desc": "Develop a marketing plan to promote the upcoming event across various channels."
+          },
+          {
+              "name": "Design Event Flyers",
+              "date": "2024-12-05",
+              "desc": "Create visually appealing flyers to distribute for event promotion."
+          }
+        ]
       },
       {
-        "name": "Guest List Finalization",
-        "date": "2024-11-25",
-        "desc": "Finalize the guest list and send out invitations to ensure timely RSVPs."
-      },
-      {
-        "name": "Audio/Visual Setup",
-        "date": "2024-12-05",
-        "desc": "Coordinate the setup of audio/visual equipment for presentations and entertainment."
-      },
-      {
-        "name": "Event Day Coordination",
-        "date": "2024-12-15",
-        "desc": "Oversee all activities on the day of the event to ensure everything runs smoothly."
+        "groupname": "Post-event Follow-up",
+        "tasks": [
+          {
+              "name": "Send Thank You Emails",
+              "date": "2025-01-02",
+              "desc": "Draft and send thank you emails to all attendees and sponsors after the event."
+          },
+          {
+              "name": "Evaluate Event Success",
+              "date": "2025-01-05",
+              "desc": "Conduct an evaluation of the event’s success based on feedback and attendance."
+          }
+        ]
       }
     ]
-  },
-  "writing_project": {
-    "groupname": "'Writing Project Goals'",
-    "tasks": [
-     {
-       "name": "Complete First Draft",
-       "date": "2024-12-01",
-       "desc": "'Finish the first draft of my novel by the end of November to stay on track with my writing goals.'"
-     }
-   ]
- }
+  }
 }
