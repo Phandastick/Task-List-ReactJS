@@ -12,3 +12,19 @@ username: mysterio
     "groupname": "Questionable list",
     "filename": "question"
 }
+
+###post req
+POST http://localhost:6969/api/doPostNewTask
+Content-Type: application/json
+username: User1
+
+{
+    "groupname": "New Project",
+    "tasks": [
+      {
+        "name": "Structural progress",
+        "date": "2025-02-01",
+        "desc": "Schedule and conduct the project kickoff meeting with all stakeholders to outline project goals and expectations."
+      }
+    ]
+  }
