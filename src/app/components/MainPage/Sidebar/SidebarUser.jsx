@@ -7,12 +7,14 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export default function SidebarUser(props){
     const [list, setlist] = useState([])
-    const {username, setUsername} = useContext(usernameContext)
+    const {currentUsername} = useContext(usernameContext)
     const updateFlag = props.updateFlag;
+    const [loading, setLoading] = useState(true); // State for loading status
+    const [error, setError] = useState(null); // State for error handling
 
     // setUsername("lucas")
 
-    const url = `${BASE_URL}/api/doGetLists?username=${username}`
+    const url = `${BASE_URL}/api/doGetLists?username=${currentUsername}`
     useEffect(() => {
         console.log('Fetchin GET url', url) 
         fetch(url)
@@ -25,15 +27,23 @@ export default function SidebarUser(props){
             if(data.data !== undefined && data.data.length != 0){
                 setlist(data.data)
             } else {
-                setlist([{"name":`Error Fetching Icons for ${username}`,"file":"error"}])
+                setlist([{"name":`Error Fetching Icons for ${currentUsername}`,"file":"error"}])
                 console.log("Error processing data in SidebarUser")
             }
         })
         .catch((error) => {
             console.error('Fetch error in sidebarUser:',error)
-            setlist([{"name":`Error Fetching Icons for ${username}`,"file":"error"}])
+            setlist([{"name":`Error Fetching Icons for ${currentUsername}`,"file":"error"}])
         });
-    }, [username,updateFlag])
+    }, [updateFlag])
+
+    if (loading) {
+        return <div>Loading...</div>; // Show loading indicator
+    }
+
+    if (error) {
+        return <div>Error fetching data: {error.message}</div>; // Show error message
+    }
 
     return (
         <div className={styles["sidebar-custom"]}>
