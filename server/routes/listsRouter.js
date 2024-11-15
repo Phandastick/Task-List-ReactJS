@@ -14,7 +14,7 @@ listsRouter.get('/doGetLists', async (req, res) => {
         // console.log('Getting Default sidebar Lists')
         payload = await getDefaultLists();
         if(payload) {
-            res.status(response.status).json(response);
+            res.status(200).json(payload);
         } else {
             res.sendStatus(400);
             return

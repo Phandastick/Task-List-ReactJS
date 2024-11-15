@@ -25,7 +25,7 @@ const handleFetchData = async () => {
 };
 */
 export const tasksFetch = (url,options = {}) => {
-    console.log("TaskFetch")
+    // console.log("TaskFetch")
     const username = window.sessionStorage.getItem('username')
 
     const headers = {
@@ -43,14 +43,12 @@ export const tasksFetch = (url,options = {}) => {
         // add body if its available, deny if its get
         fetchOptions.body = (options.body);
     }
-    console.log('AuthContext.jsx> Fetching with parameters:\n', {
+    console.log('fetchAPI.jsx> Fetching with parameters:\n', {
         url,
         fetchOptions,
     });
 
-    const response = fetch(url, fetchOptions);
-
-    return response;
+    return fetch(url, fetchOptions);
 }   
 
 

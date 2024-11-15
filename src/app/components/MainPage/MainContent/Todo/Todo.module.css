@@ -72,20 +72,22 @@
 
 .addBtn {
     padding:25px;
-    margin:20px;
-    width:10vw;
+    width:7vw;
     transition:150ms;
 
     position: sticky;
-    bottom: 0;
-    margin-left: auto;
+    bottom: 20px; /* makes it stick to bottom of screen */
+    margin-left: auto; /* fills up all the space on the left */
     outline: none;
     border:0;
+    border-radius: 20px;
     background-color: transparent;
+    background-color: var(--bg-button);
+    opacity: 80%;
 }
 
 .addBtn:hover{
-    width: 12vw;
+    width: 10vw;
 }
 
 #embed-addTask{

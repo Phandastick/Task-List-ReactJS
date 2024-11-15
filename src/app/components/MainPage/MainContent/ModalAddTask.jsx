@@ -12,6 +12,7 @@ export default function ModalAddList(props) {
     Modal.setAppElement(document.getElementById('root'))
     const username = useContext(usernameContext)
     const modalState = props.modalState
+    const listName = props.listName;
 
     const openModal = () => {
         props.setModalState(true)
@@ -44,6 +45,7 @@ export default function ModalAddList(props) {
         })
         .then((data) => {
             console.log(data)
+            props.updateFlag(true)
         })
         .catch((error) => {
             console.error("Fetch error post data: ", error)
@@ -59,7 +61,7 @@ export default function ModalAddList(props) {
         <div className={styles["modal-wrapper"]}>
             <div className={styles["modal-header"]}>Add new task</div>
             <button className={styles["modal-button-close"]}
-                onClick={() => {closeModal}}>
+                onClick={closeModal}>
                 <embed id={styles["closeBtn"]} 
                 src='./assets/cross.svg'/>
             </button>

@@ -10,7 +10,7 @@ export default function BtnAddTask({openAddTaskModal}){
             onClick={handleAddTask}
         >
             <embed id={styles["embed-addTask"]} 
-            src='./assets/add_square.svg'/>
+            src='./assets/add_task.svg'/>
         </button>
     )
 }
