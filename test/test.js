@@ -61,6 +61,45 @@ const getTaskLists = (username) => {
     })
 }
 
+const testData = {
+    "groupname": "New Project",
+    "tasks": [
+      {
+        "name": "Structural progress",
+        "date": "2025-02-01",
+        "desc": "Schedule and conduct the project kickoff meeting with all stakeholders to outline project goals and expectations."
+      },
+      {
+        "name": "Structural progress",
+        "date": "2025-02-01",
+        "desc": "Schedule and conduct the project kickoff meeting with all stakeholders to outline project goals and expectations."
+      }
+    ]
+}
+
+const newData = {
+    "tasks": [
+        {
+            "name": "Structural progress",
+            "date": "2025-02-01",
+            "desc": "Schedule and conduct the project kickoff meeting with all stakeholders to outline project goals and expectations."
+        }
+    ]
+}
+
+// testData.tasks.push(newData.tasks)
+// console.log(testData.tasks);
+let listname = 0; // listname is explicitly set to undefined
+let username = "username"; // username is a string
+let filename = undefined; // filename is a number (0)
+
+if (listname === undefined || username === undefined || filename === undefined) {
+    console.log("Missing data found:", listname, filename, username);
+    
+    const missing = !listname ? "listname" : !username ? "username" : !filename ? "filename" : null;
+    console.log(missing);
+}
+
 // getUserLists('bob').then((result) => {
 //     console.log('Result \n',result)
 // })
@@ -72,4 +111,4 @@ const getTaskLists = (username) => {
 
 // getDateList();
 
-getTaskLists();
+// getTaskLists();

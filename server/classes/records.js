@@ -1,101 +1,101 @@
-import { readFile, readFileSync, writeFileSync } from 'fs';
-import { parse } from 'csv-parse/sync';
-import { readCSV, writeCSV, readJSON, writeJSON } from './readwrite.js';
-import { response } from 'express';
+import { readCSV, readJSON, writeJSON } from './readwrite.js';
 
 export const getDefaultLists = () => {
     return new Promise((resolve, reject) => {
-        resolve(readCSV('./public/mockdb/defaultLists.csv'))
+        resolve(readCSV('./mockdb/defaultLists.csv'))
     })
 };
 
 export const getUserLists = (username) => { 
-    return new Promise((resolve, reject) => {
-        const results = readCSV('./public/mockdb/userLists.csv')
-        let resultArray = []
-        results.forEach(item => {
-            if(item.username == username){
-                resultArray.push(item)
-            }
-        });
-        // console.log('Resolving', resultArray)
-        resolve(resultArray)
-    })
+    const results = readJSON('./mockdb/tasks.json')
+    let response = {}
+
+    const keys = Object.keys(results)
+    if(!(keys.includes(username))){
+        response.status = 404
+        response.statusText = "Username not found"
+        return response
+    }
+
+    const userList = results[username]
+    // console.log('Resolving', resultArray)
+
+    response.status = 200
+    response.statusText = "OK"
+    response.body = userList
+    return response
 };
 
-export async function addList(data){
+export const addList = async (listname, filename, username) => {
     console.log('Records.js> running add list...')
-    let listname = data.name
-    let filename = data.filename
-    let username = data.username
-
-    let response = {
-        status_code: 500
-    }
+    let response = {}
 
     if(listname === undefined || username === undefined || filename=== undefined){
         console.log("Missing data found:",listname,filename,username)
-        response.status_code = 404;
-        response.error_message = "missing data"
+        const missing = listname ? "listname" : username ? "username" : filename ? "filename" : null;
+        const response = {
+            status: 404,
+            statusText: "Data is missing: " + missing
+        }
         return response;
     }
 
-    const records = readCSV('./public/mockdb/userLists.csv')
+    const records = readJSON('./mockdb/tasks.json')
 
-    let array = [];
-    array.push('name,file,username\n');
-    for (const row of records){
-        if(row.name == listname && row.username == username){
-            console.log("Caught duplicate data: ", row.name, row.username)
-            response.status_code = 412;
-            response.error_message = "duplicate data"
-            return response;
-        } else {
-            array.push(`${row.name},${row.file},${row.username}\n`)
-        }
-    };
-    
-    array.push(`${listname},${filename},${username}\n`)
-    // console.log("New lists: ",array)
-    writeCSV('./public/mockdb/userLists.csv',array)
+    const users = Object.keys(records)
+    if(!(users.includes(username))){
+        response.status = 404
+        response.statusText = "Username not found"
+        return response
+    }
 
-    response.status_code = 200
-    response.error_message = "Sucessfully added new list"
-    response.data = data
+    const userLists = records[username]
+    const newList = {
+        groupname: listname,
+        file: filename,
+        tasks: []
+    }
+    userLists.lists.push(newList)
 
-    // console.log(res)
-    return response;
+    records[username] = userLists
+
+    // console.log(records[username])
+    writeJSON('./mockdb/tasks.json', records);
+
+    response.status = 200
+    response.statusText = "OK"
+    response.body = userLists
+    return response
 }
-    // console.log(currentLists)
 
 export const getTasks = (username) => {
+    var response = {}
     if(username === undefined){
         username = 'error';
     }
 
-    return new Promise((resolve, reject) => {
-        readFile('./public/mockdb/tasks.json', (err,data)=>{
+    const data = readJSON('./mockdb/tasks.json')
 
-            if(err) throw err;
+    const existingUsers = Object.keys(data)
+    if(!(existingUsers.includes(username))){
+        response.status = 404
+        response.statusText = `Username ${username} not found`
+        return response
+    }
 
-            let json = JSON.parse(data);
-            for(var k in json){
-                if(k == 'username'){
-                    console.log(json[k])
-                }
-            }
-
-            resolve(json)
-        })
-    })
+    const userLists = data[username]
+    response.status = 200
+    response.statusText = "Tasks found for " + username
+    response.body = userLists
+    return response
 }
 
 export const addTask = (newList, username) => {
-    const response = {} 
+    var response = {} 
     let newUser = false;
     
     //fetch json object
-    const data = readJSON('./public/mockdb/tasks.json')
+    const data = readJSON('./mockdb/tasks.json')
     const keys = Object.keys(data)
     // console.log(data)
     if(!keys.includes(username)){ //check if username is in database
@@ -104,46 +104,48 @@ export const addTask = (newList, username) => {
     }
 
     const userList = data[username].lists;
-    // console.log(userList,'\n\n')
-    // console.log('----------------------------------')
     let count = 0, found = false;
 
     for (let list of userList) {
         if (list.groupname == newList.groupname) {
             let poppedList = userList.splice(count, 1)[0];
-            poppedList.tasks.push(newList.tasks);
-            userList.push(poppedList)
+            const combinedList = addNewTasks(poppedList, newList.tasks)
+            userList.push(combinedList)
             found = true; 
             break;
         }
         count++;
     }
-
     if(!found){
-        userList.push(newList) 
+        //TODO: list does not exist
+        const response = {
+            status: 400,
+            statusText: "List is not found"
+        }
+        return response
     }
+
 
     data[username].lists = userList
 
-    // console.log(userList)
-    writeJSON('./public/mockdb/tasks.json',data)
-
-    return response
+    // console.log(userList[3])
+    writeJSON('./mockdb/tasks.json',data)
+    response = {
+        status: 200,
+        statusText: "Successfully added tasks"
+    }
+    // console.log(res)
+    return response;
 }
 
-// getUserLists('bob').then((result) => {
-//     console.log('Result \n',result)
-// })
+// adds tasksList into popped ist
+const addNewTasks = (poppedList, tasksList) => {
+    tasksList.forEach(task => {
+        poppedList.tasks.push(task)
+    });
+    return poppedList
+}
 
-// addList("NewList")
+export const getIcons = () => {
 
-// addTask({
-//     "groupname": "Project Management Tasks",
-//     "tasks": [
-//       {
-//         "name": "New Meeting",
-//         "date": "2024-11-10",
-//         "desc": "Schedule and conduct the project kickoff meeting with all stakeholders to outline project goals and expectations."
-//       }
-//     ]
-//   }, 'User1')
+}

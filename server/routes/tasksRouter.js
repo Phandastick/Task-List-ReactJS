@@ -8,16 +8,10 @@ tasksRouter.get('/doGetTasks', async (req,res) => {
     let username = req.query.username
 
     console.log('Fetched tasks from username:',username)
-    var payload;
+    let response;
+    response = getTasks(username);
 
-    console.log('Getting User ' + username + ' Tasks')
-    payload = await getTasks(username);
-
-    if(payload) {
-        res.json({ message: 'GET doGetTasks request received!', data: payload })
-    } else {
-        res.sendStatus(400);
-    }
+    res.status(response.status).json(response);
 })
 
 tasksRouter.post('/doPostNewTask', (req, res) => {
@@ -27,7 +21,7 @@ tasksRouter.post('/doPostNewTask', (req, res) => {
 
     let username = req.headers.username
 
-    const res = addTask(data, username);
+    const response = addTask(data, username);
 
-    res.send(res)
+    res.status(response.status).json(response);
 })

@@ -9,7 +9,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "start": "nodemon -r dotenv/config ./index.js"
+    "start": "nodemon --ignore 'public/*' --ignore README -r dotenv/config ./index.js"
   },
   "dependencies": {
     "cors": "^2.8.5",

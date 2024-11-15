@@ -1,12 +1,23 @@
-GET http://localhost:6969/api/doGetTaskLists?username=error
+### Get list
+GET http://localhost:6969/api/doGetLists?username=User2
 
 
+### get default
+GET http://localhost:6969/api/doGetLists
 
 
-### Post req
+### get tasks
+GET http://localhost:6969/api/doGetTasks?username=User2
+
+
+### get icons
+GET http://localhost:6969/api/doGetIcons
+
+
+### Post list
 POST http://localhost:6969/api/doPostNewList
 Content-Type: application/json
-username: mysterio
+username: error
 
 {
     "groupname": "Questionable list",
@@ -16,10 +27,10 @@ username: mysterio
 ###post req
 POST http://localhost:6969/api/doPostNewTask
 Content-Type: application/json
-username: User1
+username: User2
 
 {
-    "groupname": "New Project",
+    "groupname": "Outdoor Activities",
     "tasks": [
       {
         "name": "Structural progress",
