@@ -8,73 +8,64 @@ export default function Todo(){
     // const tasks = props.tasks; //array
     const [isModelOpen, setModalState] = useState(false);
     const {currentUsername} = useContext(usernameContext);
-    const [tasks, setTasks] = useState(null)
+    const [taskArray, setTaskArray] = useState([])
     const [updateListsFlag, setUpdateFlag] = useState(false)
     const [isLoading, setLoading] = useState(true)
-    const [error, setError] = useState(null);
+    const [error, setError] = useState([null]);
     
     useEffect(()=>{
         const url = `http://localhost:6969/api/doGetTasks?username=${currentUsername}`
-        fetch(url)
         const fetchData = async () => {
             try{
-                const data = await fetch(url)
-                const lists = data.json().body
-                setTasks(lists)
+                fetch(url)
+                .then((res) => {
+                    return res.json()
+                })
+                .then((data) => {
+                    //returns array
+                    const tasks = data.body.lists
+                    setTaskArray(tasks)
+                    setLoading(false)
+                })
             } catch(err){
                 console.error(err)
                 setError(err)
             } finally {
-                setLoading(false)
                 setUpdateFlag(false)
             }
         }
-
         fetchData();
     }, [updateListsFlag])
-
-    if (isLoading) {
-        return <div>Loading...</div>; // Show loading indicator
-    }
-
-    if (error) {
-        return <div>Error fetching data: {error.message}</div>; // Show error message
-    }
-
 
     const openModal = () => {
         setModalState(true)
     }
     const closeModal = () => {
-        setModalState(close)
+        setModalState(false)
     }
 
-    // const getTasks = () => {
-    //     const url = `http://localhost:6969/api/doGetTasks?username=${currentUsername}`
-    //     console.log('Fetchin GET url', url)
-    //     fetch(url)
-    //     .then((response) => {
-    //         return response.json()
-    //     })
-    //     .then((data) => {
-    //         // console.log('Data Received!: ')
-    //         // console.log(data)
-    //         setList(data.data)
-    //     })
-    //     .catch((error) => {
-    //         console.error('Fetch error in Todo.jsx:',error)
-    //     });
-    // }
+    if (error) {
+        return (
+            <div>
+                <p>Error fetching tasks: {error.message}</p>
+            </div>
+        );
+    }
+    
+    if (isLoading) {
+        return <div>Loading tasks, please wait...</div>;
+    }
+
     return (<>
-        <div className={styles["Task-wrapper"]} id={styles[`Task-group-${tasks.groupname}`]}>
+        <div className={styles["Task-wrapper"]}>
             {
-                taskLists.map((item,index) => {
+                taskArray.map((item) => {
                     return(
                     <TaskListSection
                         filter={filterMode}
                         listname={item.groupname}
                         tasks={item.tasks} //array of individual tasks
-                        key = {index}
+                        key = {item.groupname}
                     />
                     )
                 })

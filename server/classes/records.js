@@ -17,12 +17,18 @@ export const getUserLists = (username) => {
         return response
     }
 
-    const userList = results[username]
+    const userList = results[username].lists
     // console.log('Resolving', resultArray)
+    let listnames = []
+    userList.forEach(list => {
+        listnames.push(list.groupname)
+    });
+
+    // console.log(listnames)
 
     response.status = 200
     response.statusText = "OK"
-    response.body = userList
+    response.body = listnames
     return response
 };
 
@@ -149,3 +155,5 @@ const addNewTasks = (poppedList, tasksList) => {
 export const getIcons = () => {
 
 }
+
+getUserLists("User1")

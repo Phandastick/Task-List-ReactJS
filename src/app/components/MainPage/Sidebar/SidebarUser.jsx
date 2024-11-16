@@ -6,9 +6,10 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 
 export default function SidebarUser(props){
-    const [list, setlist] = useState([])
+    const [list, setlist] = useState(null)
     const {currentUsername} = useContext(usernameContext)
     const updateFlag = props.updateFlag;
+    const setUpdateFlag = props.setUpdateFlag;
     const [loading, setLoading] = useState(true); // State for loading status
     const [error, setError] = useState(null); // State for error handling
 
@@ -17,32 +18,34 @@ export default function SidebarUser(props){
     const url = `${BASE_URL}/api/doGetLists?username=${currentUsername}`
     useEffect(() => {
         console.log('Fetchin GET url', url) 
-        fetch(url)
-        .then((response) => {
-            return response.json()
-        })
-        .then((data) => {
-            // console.log('SidebarUsers.jsx> Data Received!: ')
-            // console.log(data)
-            if(data.data !== undefined && data.data.length != 0){
-                setlist(data.data)
-            } else {
-                setlist([{"name":`Error Fetching Icons for ${currentUsername}`,"file":"error"}])
-                console.log("Error processing data in SidebarUser")
+        const fetchData = async () => {
+            try{
+                fetch(url)
+                .then((res) => {
+                    return res.json()
+                })
+                .then((data) =>{
+                    const lists = data.body
+                    setlist(lists)
+                    setLoading(false)
+                })
+            } catch(err){
+                console.error(err)
+                setError(err)
+            } finally {
+                setUpdateFlag(false)
             }
-        })
-        .catch((error) => {
-            console.error('Fetch error in sidebarUser:',error)
-            setlist([{"name":`Error Fetching Icons for ${currentUsername}`,"file":"error"}])
-        });
+        }
+        fetchData();
     }, [updateFlag])
+
+    if (error) {
+        setlist([{"name":"Error Fetching Lists","file":"error"}])
+        return
+    }
 
     if (loading) {
         return <div>Loading...</div>; // Show loading indicator
-    }
-
-    if (error) {
-        return <div>Error fetching data: {error.message}</div>; // Show error message
     }
 
     return (
@@ -55,7 +58,7 @@ export default function SidebarUser(props){
                         icon={item.file}
                         className={className}
                         idName={className}
-                        key={item.name}
+                        key={index}
                     />
                 })
             }

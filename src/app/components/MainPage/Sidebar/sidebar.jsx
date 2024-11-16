@@ -35,6 +35,7 @@ export default function Sidebar() {
             </div>
             <SidebarUser 
                 updateFlag={userListsFlag}
+                setUpdateFlag={updateUserLists}
             />
         </div>
     );
