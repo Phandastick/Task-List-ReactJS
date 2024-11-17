@@ -20,20 +20,16 @@ export default function SidebarUser(props){
         console.log('Fetchin GET url', url) 
         const fetchData = async () => {
             try{
-                fetch(url)
-                .then((res) => {
-                    return res.json()
-                })
-                .then((data) =>{
-                    const lists = data.body
-                    setlist(lists)
-                    setLoading(false)
-                })
+                const res = await fetch(url)
+                const data = await res.json()
+                const lists = data.body
+                setlist(lists)
             } catch(err){
                 console.error(err)
                 setError(err)
             } finally {
                 setUpdateFlag(false)
+                setLoading(false)
             }
         }
         fetchData();

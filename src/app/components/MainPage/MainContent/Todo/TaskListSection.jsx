@@ -7,7 +7,7 @@ export default function TaskListSection({filter, listname, tasks}) {
     return(
     <>
         <div className={styles["Task-header"]}>
-            {props.groupname}
+            {listname}
         </div>
         {
             tasks.map((jsonTask,index)=>{

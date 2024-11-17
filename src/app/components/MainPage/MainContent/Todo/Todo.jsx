@@ -1,47 +1,59 @@
-import BtnAddTask from './BtnAddTask'
-import ModalAddTask from '../ModalAddTask.jsx'
-import { useContext, useState, useEffect } from 'react'
+import BtnAddTask from './BtnAddTask';
+import ModalAddTask from '../ModalAddTask.jsx';
+import TaskListSection from './TaskListSection.jsx';
+
 import { usernameContext } from '../../../../contexts/Contexts.jsx';
-import styles from './Todo.module.css'
+import styles from './Todo.module.css';
+import { useContext, useState, useEffect } from 'react';
 
 export default function Todo(){
     // const tasks = props.tasks; //array
-    const [isModelOpen, setModalState] = useState(false);
     const {currentUsername} = useContext(usernameContext);
-    const [taskArray, setTaskArray] = useState([])
-    const [updateListsFlag, setUpdateFlag] = useState(false)
-    const [isLoading, setLoading] = useState(true)
-    const [error, setError] = useState([null]);
+    const [taskArray, setTaskArray] = useState(null)
+    const [listnames, setListnames] = useState(null)
+
+    //flag
+    const [isModelOpen, setModalState] = useState(false);
+    const [updateListsFlag, setUpdateFlag] = useState(false);
+    const [filterMode, setFiltermode] = useState("Day");
+    const [isLoading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     
     useEffect(()=>{
         const url = `http://localhost:6969/api/doGetTasks?username=${currentUsername}`
         const fetchData = async () => {
             try{
-                fetch(url)
-                .then((res) => {
-                    return res.json()
-                })
-                .then((data) => {
-                    //returns array
-                    const tasks = data.body.lists
-                    setTaskArray(tasks)
-                    setLoading(false)
-                })
+                const res = await fetch(url)
+                const data = await res.json()
+
+                const tasks = data.body.lists
+                setTaskArray(tasks)
+                setLists(tasks, setListnames);
+
             } catch(err){
                 console.error(err)
                 setError(err)
             } finally {
                 setUpdateFlag(false)
+                setLoading(false)
             }
         }
         fetchData();
     }, [updateListsFlag])
 
-    const openModal = () => {
-        setModalState(true)
+    const setLists = (taskList, setList) => {
+        const lists = [];
+        taskList.forEach(list => {
+            lists.push(list.groupname)
+        });
+        setList(lists)
     }
-    const closeModal = () => {
-        setModalState(false)
+
+    const openModal = () => { setModalState(true) }
+    const closeModal = () => { setModalState(false) }
+    
+    if (isLoading) {
+        return <div>Loading tasks, please wait...</div>;
     }
 
     if (error) {
@@ -50,10 +62,6 @@ export default function Todo(){
                 <p>Error fetching tasks: {error.message}</p>
             </div>
         );
-    }
-    
-    if (isLoading) {
-        return <div>Loading tasks, please wait...</div>;
     }
 
     return (<>
@@ -77,7 +85,7 @@ export default function Todo(){
         <ModalAddTask 
             setModalState = {setModalState}
             modalState = {isModelOpen}
-            listName = {listName}
+            listName = {listnames[0]}
             updateFlag = {setUpdateFlag}
         />
         </>

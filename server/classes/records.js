@@ -21,7 +21,11 @@ export const getUserLists = (username) => {
     // console.log('Resolving', resultArray)
     let listnames = []
     userList.forEach(list => {
-        listnames.push(list.groupname)
+        const listname = {
+            name: list.groupname,
+            file: list.file
+        }
+        listnames.push(listname)
     });
 
     // console.log(listnames)
