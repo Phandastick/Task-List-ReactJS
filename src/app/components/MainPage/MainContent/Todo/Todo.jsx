@@ -9,8 +9,8 @@ import { useContext, useState, useEffect } from 'react';
 export default function Todo(){
     // const tasks = props.tasks; //array
     const {currentUsername} = useContext(usernameContext);
-    const [taskArray, setTaskArray] = useState(null)
-    const [listnames, setListnames] = useState(null)
+    const [taskArray, setTaskArray] = useState(null);
+    const [listnames, setListnames] = useState(null);
 
     //flag
     const [isModelOpen, setModalState] = useState(false);
@@ -28,6 +28,8 @@ export default function Todo(){
 
                 const tasks = data.body.lists
                 setTaskArray(tasks)
+
+
                 setLists(tasks, setListnames);
 
             } catch(err){
@@ -65,9 +67,12 @@ export default function Todo(){
     }
 
     return (<>
-        <div className={styles["Task-wrapper"]}>
+        <div className={styles["Task-wrapper"]} id='Task-wrapper'>
             {
                 taskArray.map((item) => {
+                    if(item.tasks === undefined || item.tasks == ""){
+                        return
+                    }
                     return(
                     <TaskListSection
                         filter={filterMode}
@@ -87,6 +92,7 @@ export default function Todo(){
             modalState = {isModelOpen}
             listName = {listnames[0]}
             updateFlag = {setUpdateFlag}
+            lists = {listnames}
         />
         </>
     )

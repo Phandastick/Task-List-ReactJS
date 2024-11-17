@@ -1,6 +1,6 @@
 import Modal from 'react-modal';
 import styles from './Modal.module.css'
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { usernameContext } from '../../../contexts/Contexts';
 import { tasksFetch } from '../../../hooks/fetchAPI'
 const BASE_URL = import.meta.env.VITE_BASE_URL
@@ -10,9 +10,12 @@ const BASE_URL = import.meta.env.VITE_BASE_URL
 
 export default function ModalAddList(props) {
     Modal.setAppElement(document.getElementById('root'))
-    const username = useContext(usernameContext)
     const modalState = props.modalState
-    const listName = props.listName;
+    const [lists, setLists] = useState(props.lists)
+
+    useEffect(()=>{
+        setLists(props.lists)
+    },[props.lists])
 
     const openModal = () => {
         props.setModalState(true)
@@ -34,11 +37,19 @@ export default function ModalAddList(props) {
         });
         
         const url = `${BASE_URL}/api/doPostNewTask`;
+        const payload = {
+            groupname: data.listname,
+            tasks: [{
+                name: data.name,
+                desc: data.desc,
+                date: data.date
+            }]
+        }
         tasksFetch(
             url,
             {
                 method:'post',
-                body: JSON.stringify(data)
+                body: JSON.stringify(payload)
             }
         ).then((response) => {
             return response.json()
@@ -52,12 +63,16 @@ export default function ModalAddList(props) {
         });
     }
 
+
+
     return (
     <Modal 
     className={styles.modal}
     isOpen={modalState}
     styles= {styles}
-    preventScroll={true}>
+    onAfterOpen={() => document.body.style.overflow = 'hidden'}
+    onAfterClose={() => document.body.style.overflow = 'unset'}
+    >
         <div className={styles["modal-wrapper"]}>
             <div className={styles["modal-header"]}>Add new task</div>
             <button className={styles["modal-button-close"]}
@@ -73,6 +88,16 @@ export default function ModalAddList(props) {
                 <input type='text' id="desc" name="desc" className={styles["modal-tfdate"]} required/>
                 <label htmlFor="date">Task Duedate</label>
                 <input type='text' id="date" name="date" className={styles["modal-tf"]} required/>
+
+                <select className={styles["ddl-listname"]} name='listname'>
+                    {
+                        lists.map((listname) => {
+                            return(
+                                <option value={listname}>{listname}</option>
+                            )
+                        })
+                    }
+                </select>
 
                 <button 
                     className={styles["modal-addBtn"]}

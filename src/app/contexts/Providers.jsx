@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { usernameContext, loginContext } from './Contexts';
 
 export default function Providers({children}) {
-    const [currentUsername, setCurrentUsername] = useState('error')
+    const [currentUsername, setCurrentUsername] = useState(null)
     const [isLogin, setLogin] = useState(false);
 
     return(

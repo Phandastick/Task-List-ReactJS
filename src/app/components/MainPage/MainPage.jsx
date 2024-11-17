@@ -1,19 +1,19 @@
 
 import './MainPage.css'
-import Navbar from './Navbar/navbar'
+import Navbar from './Navbar/Navbar.jsx'
 import MainContent from './MainContent/mainContent'
 import Sidebar from './Sidebar/sidebar'
 
 import { usernameContext } from '../../contexts/Contexts'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 
 
 function MainPage() {
-  const {username, setUsername} = useContext(usernameContext)
-
+  const {currentUsername, setCurrentUsername} = useContext(usernameContext)
+  
   useEffect(() => {
-    window.sessionStorage.setItem('username',username);
-  }, [username])
+    window.sessionStorage.setItem('username',currentUsername);
+  }, [currentUsername])
 
   return (
           <div className='app-wrapper'>

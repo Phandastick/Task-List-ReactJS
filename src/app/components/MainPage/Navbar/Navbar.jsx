@@ -2,51 +2,35 @@
 import styles from './Navbar.module.css';
 
 function getDateList(){
+    
     var date = new Date()
-    let todayDate = date.getDate();
-    let dayofweek = date.getDay();
+    let todayDate = date.getDate(); // date number
     var dateList = []; 
+    
+    let dayofweek = date.getDay()-1;
+    if(dayofweek == -1){
+        dayofweek = 6
+    }
 
-    //find sunday's date
-    todayDate = todayDate-dayofweek
-    date.setDate(todayDate)
+    console.log(dayofweek)
+    console.log(todayDate)
+    date.setDate(todayDate - dayofweek) // get monday
     // console.log(date.getDate())
+
+    let day = {}
+    let dateDict = []
+    const dayList = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
     
     for(var i = 0; i < 7; i++){
         //Increment starting from monday idk how
-        dateList[i] = date.getDate(date.setDate(date.getDate()+1));
+        day = {
+            "dayname": dayList[i],
+            "datenum": date.getDate()
+        }
+        dateList[i] = date.getDate();
+        date.setDate(date.getDate()+1);
+        dateDict[i] = day;
     }
-
-    let dateDict = [
-                {
-                    "dayname":"Mon",
-                    "datenum": dateList[0]
-                },
-                {
-                    "dayname":"Tue",
-                    "datenum": dateList[1]
-                },
-                {
-                    "dayname":"Wed",
-                    "datenum": dateList[2]
-                },
-                {
-                    "dayname":"Thu",
-                    "datenum": dateList[3]
-                },
-                {
-                    "dayname":"Fri",
-                    "datenum": dateList[4]
-                },
-                {
-                    "dayname":"Sat",
-                    "datenum": dateList[5]
-                },
-                {
-                    "dayname":"Sun",
-                    "datenum": dateList[6]
-                }
-            ]
 
     // console.log(dateDict)
     return dateDict
