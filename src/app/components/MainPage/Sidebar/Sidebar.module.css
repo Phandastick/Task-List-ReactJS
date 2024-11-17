@@ -75,7 +75,7 @@
   
     padding: 15px 7.5px;
     margin: 10px 0;
-    height: 2.5em;
+    min-height: 2.5em;
     display: flex;
     align-items: center;
 
