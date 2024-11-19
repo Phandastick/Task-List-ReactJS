@@ -14,6 +14,10 @@ GET http://localhost:6969/api/doGetTasks?username=User2
 GET http://localhost:6969/api/doGetIcons
 
 
+### get login image
+GET
+
+
 ### Post list
 POST http://localhost:6969/api/doPostNewList
 Content-Type: application/json
@@ -30,12 +34,17 @@ Content-Type: application/json
 username: User2
 
 {
-    "groupname": "Outdoor Activities",
-    "tasks": [
-      {
-        "name": "Structural progress",
-        "date": "2025-02-01",
-        "desc": "Schedule and conduct the project kickoff meeting with all stakeholders to outline project goals and expectations."
-      }
-    ]
-  }
+  "groupname": "Outdoor Activities",
+  "tasks": [
+    {
+      "name": "Structural progress",
+      "date": "2025-02-01",
+      "desc": "Schedule and conduct the project kickoff meeting with all stakeholders to outline project goals and expectations."
+    }
+  ]
+}
+
+### unsplash test
+GET https://api.unsplash.com/photos/random?query=Wallpaper&orientation=portrait
+Authorization: Client-ID {{$dotenv %UNSPLASH_CLIENT_KEY}}
+Accept-Version: v1
