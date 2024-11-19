@@ -1,1 +1,223 @@
-{"User1":{"lists":[{"groupname":"Project Management Tasks","file":"writing","tasks":[{"name":"Kickoff Meeting","date":"2024-11-10","desc":"Schedule and conduct the project kickoff meeting with all stakeholders to outline project goals and expectations."},{"name":"Requirements Gathering","date":"2024-11-15","desc":"Collect and document all project requirements from stakeholders to ensure clarity and alignment."}]},{"groupname":"New Project","file":"upcoming","tasks":[{"name":"Structural progress","date":"2025-02-01","desc":"Schedule and conduct the project kickoff meeting with all stakeholders to outline project goals and expectations."}]},{"groupname":"Personal Development Goals","file":"person","tasks":[{"name":"Read 'Atomic Habits'","date":"2024-11-20","desc":"Finish reading 'Atomic Habits' by James Clear to gain insights into building effective habits."},{"name":"Online Course on Time Management","date":"2024-12-05","desc":"Complete an online course focused on improving time management skills."},{"name":"Structural progress","date":"2025-02-01","desc":"Schedule and conduct the project kickoff meeting with all stakeholders to outline project goals and expectations."}]},{"groupname":"New List","file":"error","tasks":[]},{"groupname":"Health and Wellness","file":"home","tasks":[{"name":"Weekly Meal Prep","date":"2024-11-17","desc":"Plan and prepare meals for the week to maintain a healthy diet."},{"name":"Daily Meditation Practice","date":"2024-11-18","desc":"Incorporate daily meditation into my routine for mental well-being."},{"name":"Task Name","desc":"Desc","date":"Best Duedate"}]},{"groupname":"New List","file":"error","tasks":[]}]},"User2":{"lists":[{"groupname":"Fitness Goals","file":"list","tasks":[{"name":"Join a Gym","date":"2024-11-25","desc":"Sign up for a local gym to start a regular workout routine."},{"name":"30-Day Yoga Challenge","date":"2024-12-01","desc":"Participate in a 30-day yoga challenge for flexibility and mindfulness."}]},{"groupname":"Nutrition Goals","file":"home","tasks":[{"name":"Track Daily Water Intake","date":"2024-11-22","desc":"Monitor water consumption to ensure proper hydration."},{"name":"Try a New Healthy Recipe","date":"2024-12-03","desc":"'Experiment with a new healthy recipe each week to diversify my diet.'"}]},{"groupname":"Outdoor Activities","file":"person","tasks":[{"name":"'Hiking Trip Planning'","date":"'2024-12-10'","desc":"Plan a hiking trip with friends for the upcoming weekend."},{"name":"Join a Running Club","date":"2024-12-15","desc":"Register for a local running club to meet new people and stay active."},{"name":"Structural progress","date":"2025-02-01","desc":"Schedule and conduct the project kickoff meeting with all stakeholders to outline project goals and expectations."},{"name":"Structural progress","date":"2025-02-01","desc":"Schedule and conduct the project kickoff meeting with all stakeholders to outline project goals and expectations."}]},{"groupname":"Questionable list","file":"question","tasks":[]}]},"User3":{"lists":[{"groupname":"'Event Planning Tasks","file":"home","tasks":[{"name":"Venue Booking","date":"2024-11-15","desc":"Secure a venue for the upcoming corporate event, ensuring it meets capacity and technical requirements."},{"name":"Catering Service Selection","date":"2024-11-20","desc":"Choose a catering service that offers a diverse menu suitable for all dietary restrictions."},{"name":"Guest List Finalization","date":"2024-11-25","desc":"Finalize the guest list and send out invitations to ensure timely RSVPs."}]},{"groupname":"Marketing Tasks","file":"list","tasks":[{"name":"Create Event Promotion Plan","date":"2024-12-01","desc":"Develop a marketing plan to promote the upcoming event across various channels."},{"name":"Design Event Flyers","date":"2024-12-05","desc":"Create visually appealing flyers to distribute for event promotion."}]},{"groupname":"Post-event Follow-up","file":"upcoming","tasks":[{"name":"Send Thank You Emails","date":"2025-01-02","desc":"Draft and send thank you emails to all attendees and sponsors after the event."},{"name":"Evaluate Event Success","date":"2025-01-05","desc":"Conduct an evaluation of the event’s success based on feedback and attendance."}]}]},"error":{"lists":[{"groupname":"Questionable list","file":"error","tasks":[]}]}}
+{
+    "User1": {
+        "lists": [
+            {
+                "groupname": "New Project",
+                "file": "upcoming",
+                "tasks": [
+                    {
+                        "name": "Structural progress",
+                        "date": "2025-02-01",
+                        "desc": "Schedule and conduct the project kickoff meeting with all stakeholders to outline project goals and expectations."
+                    }
+                ]
+            },
+            {
+                "groupname": "Personal Development Goals",
+                "file": "person",
+                "tasks": [
+                    {
+                        "name": "Read 'Atomic Habits'",
+                        "date": "2024-11-20",
+                        "desc": "Finish reading 'Atomic Habits' by James Clear to gain insights into building effective habits."
+                    },
+                    {
+                        "name": "Online Course on Time Management",
+                        "date": "2024-12-05",
+                        "desc": "Complete an online course focused on improving time management skills."
+                    },
+                    {
+                        "name": "Structural progress",
+                        "date": "2025-02-01",
+                        "desc": "Schedule and conduct the project kickoff meeting with all stakeholders to outline project goals and expectations."
+                    }
+                ]
+            },
+            {
+                "groupname": "New List",
+                "file": "error",
+                "tasks": []
+            },
+            {
+                "groupname": "Health and Wellness",
+                "file": "home",
+                "tasks": [
+                    {
+                        "name": "Weekly Meal Prep",
+                        "date": "2024-11-17",
+                        "desc": "Plan and prepare meals for the week to maintain a healthy diet."
+                    },
+                    {
+                        "name": "Daily Meditation Practice",
+                        "date": "2024-11-18",
+                        "desc": "Incorporate daily meditation into my routine for mental well-being."
+                    },
+                    {
+                        "name": "Task Name",
+                        "desc": "Desc",
+                        "date": "Best Duedate"
+                    }
+                ]
+            },
+            {
+                "groupname": "New List",
+                "file": "error",
+                "tasks": []
+            },
+            {
+                "groupname": "Project Management Tasks",
+                "file": "writing",
+                "tasks": [
+                    {
+                        "name": "Kickoff Meeting",
+                        "date": "2024-11-10",
+                        "desc": "Schedule and conduct the project kickoff meeting with all stakeholders to outline project goals and expectations."
+                    },
+                    {
+                        "name": "Requirements Gathering",
+                        "date": "2024-11-15",
+                        "desc": "Collect and document all project requirements from stakeholders to ensure clarity and alignment."
+                    },
+                    {
+                        "name": "New Task for managing the chern",
+                        "desc": "chern is bad and needs more management",
+                        "date": "tmr"
+                    }
+                ]
+            }
+        ]
+    },
+    "User2": {
+        "lists": [
+            {
+                "groupname": "Fitness Goals",
+                "file": "list",
+                "tasks": [
+                    {
+                        "name": "Join a Gym",
+                        "date": "2024-11-25",
+                        "desc": "Sign up for a local gym to start a regular workout routine."
+                    },
+                    {
+                        "name": "30-Day Yoga Challenge",
+                        "date": "2024-12-01",
+                        "desc": "Participate in a 30-day yoga challenge for flexibility and mindfulness."
+                    }
+                ]
+            },
+            {
+                "groupname": "Nutrition Goals",
+                "file": "home",
+                "tasks": [
+                    {
+                        "name": "Track Daily Water Intake",
+                        "date": "2024-11-22",
+                        "desc": "Monitor water consumption to ensure proper hydration."
+                    },
+                    {
+                        "name": "Try a New Healthy Recipe",
+                        "date": "2024-12-03",
+                        "desc": "'Experiment with a new healthy recipe each week to diversify my diet.'"
+                    }
+                ]
+            },
+            {
+                "groupname": "Outdoor Activities",
+                "file": "person",
+                "tasks": [
+                    {
+                        "name": "'Hiking Trip Planning'",
+                        "date": "'2024-12-10'",
+                        "desc": "Plan a hiking trip with friends for the upcoming weekend."
+                    },
+                    {
+                        "name": "Join a Running Club",
+                        "date": "2024-12-15",
+                        "desc": "Register for a local running club to meet new people and stay active."
+                    },
+                    {
+                        "name": "Structural progress",
+                        "date": "2025-02-01",
+                        "desc": "Schedule and conduct the project kickoff meeting with all stakeholders to outline project goals and expectations."
+                    },
+                    {
+                        "name": "Structural progress",
+                        "date": "2025-02-01",
+                        "desc": "Schedule and conduct the project kickoff meeting with all stakeholders to outline project goals and expectations."
+                    }
+                ]
+            },
+            {
+                "groupname": "Questionable list",
+                "file": "question",
+                "tasks": []
+            }
+        ]
+    },
+    "User3": {
+        "lists": [
+            {
+                "groupname": "'Event Planning Tasks",
+                "file": "home",
+                "tasks": [
+                    {
+                        "name": "Venue Booking",
+                        "date": "2024-11-15",
+                        "desc": "Secure a venue for the upcoming corporate event, ensuring it meets capacity and technical requirements."
+                    },
+                    {
+                        "name": "Catering Service Selection",
+                        "date": "2024-11-20",
+                        "desc": "Choose a catering service that offers a diverse menu suitable for all dietary restrictions."
+                    },
+                    {
+                        "name": "Guest List Finalization",
+                        "date": "2024-11-25",
+                        "desc": "Finalize the guest list and send out invitations to ensure timely RSVPs."
+                    }
+                ]
+            },
+            {
+                "groupname": "Marketing Tasks",
+                "file": "list",
+                "tasks": [
+                    {
+                        "name": "Create Event Promotion Plan",
+                        "date": "2024-12-01",
+                        "desc": "Develop a marketing plan to promote the upcoming event across various channels."
+                    },
+                    {
+                        "name": "Design Event Flyers",
+                        "date": "2024-12-05",
+                        "desc": "Create visually appealing flyers to distribute for event promotion."
+                    }
+                ]
+            },
+            {
+                "groupname": "Post-event Follow-up",
+                "file": "upcoming",
+                "tasks": [
+                    {
+                        "name": "Send Thank You Emails",
+                        "date": "2025-01-02",
+                        "desc": "Draft and send thank you emails to all attendees and sponsors after the event."
+                    },
+                    {
+                        "name": "Evaluate Event Success",
+                        "date": "2025-01-05",
+                        "desc": "Conduct an evaluation of the event’s success based on feedback and attendance."
+                    }
+                ]
+            }
+        ]
+    },
+    "error": {
+        "lists": [
+            {
+                "groupname": "Questionable list",
+                "file": "error",
+                "tasks": []
+            }
+        ]
+    }
+}
