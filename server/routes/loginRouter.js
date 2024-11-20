@@ -2,37 +2,48 @@ import { Router } from "express";
 
 export const loginRouter = Router();
 
-loginRouter.use('/login')
-
 loginRouter.get('/doGetBgImage', async (req, res) => {
+    console.log("Called login bg image")
     const params = new URLSearchParams({
-        query: "Wallpaper",
-        orientation: "portrait"
+        query: "Green Background",
+        orientation: "landscape"
     })
-    const url = process.env.UNSPLASH_BASE_URL + params.toString()
+    const headers = {
+        Authorization: 'Client-ID ' + process.env.UNSPLASH_CLIENT_KEY,
+        'Accept-Version': 'v1'
+    }
+    const url = process.env.UNSPLASH_URL + '/photos/random?' + params.toString()
+    console.log(url)
     const response = {}
 
     try{
-        const res = await fetch(url);
-        const data = await res.json()
-    
-        const urls = data.urls;
-        const imgUrl = `${urls.raw}&w=1500&dpr=2`;
+        const res = await fetch(url, {headers: headers});
+
+        if(res.status != 200){
+            throw new Error(res.statusText);
+        }
+        // console.log(res)
         
+
+        const data = await res.json()
+        
+        // console.log(data)
+        const urls = data.urls;
         const authUser = data.user
-        const authName = authUser.Name
-        const authLink = authUser.links.html
+        const links = data.links
+        // console.log(authUser)
     
         response.status = 200
         response.statusText = "OK"
         response.body ={
-            imgUrl: imgUrl,
-            authName: authName,
-            authLink: authLink,
+            urls: urls,
+            user: authUser,
+            links: links,
         }
     } catch(err){
         response.status = 400
-        response.statusText = err
+        response.statusText = err.text
+        console.error(err)
     } finally {
         res.status(response.status).send(response)
     }

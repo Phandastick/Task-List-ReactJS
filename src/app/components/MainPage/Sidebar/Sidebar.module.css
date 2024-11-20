@@ -5,6 +5,8 @@
     width: 18vw;
     min-height: 500px;
 
+    padding-left: 10px;
+
     display: flex;
     flex-direction: column;
 }

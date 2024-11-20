@@ -26,4 +26,15 @@
 
 body {
   background-color: var(--bg-color);
+  min-height: 100vh;
+}
+
+a:link {
+  color: var(--c6);
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+  color: var(--c6)
 }

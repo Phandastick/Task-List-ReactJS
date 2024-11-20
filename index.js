@@ -2,6 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import { listsRouter } from './server/routes/listsRouter.js';
 import { tasksRouter } from './server/routes/tasksRouter.js';
+import { loginRouter } from './server/routes/loginRouter.js';
 
 const app = express()
 const BASE_URL = process.env.BASE_URL
@@ -19,6 +20,7 @@ app.use(
 // app.use(listsRouter)
 app.use('/api', listsRouter)
 app.use('/api', tasksRouter)
+app.use('/api/login', loginRouter)
 
 app.get('/', (req,res) => {
     res.sendFile('index.html');

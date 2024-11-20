@@ -1,4 +1,58 @@
+.Page {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.login-container {
+    height: 100%;
+    min-width: 40vw;
+    width: 400px;
+    background-color: va(--bg-color);
+}
+
 .button {
     width: 500px;
     height:500px;
+}
+
+.image-container, img{
+    position:absolute;
+    width:100%;
+    height:100%;
+    left:0;
+    top:0;
+
+    z-index: -1;
+}
+
+.image-container::after {
+    content: '';
+    position: absolute;
+    width:100%;
+    height:100%;
+    top: 0;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), var(--bg-color) 70%);
+    pointer-events: none; /* Allows clicks to pass through */
+}
+
+.bg-image {
+    display:block;
+}
+
+.bg-image-att {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+
+    padding: 10px;
+    border: none;
+
+    color: var(--text-color);
+    font-weight: 500;
+
+    background-color:rgb(172, 219, 221);
+    opacity: 70%;
 }

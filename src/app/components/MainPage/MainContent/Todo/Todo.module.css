@@ -31,15 +31,17 @@
     z-index: -1;
 }
 
-.Task-group-details {
-    padding: 20px 35px; 
-}
-
 :hover.Task-group {
     padding:15px;
     min-height: 200px;
+    height: auto;
+    max-height: 1000vh;
 
     background-color: var(--item-highlight);
+}
+
+.Task-group-details {
+    padding: 20px 35px; 
 }
 
 .name{

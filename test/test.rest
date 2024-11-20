@@ -15,7 +15,7 @@ GET http://localhost:6969/api/doGetIcons
 
 
 ### get login image
-GET
+GET http://localhost:6969/api/login/doGetBgImage
 
 
 ### Post list

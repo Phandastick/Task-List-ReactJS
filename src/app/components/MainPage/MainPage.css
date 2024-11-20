@@ -1,6 +1,6 @@
 .app-wrapper {
   display: grid;
-  grid-template-columns: 18vw auto;
+  grid-template-columns: auto 80vw;
   grid-template-rows: 169px auto;
   min-height: 100vh;
 }
