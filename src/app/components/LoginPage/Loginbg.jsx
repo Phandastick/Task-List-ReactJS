@@ -31,7 +31,7 @@ export default function Loginbg(){
 
     return (
     <div className={styles["image-container"]}>
-        <img className={styles["bg-image"]} src={imgData.urls.raw+"&w=1500"} alt="Image Background"/>
+        <img className={styles["bg-image"]} src={imgData.urls.raw+"&w=1500"} alt="Image Background" />
         <div className={styles["bg-image-att"]}>
             <a href={imgData.links.html} target="_blank">Photo</a> By <a href={imgData.user.links.html}target="_blank">{imgData.user.name}</a>
         </div>

@@ -18,6 +18,16 @@ GET http://localhost:6969/api/doGetIcons
 GET http://localhost:6969/api/login/doGetBgImage
 
 
+
+### Post new User
+POST http://localhost:6969/api/login/doSignIn
+Content-Type: application/json
+
+{
+  "username": "User7",
+  "password": "123"
+}
+
 ### Post list
 POST http://localhost:6969/api/doPostNewList
 Content-Type: application/json

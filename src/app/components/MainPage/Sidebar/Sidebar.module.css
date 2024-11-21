@@ -20,6 +20,7 @@
 .sidebar-divider {
     display: flex;
     align-items: center;
+    width: 100%;
 }
 
 .sidebar-divider-line {   
@@ -27,7 +28,18 @@
     height: 2px;
     flex: 1;
     margin: 0;
-    width: 80%;
+    width: auto;
+}
+
+.input-addList {
+    margin: 5px 0;
+}
+
+#embed-addBtn {
+    width: 100%;
+    padding-right: 10px;
+    transition:150ms;
+    pointer-events: none;
 }
 
 .add-list-header {
@@ -40,10 +52,6 @@
     z-index: 99;
 }
 
-.input-addList {
-    margin: 5px 0;
-}
-
 .sidebar-addBtn {
     padding:0;
     margin:0;
@@ -52,19 +60,13 @@
 
     border:0;
     background-color: transparent;
+
+    &:hover {
+        width: 3.2rem;
+        z-index: 0;
+    }
 }
 
-#embed-addBtn {
-    width: 100%;
-    padding-right: 10px;
-    transition:150ms;
-    pointer-events: none;
-}
-
-:hover#addBtn {
-    width: 3.2rem;
-    z-index: 0;
-}
 
 .sidebar-preset {
     padding: 0 0 5px 10px;

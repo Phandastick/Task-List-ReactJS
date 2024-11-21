@@ -9,7 +9,7 @@ listsRouter.get('/doGetLists', async (req, res) => {
     // console.log('Fetched username:',username)
     var payload;
 
-    if(username === undefined){
+    if(username === undefined){ 
         //default list
         // console.log('Getting Default sidebar Lists')
         payload = await getDefaultLists();

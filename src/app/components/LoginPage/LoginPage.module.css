@@ -1,21 +1,56 @@
 .Page {
     width: 100%;
-    height: auto;
+    min-height: 100vh;
     overflow: hidden;
     display: flex;
     flex-direction: row-reverse;
 }
 
-.login-container {
-    height: 100%;
-    min-width: 40vw;
-    width: 400px;
-    background-color: va(--bg-color);
+.login-container{
+    padding: 0 50px 0 0;
 }
 
+.login-head {
+    font-weight: 600;
+    font-size: 6rem;
+}
+
+.frm-login {
+    height: 100%;
+    min-width: auto;
+    width: 400px;
+    background-color: va(--bg-color);
+
+    display: flex;
+    flex-direction: column;
+    padding: 70px 0 0 15px;
+}
+
+.tf-login {
+    font-family: inherit;
+
+    border: none;
+    border-radius: 5px;
+    background: var(--bg-item);
+
+    font-size: 2rem;
+    font-weight: 350;
+    height: 2.5rem;
+    width: 75%;
+
+    margin-bottom: 20px;
+    transition: 200ms;
+    
+
+    &:focus{
+        outline: 4px solid var(--border-highlight);
+    }
+}
+
+
 .button {
-    width: 500px;
-    height:500px;
+    width: auto;
+    height:100px;
 }
 
 .image-container, img{

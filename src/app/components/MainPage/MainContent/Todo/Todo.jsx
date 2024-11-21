@@ -24,17 +24,19 @@ export default function Todo(){
         const fetchData = async () => {
             try{
                 const res = await fetch(url)
+                if(res.status != 200){
+                    throw new Error(res.statusText)
+                }
+
                 const data = await res.json()
 
                 const tasks = data.body.lists
                 setTaskArray(tasks)
-
-
                 setLists(tasks, setListnames);
 
             } catch(err){
                 console.error(err)
-                setError(err)
+                setError(err.message)
             } finally {
                 setUpdateFlag(false)
                 setLoading(false)
@@ -53,7 +55,6 @@ export default function Todo(){
 
     const openModal = () => { setModalState(true) }
     const closeModal = () => { setModalState(false) }
-    
     if (isLoading) {
         return <div>Loading tasks, please wait...</div>;
     }
@@ -61,7 +62,7 @@ export default function Todo(){
     if (error) {
         return (
             <div>
-                <p>Error fetching tasks: {error.message}</p>
+                <p>Error fetching tasks: {error}</p>
             </div>
         );
     }

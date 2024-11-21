@@ -21,14 +21,20 @@ export default function SidebarUser(props){
         const fetchData = async () => {
             try{
                 const res = await fetch(url)
+                if(res.status != 200){
+                    setError(res.statusText)
+                    throw new Error(res.statusText)
+                }
+
                 const data = await res.json()
                 const lists = data.body
                 setlist(lists)
             } catch(err){
                 console.error(err)
-                setError(err)
+                setError(err.message)
             } finally {
-                setUpdateFlag(false)
+                if(updateFlag)
+                    setUpdateFlag(false)
                 setLoading(false)
             }
         }
@@ -36,8 +42,7 @@ export default function SidebarUser(props){
     }, [updateFlag])
 
     if (error) {
-        setlist([{"name":"Error Fetching Lists","file":"error"}])
-        return
+        return <div> {error}</div>
     }
 
     if (loading) {
@@ -58,7 +63,7 @@ export default function SidebarUser(props){
                     />
                 })
             }
-        </div>
+        </div> 
     )
 }
 

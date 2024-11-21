@@ -17,6 +17,8 @@
   --item-outline: var(--c5);
   --item-highlight: var(--c5);
 
+  --border-highlight: var(--c5);
+
   --accent: var(--c5);
 
   --text-color: var(--c7);
