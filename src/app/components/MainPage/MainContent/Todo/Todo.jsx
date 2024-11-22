@@ -6,6 +6,8 @@ import { usernameContext } from '../../../../contexts/Contexts.jsx';
 import styles from './Todo.module.css';
 import { useContext, useState, useEffect } from 'react';
 
+const BASE_URL = import.meta.env.VITE_BASE_URL
+
 export default function Todo(){
     // const tasks = props.tasks; //array
     const {currentUsername} = useContext(usernameContext);
@@ -20,7 +22,7 @@ export default function Todo(){
     const [error, setError] = useState(null);
     
     useEffect(()=>{
-        const url = `http://localhost:6969/api/doGetTasks?username=${currentUsername}`
+        const url = `${BASE_URL}/api/doGetTasks?username=${currentUsername}`
         const fetchData = async () => {
             try{
                 const res = await fetch(url)

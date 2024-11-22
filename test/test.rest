@@ -3,8 +3,8 @@ GET http://localhost:6969/api/doGetLists?username=User2
 
 
 ### get default
-GET http://localhost:6969/api/doGetLists
-
+GET http://localhost:6969/api/doGetList
+s
 
 ### get tasks
 GET http://localhost:6969/api/doGetTasks?username=User2

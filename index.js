@@ -5,7 +5,6 @@ import { tasksRouter } from './server/routes/tasksRouter.js';
 import { loginRouter } from './server/routes/loginRouter.js';
 
 const app = express()
-const BASE_URL = process.env.BASE_URL
 
 //server static files (react frontend)
 app.use('/', express.static('./public'));
