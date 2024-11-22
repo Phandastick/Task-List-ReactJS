@@ -1,15 +1,19 @@
 
 import styles from './LoginPage.module.css'
 
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { loginContext,usernameContext } from "../../contexts/Contexts";
+import { urlencoded } from 'express';
+
+const BASE_URL = import.meta.env.VITE_BASE_URL
 
 export default function LoginForm() {
+    const [error, setError] = useState(null)
 
     const {setLogin} = useContext(loginContext)
     const {currentUsername, setCurrentUsername} = useContext(usernameContext)
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault()
         const data = new FormData(e.target)
         const username = data.get("username")
@@ -17,9 +21,15 @@ export default function LoginForm() {
 
         //do login
         console.log("Confirming login for",username)
-        setCurrentUsername(username)
-        window.sessionStorage.setItem('username', currentUsername)
-        setLogin(true);
+
+        const result = await fetchLogin(username, password);
+        if(result.success){
+            window.sessionStorage.setItem('username', currentUsername)
+            setCurrentUsername(username)
+            setLogin(true)
+        } else {
+            setError(result.message)
+        }
     }
 
     return <div className={styles['login-container']}>
@@ -31,7 +41,34 @@ export default function LoginForm() {
             <label  className={styles["lbl-login"]} id={styles["lbl-Password"]}> Password </label>
             <input type="password" name="password" id={styles["tf-password"]} className={styles["tf-login"]} required/>
 
+            {error ? <div>{error}</div> : null}
+
             <button className={styles.button}>PRESS ME!</button>
         </form>
     </div>
+}
+
+async function fetchLogin(username, password){
+    const payload = {
+        username: username,
+        password: password
+    }
+
+    const url = `${BASE_URL}/api/login/doSignIn`;
+    
+    const res = await fetch(url, {
+        body: payload,
+        method: "post"
+    })
+
+    if (res.status == 200) {
+        return {
+            success: true
+        }
+    } else {
+        return {
+            success: false,
+            message: res.statusText
+        }
+    }
 }

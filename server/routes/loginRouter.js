@@ -4,6 +4,9 @@ import db from "../db/connection.js";
 export const loginRouter = Router();
 
 loginRouter.get('/doSignIn', async (req,res) => {
+    const data = req.body
+    const username = data.username
+    const password = data.password
 
 })
 
@@ -34,9 +37,16 @@ loginRouter.post('/doPostNewUser', async (req, res) => {
 
         let result = await collection.insertOne(newDoc);
 
+        let newList = {
+            name: username,
+            lists: []
+        }
+        let tasksCollection = await db.collection("tasks")
+        let result2 = await tasksCollection.insertOne(newList)
+
         // console.log(result);
 
-        if(result.acknowledged){
+        if(result.acknowledged && result2.acknowledged){
             response.status = 200
             response.statusText = result
             console.log(response)

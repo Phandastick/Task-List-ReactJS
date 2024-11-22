@@ -1,4 +1,4 @@
-import { MongoClient, ServerApiVersion } from 'mongodb';
+import { MongoClient, ServerApiVersion, MongoServerError } from 'mongodb';
 
 const dbUser = process.env.MONGO_USER_NAME
 const dbPass = process.env.MONGO_USER_PW
@@ -20,10 +20,12 @@ try{
     //ping server to ensure connection
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
-} catch(err) {
-    console.error(err)
+} catch(error) {
+    if (error instanceof MongoServerError) {
+        console.log(`Error worth logging: ${error}`); // special case for some reason
+    }
 }
 
-let db = client.db("task-list-db")
+let db = client.db("task-list-db");
 
 export default db;

@@ -1,4 +1,5 @@
 import { getTasks, addTask } from '../classes/records.js'
+import { db } from '../db/connection.js'
 
 import { Router } from 'express'
 
@@ -9,7 +10,15 @@ tasksRouter.get('/doGetTasks', async (req,res) => {
 
     console.log('Fetched tasks from username:',username)
     let response;
-    response = getTasks(username);
+    // response = getTasks(username);
+
+    const tasks = db.collection("tasks")
+
+    const query = {
+        name: username
+    }
+    tasks.find(query, projection)
+
 
     res.status(response.status).json(response);
 })
