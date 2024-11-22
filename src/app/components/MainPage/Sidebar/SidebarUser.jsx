@@ -22,10 +22,8 @@ export default function SidebarUser(props){
             try{
                 const res = await fetch(url)
                 if(res.status != 200){
-                    setError(res.statusText)
                     throw new Error(res.statusText)
                 }
-
                 const data = await res.json()
                 const lists = data.body
                 setlist(lists)
