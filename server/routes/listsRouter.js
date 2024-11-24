@@ -1,10 +1,11 @@
-import { getDefaultLists, getUserLists, addList, getIcons } from '../classes/records.js'
+import { getIcons } from '../classes/records.js'
 
 import { Router } from 'express'
 import db from '../db/connection.js';
 
 export const listsRouter = Router()
 
+// #region task lists operation
 listsRouter.get('/doGetDefaultLists', async (req, res) => {
     let lists = await db.collection("tasks")
     let result = await lists.findOne({ name: 'default' })
@@ -32,7 +33,7 @@ listsRouter.get('/doGetDefaultLists', async (req, res) => {
             res.status(500).send("Something went wrong retrieving lists!")
         }
     }
-})
+});
 
 listsRouter.get('/doGetLists', async (req, res) => {
     let username = req.query.username
@@ -134,6 +135,16 @@ listsRouter.post('/doPostNewList', async (req, res) => {
     // console.log("Response: ",response)
     // res.status(response.status).json(response);
 });
+
+listsRouter.delete('/doDeleteList', async (req, res) => {
+    res.sendStatus(502)
+});
+
+listsRouter.patch('/doPatchList', async (req, res) => {
+    res.sendStatus(502)
+});
+
+// #endregion
 
 listsRouter.get('/doGetIcons', (req, res) => {
     const response = {}

@@ -20,14 +20,18 @@ export default function LoginForm() {
 
         //do login
         console.log("Confirming login for",username)
-
+        try {
         const result = await fetchLogin(username, password);
-        if(result.success){
+        
+        if(result){
             window.sessionStorage.setItem('username', currentUsername)
             setCurrentUsername(username)
             setLogin(true)
         } else {
-            setError(result.message)
+            throw new Error()
+        }
+        } catch (err) {
+            setError("Username or password incorrect!")
         }
     }
 
@@ -59,7 +63,7 @@ async function fetchLogin(username, password){
         body: JSON.stringify(payload),
         method: "post",
         headers: {
-            "Content-Type": "application/json"
+            "Content-type": "application/json"
         }
     })
 

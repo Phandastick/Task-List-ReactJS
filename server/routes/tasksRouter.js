@@ -5,6 +5,7 @@ import { Router } from 'express'
 
 export const tasksRouter = Router()
 
+//#region task operations
 tasksRouter.get('/doGetTasks', async (req, res) => {
     let username = req.query.username
 
@@ -103,3 +104,5 @@ tasksRouter.delete('./doDeleteTask', async (req, res) => {
 tasksRouter.patch('./doUpdateTask', async (req, res) => {
     res.sendStatus(502)
 })
+
+//#endregion

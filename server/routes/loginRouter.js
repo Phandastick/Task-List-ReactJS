@@ -3,6 +3,8 @@ import db from '../db/connection.js'
 
 export const loginRouter = Router();
 
+// #region login details
+//get user
 loginRouter.post('/doSignIn', async (req, res) => {
     const data = req.body
     // console.log("Login from: ", data)
@@ -77,6 +79,15 @@ loginRouter.post('/doPostNewUser', async (req, res) => {
         res.status(400).send(err.message)
     }
 });
+
+loginRouter.patch('/doUpdateNewUser', async (req, res) => {
+    res.sendStatus(502)
+});
+
+loginRouter.delete('/doDeleteNewUser', async (req, res) => {
+    res.sendStatus(502)
+});
+//#endregion
 
 loginRouter.get('/doGetBgImage', async (req, res) => {
     console.log("Called login bg image")

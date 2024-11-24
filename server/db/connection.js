@@ -8,13 +8,13 @@ const uri = `mongodb+srv://${dbUser}:${dbPass}@task-cluster.kixvt.mongodb.net/?r
 
 const client = new MongoClient(uri, {
     serverApi: {
-      version: ServerApiVersion.v1,
-      strict: true,
-      deprecationErrors: true,
+        version: ServerApiVersion.v1,
+        strict: true,
+        deprecationErrors: true,
     }
 });
 
-try{
+try {
     //Connect client to server
     console.log("Connecting to mongo client...")
     await client.connect();
@@ -22,7 +22,7 @@ try{
     //ping server to ensure connection
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
-} catch(error) {
+} catch (error) {
     if (error instanceof MongoServerError) {
         console.log(`Error worth logging: ${error}`); // special case for some reason
     }
