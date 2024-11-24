@@ -1,13 +1,34 @@
 import { Router } from "express";
-import db from "../db/connection.js";
+import db from '../db/connection.js'
 
 export const loginRouter = Router();
 
-loginRouter.get('/doSignIn', async (req,res) => {
+loginRouter.post('/doSignIn', async (req, res) => {
     const data = req.body
+    // console.log("Login from: ", data)
     const username = data.username
     const password = data.password
+    const response = {};
 
+    const users = await db.collection("users")
+    const foundUser = await users.findOne({
+        username: username
+    })
+
+    // console.log(foundUser);
+    try {
+        const userPass = foundUser.password
+        if (foundUser && password == userPass) {
+            response.status = 200
+            response.statusText = "User found!"
+        } else {
+            throw new Error()
+        }
+
+        res.status(response.status).json(response)
+    } catch (error) {
+        res.status(400).send("Username or passord incorrect!")
+    }
 })
 
 loginRouter.post('/doPostNewUser', async (req, res) => {
@@ -16,19 +37,19 @@ loginRouter.post('/doPostNewUser', async (req, res) => {
     const password = data.password
     const response = {}
 
+    console.log("Posting new user:")
     console.log("Username:", username)
     console.log("Password:", password)
 
-    try{
+    try {
         let collection = await db.collection("users")
         let duplicate = await collection.findOne({
             username: username
         })
 
-        if(duplicate){
-            //duplicate found
-            throw Error("Duplicate username found!")
-        }
+        //duplicate found
+        if (duplicate)
+            throw Error("Duplicate username found!");
 
         let newDoc = {
             username: username,
@@ -46,22 +67,14 @@ loginRouter.post('/doPostNewUser', async (req, res) => {
 
         // console.log(result);
 
-        if(result.acknowledged && result2.acknowledged){
-            response.status = 200
-            response.statusText = result
-            console.log(response)
+        if (result.acknowledged && result2.acknowledged) {
+            res.status(200).json(result2)
         } else {
-            response.status = 500
-            response.statusText = result
+            res.status(400).send("Query not acknowledged")
         }
 
-    } catch (err){
-        console.error(err);
-        response.status = 500
-        response.statusText = err.message
-    } finally {
-        console.log("Finally")
-        res.status(response.status).json(response)
+    } catch (err) {
+        res.status(400).send(err.message)
     }
 });
 
@@ -79,31 +92,31 @@ loginRouter.get('/doGetBgImage', async (req, res) => {
     console.log(url)
     const response = {}
 
-    try{
-        const res = await fetch(url, {headers: headers});
+    try {
+        const res = await fetch(url, { headers: headers });
 
-        if(res.status != 200){
+        if (res.status != 200) {
             throw new Error(res.statusText);
         }
         // console.log(res)
-        
+
 
         const data = await res.json()
-        
+
         // console.log(data)
         const urls = data.urls;
         const authUser = data.user
         const links = data.links
         // console.log(authUser)
-    
+
         response.status = 200
         response.statusText = "OK"
-        response.body ={
+        response.body = {
             urls: urls,
             user: authUser,
             links: links,
         }
-    } catch(err){
+    } catch (err) {
         response.status = 400
         response.statusText = err.text
         console.error(err)

@@ -29,6 +29,10 @@ export default function Loginbg(){
         return <div style={{backgroundColor: "var(--c1)"}}></div>
     }
 
+    if(error) {
+      return <div>{error}</div>
+    }
+
     return (
     <div className={styles["image-container"]}>
         <img className={styles["bg-image"]} src={imgData.urls.raw+"&w=1500"} alt="Image Background" />

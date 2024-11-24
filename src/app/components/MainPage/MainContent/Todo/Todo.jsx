@@ -24,11 +24,10 @@ export default function Todo(){
         const fetchData = async () => {
             try{
                 const res = await fetch(url)
-                if(res.status != 200){
-                    throw new Error(res.statusText)
-                }
-
                 const data = await res.json()
+                if(data.status != 200){
+                    throw new Error(data.statusText)
+                }
 
                 const tasks = data.body.lists
                 setTaskArray(tasks)

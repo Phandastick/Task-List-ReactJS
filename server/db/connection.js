@@ -16,6 +16,7 @@ const client = new MongoClient(uri, {
 
 try{
     //Connect client to server
+    console.log("Connecting to mongo client...")
     await client.connect();
     console.log("Connected successfully to MongoDB!");
     //ping server to ensure connection
@@ -25,6 +26,7 @@ try{
     if (error instanceof MongoServerError) {
         console.log(`Error worth logging: ${error}`); // special case for some reason
     }
+    console.error(error.stack)
 }
 
 let db = client.db("task-list-db");

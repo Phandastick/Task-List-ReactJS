@@ -3,7 +3,6 @@ import styles from './LoginPage.module.css'
 
 import { useContext, useEffect, useState } from "react";
 import { loginContext,usernameContext } from "../../contexts/Contexts";
-import { urlencoded } from 'express';
 
 const BASE_URL = import.meta.env.VITE_BASE_URL
 
@@ -57,8 +56,11 @@ async function fetchLogin(username, password){
     const url = `${BASE_URL}/api/login/doSignIn`;
     
     const res = await fetch(url, {
-        body: payload,
-        method: "post"
+        body: JSON.stringify(payload),
+        method: "post",
+        headers: {
+            "Content-Type": "application/json"
+        }
     })
 
     if (res.status == 200) {
@@ -66,9 +68,10 @@ async function fetchLogin(username, password){
             success: true
         }
     } else {
+        const data = await res.json()
         return {
             success: false,
-            message: res.statusText
+            message: data.statusText
         }
     }
 }
