@@ -5,12 +5,11 @@ import SidebarUser from './SidebarUser'
 
 import { useState } from 'react';
 import AddListToolTip from './AddListTooltip';
+import { listsContext } from '../../../contexts/Contexts';
 const BASE_URL = import.meta.env.VITE_BASE_URL
 
 export default function Sidebar() {
     // console.log(username);
-    const [userListsFlag, updateUserLists] = useState(false);
-
     function focusField(){
         let tf = document.getElementById('input-addList');
         tf.focus()
@@ -29,14 +28,9 @@ export default function Sidebar() {
                     <embed id={styles["embed-addBtn"]} 
                     src='./assets/add_square.svg'/>
                 </button>
-                <AddListToolTip 
-                    updateUserLists={updateUserLists}
-                />
+                <AddListToolTip/>
             </div>
-            <SidebarUser 
-                updateFlag={userListsFlag}
-                setUpdateFlag={updateUserLists}
-            />
+            <SidebarUser />
         </div>
     );
 };

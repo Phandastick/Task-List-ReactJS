@@ -1,6 +1,6 @@
 import TaskListSection from './TaskListSection.jsx';
 
-import { usernameContext, taskUpdates } from '../../../../contexts/Contexts.jsx';
+import { usernameContext, taskUpdateContext } from '../../../../contexts/Contexts.jsx';
 import styles from './Todo.module.css';
 import { useContext, useState, useEffect } from 'react';
 
@@ -9,13 +9,13 @@ const BASE_URL = import.meta.env.VITE_BASE_URL
 export default function Todo(props){
     // const tasks = props.tasks; //array
     const {currentUsername} = useContext(usernameContext);
-    const [taskArray, setTaskArray] = useState(null);
+    const [taskArray, setTaskArray] = useState([]);
     const [listnames, setListnames] = useState(null);
-    const { useAddTaskUpdate, setTaskUpdate } = useContext(taskUpdateContext)
 
     //flag
     const [isLoading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const { useTasksUpdate, setTasksUpdate } = useContext(taskUpdateContext)
     
     useEffect(()=>{
         const url = `${BASE_URL}/api/doGetTasks?username=${currentUsername}`
@@ -27,28 +27,21 @@ export default function Todo(props){
                     throw new Error(data.statusText)
                 }
 
-                const tasks = data.body.lists
+                const tasks = data.lists
+                console.log(tasks)
                 setTaskArray(tasks)
-                setLists(tasks, setListnames);
-
             } catch(err){
                 console.error(err)
                 setError(err.message)
             } finally {
-                setUpdateFlag(false)
+                if(useTasksUpdate)
+                    setTasksUpdate(false)
                 setLoading(false)
             }
         }
         fetchData();
-    }, [updateListsFlag])
+    }, [useTasksUpdate])
 
-    const setLists = (taskList, setList) => {
-        const lists = [];
-        taskList.forEach(list => {
-            lists.push(list.groupname)
-        });
-        setList(lists)
-    }
     if (isLoading) {
         return <div>Loading tasks, please wait...</div>;
     }

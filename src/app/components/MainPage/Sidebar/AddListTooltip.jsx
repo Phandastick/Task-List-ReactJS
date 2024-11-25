@@ -1,25 +1,30 @@
 import { Tooltip } from "react-tooltip"
 import styles from './Sidebar.module.css'
-import { tasksFetch } from '../../../hooks/fetchAPI';
-import { useContext } from "react";
-import { usernameContext } from '../../../contexts/Contexts'
+import { useContext, useState } from "react";
+import { listsUpdateContext, usernameContext } from '../../../contexts/Contexts'
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export default function AddListToolTip(props){
     // const icons = getIcons();
     const {currentUsername} = useContext(usernameContext);
+    const {setListsUpdate} = useContext(listsUpdateContext);
+    const [error, setError] = useState(null);
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         //stop redirect 
         e.preventDefault();
         
         let listName = e.target[0].value;
-        let filename = 'error';
-        console.log(`New list ${listName}Submitted!`)
-        postList(listName, filename, currentUsername, () => {
-            props.updateUserLists(true);
-        })
+        let filename = 'cross';
+        // console.log(`New list ${listName}Submitted!`)
+
+        const res = await postList(listName, filename, currentUsername)
+        if(res.status == 200){
+            setListsUpdate(true);
+        } else {
+            setError(res.statusText)
+        }
     }
 
     return(
@@ -41,34 +46,24 @@ export default function AddListToolTip(props){
 
 
 
-const postList = (newList, filename, username, fnCallBack) => {
+const postList = async (newList, filename, username) => {
     console.log(`Posting list: ${newList}`)
     
     const url = `${BASE_URL}/api/doPostNewList`
-    const data = {
+    const payload = {
+        "username": username,
         "groupname":newList,
-        "filename": filename
+        "filename": filename,
     }
 
-    tasksFetch(url,
+    const res = await fetch(url,
         {
             "method": "post",
-            "body": JSON.stringify(data),
-            headers: { username: username }
+            "body": JSON.stringify(payload),
+            headers: {
+                'Content-type': 'application/json'
+            }
         }
     )
-    .then((res) => {
-        if (res.status == 200) {
-            fnCallBack()
-        } else {
-            console.error('Error with adding list!')
-        }
-        return res.json()
-    })
-    .then((data) => {
-        console.log('Received response!!')
-        console.log(data);
-    }).catch((err) => {
-        console.error('Error with post request!', err)
-    })
+    return res
 }   

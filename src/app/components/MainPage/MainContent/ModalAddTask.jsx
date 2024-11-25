@@ -1,7 +1,7 @@
 import Modal from 'react-modal';
 import styles from './Modal.module.css'
 import { useContext, useEffect, useState } from 'react';
-import { usernameContext } from '../../../contexts/Contexts';
+import { usernameContext, listsContext, tasksContext } from '../../../contexts/Contexts';
 import { tasksFetch } from '../../../hooks/fetchAPI'
 const BASE_URL = import.meta.env.VITE_BASE_URL
 
@@ -11,12 +11,12 @@ const BASE_URL = import.meta.env.VITE_BASE_URL
 export default function ModalAddList(props) {
     Modal.setAppElement(document.getElementById('root'))
     const modalState = props.modalState
-    const [lists, setLists] = useState(props.lists)
-
-    useEffect(()=>{
-        setLists(props.lists)
-    },[props.lists])
-
+    const {useLists} = useContext(listsContext)
+    const setTasksUpdate = useContext(tasksContext); // sets update flag 
+    const {currentUsername} = useContext(usernameContext)
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
+    
     const openModal = () => {
         props.setModalState(true)
     }
@@ -24,7 +24,8 @@ export default function ModalAddList(props) {
         props.setModalState(false)
     }
 
-    function submitList(e) {
+    async function submitList(e) {
+        setLoading(true);
         console.log('Submitting data...')
         e.preventDefault();
         // console.log(e)
@@ -45,25 +46,23 @@ export default function ModalAddList(props) {
                 date: data.date
             }]
         }
-        tasksFetch(
-            url,
-            {
-                method:'post',
-                body: JSON.stringify(payload)
-            }
-        ).then((response) => {
-            return response.json()
+        const headers = {
+            'Content-type': 'application/json'
+        }
+
+        const res = await fetch(url, {
+            data: JSON.stringify(payload),
+            headers:headers,
+            method: "post"
         })
-        .then((data) => {
-            console.log(data)
-            props.updateFlag(true)
-        })
-        .catch((error) => {
-            console.error("Fetch error post data: ", error)
-        });
+        if(res.status == 200){
+            setUpdateTasks(true)
+        } else {
+            setError(res.statusText)
+        }
+        setTimeout(()=>{console.log("elo there")}, 500)
+        setLoading(false);
     }
-
-
 
     return (
     <Modal 
@@ -91,7 +90,7 @@ export default function ModalAddList(props) {
 
                 <select className={styles["ddl-listname"]} name='listname'>
                     {
-                        lists.map((listname, index) => {
+                        useLists.map((listname, index) => {
                             return(
                                 <option 
                                 value={listname}
@@ -102,9 +101,11 @@ export default function ModalAddList(props) {
                         })
                     }
                 </select>
+                {error ? <div>{error}</div> : null}
 
                 <button 
                     className={styles["modal-addBtn"]}
+                    disabled={loading}
                 >Add task</button>
             </form>
         </div>
