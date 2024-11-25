@@ -1,26 +1,24 @@
-import BtnAddTask from './BtnAddTask';
-import ModalAddTask from '../ModalAddTask.jsx';
 import TaskListSection from './TaskListSection.jsx';
 
-import { usernameContext } from '../../../../contexts/Contexts.jsx';
+import { usernameContext, taskUpdates } from '../../../../contexts/Contexts.jsx';
 import styles from './Todo.module.css';
 import { useContext, useState, useEffect } from 'react';
 
-export default function Todo(){
+const BASE_URL = import.meta.env.VITE_BASE_URL
+
+export default function Todo(props){
     // const tasks = props.tasks; //array
     const {currentUsername} = useContext(usernameContext);
     const [taskArray, setTaskArray] = useState(null);
     const [listnames, setListnames] = useState(null);
+    const { useAddTaskUpdate, setTaskUpdate } = useContext(taskUpdateContext)
 
     //flag
-    const [isModelOpen, setModalState] = useState(false);
-    const [updateListsFlag, setUpdateFlag] = useState(false);
-    const [filterMode, setFiltermode] = useState("Day");
     const [isLoading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     
     useEffect(()=>{
-        const url = `http://localhost:6969/api/doGetTasks?username=${currentUsername}`
+        const url = `${BASE_URL}/api/doGetTasks?username=${currentUsername}`
         const fetchData = async () => {
             try{
                 const res = await fetch(url)
@@ -51,9 +49,6 @@ export default function Todo(){
         });
         setList(lists)
     }
-
-    const openModal = () => { setModalState(true) }
-    const closeModal = () => { setModalState(false) }
     if (isLoading) {
         return <div>Loading tasks, please wait...</div>;
     }
@@ -66,8 +61,8 @@ export default function Todo(){
         );
     }
 
-    return (<>
-        <div className={styles["Task-wrapper"]} id='Task-wrapper'>
+    return (
+        <div className={styles["tasks-container"]}>
             {
                 taskArray.map((item) => {
                     if(item.tasks === undefined || item.tasks == ""){
@@ -83,17 +78,6 @@ export default function Todo(){
                     )
                 })
             }
-            <BtnAddTask 
-                openAddTaskModal={openModal}
-            />
         </div>
-        <ModalAddTask 
-            setModalState = {setModalState}
-            modalState = {isModelOpen}
-            listName = {listnames[0]}
-            updateFlag = {setUpdateFlag}
-            lists = {listnames}
-        />
-        </>
     )
 }
