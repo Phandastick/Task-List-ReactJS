@@ -10,14 +10,14 @@ tasksRouter.get('/doGetTasks', async (req, res) => {
     let username = req.query.username
 
     console.log('Fetched tasks from username:', username)
-    let response;
-    response = getTasks(username);
+    // let response;
+    // response = getTasks(username);
 
     const tasks = await db.collection("tasks")
     const query = {
         name: username
     }
-    
+
     const result = await tasks.findOne(query)
     if(!result){
         res.status(400).send("Tasks not found")
@@ -25,13 +25,13 @@ tasksRouter.get('/doGetTasks', async (req, res) => {
     }
 
     const listArray = result.lists
-    const res = {
+    const response = {
         lists: listArray
     }
-    res.status(200).json(res)
+    res.status(200).json(response)
 
 
-    res.status(response.status).json(response);
+    // res.status(response.status).json(response);
 })
 
 tasksRouter.post('/doPostNewTask', async (req, res) => {
