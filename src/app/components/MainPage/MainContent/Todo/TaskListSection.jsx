@@ -12,7 +12,7 @@ export default function TaskListSection({filter, listname, tasks}) {
         {
             tasks.map((jsonTask,index)=>{
                 return(
-                    <Task data={jsonTask} key={index}/>
+                    <Task data={jsonTask} key={listname + "-" + index}/>
                 )
             })
         }

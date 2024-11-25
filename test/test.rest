@@ -1,7 +1,7 @@
 ### Get list
-GET http://localhost:6969/api/doGetLists?username=User2
+GET http://localhost:6969/api/doGetLists?username=User1
 
-
+  
 ### get default
 GET http://localhost:6969/api/doGetDefaultLists
 
@@ -23,8 +23,8 @@ POST http://localhost:6969/api/login/doSignIn
 Content-Type: application/json
 
 {
-  "username": "paddles",
-  "password": "paddlestars"
+  "username": "User1",
+  "password": "123"
 }
 
 
@@ -33,8 +33,8 @@ POST http://localhost:6969/api/login/doPostNewUser
 Content-Type: application/json
 
 {
-  "username": "paddles",
-  "password": "paddlestars"
+  "username": "User1",
+  "password": "123"
 }
 
 ### Post list

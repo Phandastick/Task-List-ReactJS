@@ -8,6 +8,7 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 export default function SidebarUser(props){
     const [list, setlist] = useState(null)
     const {currentUsername} = useContext(usernameContext)
+
     const updateFlag = props.updateFlag;
     const setUpdateFlag = props.setUpdateFlag;
     const [loading, setLoading] = useState(true); // State for loading status
@@ -17,7 +18,7 @@ export default function SidebarUser(props){
 
     const url = `${BASE_URL}/api/doGetLists?username=${currentUsername}`
     useEffect(() => {
-        console.log('Fetchin GET url', url) 
+        // console.log('Fetchin GET url', url) 
         const fetchData = async () => {
             try{
                 const res = await fetch(url)
@@ -25,7 +26,7 @@ export default function SidebarUser(props){
                     throw new Error(res.statusText)
                 }
                 const data = await res.json()
-                const lists = data.body
+                const lists = data.lists
                 setlist(lists)
             } catch(err){
                 console.error(err)
@@ -48,16 +49,16 @@ export default function SidebarUser(props){
     }
 
     return (
-        <div className={styles["sidebar-custom"]}>
+        <div className={styles["sidebar-user"]}>
             {
                 list.map((item, index) => {
-                    const className = `sidebar-preset-${index + 1}`;
+                    const className = `sidebar-user-${index + 1}`;
                     return <SidebarRow
-                        text={item.name}
-                        icon={item.file}
-                        className={className}
+                        text={item.groupname}
+                        icon={item.filename}
+                        className={styles['sidebar-user']}
                         idName={className}
-                        key={index}
+                        key={"Userlist-"+   index}
                     />
                 })
             }

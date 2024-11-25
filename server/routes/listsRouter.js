@@ -17,17 +17,16 @@ listsRouter.get('/doGetDefaultLists', async (req, res) => {
             const defaultLists = result.lists
             let list;
             var payload = {
-                body: []
+                lists: []
             }
             defaultLists.forEach(elemList => {
                 list = {
                     groupname: elemList.groupname,
                     filename: elemList.filename
                 }
-                payload.body.push(list)
+                payload.lists.push(list)
             })
-            payload.statusText = "Lists retrieved successfully"
-            console.log(payload)
+            // console.log(payload)
             res.status(200).json(payload)
         } catch (error) {
             res.status(500).send("Something went wrong retrieving lists!")
@@ -47,7 +46,7 @@ listsRouter.get('/doGetLists', async (req, res) => {
     } else {
         const userLists = result.lists
         let list = {}, payload = {
-            body: []
+            lists: []
         };
         try {
             userLists.forEach(elemList => {
@@ -55,7 +54,7 @@ listsRouter.get('/doGetLists', async (req, res) => {
                     groupname: elemList.groupname,
                     filename: elemList.filename
                 }
-                payload.body.push(list)
+                payload.lists.push(list)
             })
             payload.statusText = "Lists retrieved successfully"
             console.log(payload)

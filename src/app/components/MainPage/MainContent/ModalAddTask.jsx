@@ -91,9 +91,13 @@ export default function ModalAddList(props) {
 
                 <select className={styles["ddl-listname"]} name='listname'>
                     {
-                        lists.map((listname) => {
+                        lists.map((listname, index) => {
                             return(
-                                <option value={listname}>{listname}</option>
+                                <option 
+                                value={listname}
+                                key={"Modal-ddl-" + index}>
+                                    {listname}
+                                </option>
                             )
                         })
                     }

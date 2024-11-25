@@ -2,10 +2,12 @@
     grid-column: 1;
     grid-row: 1/2;
 
-    width: 18vw;
+    min-width: 18vw;
+    width: auto;
     min-height: 500px;
+    height: 100%;
 
-    padding-left: 10px;
+    margin: 0 15px 0 5px;
 
     display: flex;
     flex-direction: column;
@@ -68,17 +70,23 @@
 }
 
 
-.sidebar-preset {
-    padding: 0 0 5px 10px;
+.sidebar-presets {
+    margin: 10px 0 5px 10px;
+    width: 100%;
+}
+
+.sidebar-user {
+    margin: 10px 0 5px 10px;
+    width: 100%;
 }
 
 .sidebar-item {
     border: 0;
     border-radius: 5px;
-    width: 95%;
+    width: auto;
   
-    padding: 15px 7.5px;
-    margin: 10px 0;
+    padding: 0 7.5px;
+    margin: 5px 0;
     min-height: 2.5em;
     display: flex;
     align-items: center;
