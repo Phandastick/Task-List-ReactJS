@@ -156,8 +156,4 @@ const addNewTasks = (poppedList, tasksList) => {
     return poppedList
 }
 
-export const getIcons = () => {
-
-}
-
 getUserLists("User1")

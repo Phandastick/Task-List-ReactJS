@@ -13,12 +13,22 @@ tasksRouter.get('/doGetTasks', async (req, res) => {
     let response;
     response = getTasks(username);
 
-    // const tasks = db.collection("tasks")
+    const tasks = await db.collection("tasks")
+    const query = {
+        name: username
+    }
+    
+    const result = await tasks.findOne(query)
+    if(!result){
+        res.status(400).send("Tasks not found")
+        return
+    }
 
-    // const query = {
-    //     name: username
-    // }
-    // tasks.find(query, projection)
+    const listArray = result.lists
+    const res = {
+        lists: listArray
+    }
+    res.status(200).json(res)
 
 
     res.status(response.status).json(response);

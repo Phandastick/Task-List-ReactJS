@@ -1,5 +1,3 @@
-import { getIcons } from '../classes/records.js'
-
 import { Router } from 'express'
 import db from '../db/connection.js';
 
@@ -146,20 +144,13 @@ listsRouter.patch('/doPatchList', async (req, res) => {
 // #endregion
 
 listsRouter.get('/doGetIcons', (req, res) => {
-    const response = {}
-    const icons = {}
+    const icons = [] // list names array
 
-    getIcons()
-        .then((data) => {
-            icons = data
-        }).catch((err) => {
-            console.error(err)
-            response.status = 500
-        })
+    //search all icons
 
-    response.status = 200
-    response.statusText = "OK"
-    response.body = icons
+    const payload = {
+        icons: icons
+    }
 
-    res.status(response.status).json(response);
+    res.status(response.status).json(payload);
 });
