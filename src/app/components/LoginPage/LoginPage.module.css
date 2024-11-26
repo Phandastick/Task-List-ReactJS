@@ -17,7 +17,7 @@
     margin-right: 50px;
 }
 
-.frm-login {
+.form {
     height: 100%;
     width: 100%;
 
@@ -26,12 +26,17 @@
     margin-top: 70px;
 }
 
-.lbl-login {
+.text-backtologin {
+    /* margin: 20px 0 30px 5%; */
+    display:block;
+}
+
+.lbl-form {
     margin-left: 5%;
 }
 
 
-.tf-login {
+.tf-form {
     font-family: inherit;
 
     border: none;
@@ -54,11 +59,13 @@
 }
 
 
-.button {
+.btn-form {
     outline: none;
     width: 7em;
-    margin-top: 50px;
+    height:7em;
     align-self: center;
+    justify-self: baseline;
+    margin-top:50px;
 
     border-radius: 15px;
     border: 8px solid var(--bg-item2);
@@ -68,6 +75,7 @@
 
     &:hover {
         width: 7.5em;
+        height: 7.5em;
         margin-top:47.5px;
     }
 }

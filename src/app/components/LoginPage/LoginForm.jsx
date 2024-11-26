@@ -6,7 +6,7 @@ import { loginContext,usernameContext } from "../../contexts/Contexts";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL
 
-export default function LoginForm() {
+export default function LoginForm({setRegister}) {
     const [error, setError] = useState(null)
 
     const {setLogin} = useContext(loginContext)
@@ -35,23 +35,32 @@ export default function LoginForm() {
         }
     }
 
+    const handleRegister = () => {
+        setRegister(true);
+    }
+
     return <div className={styles['login-container']}>
         <h1 className={styles["login-head"]}>To-do List</h1>
-        <form className={styles["frm-login"]} onSubmit={handleLogin}>
-            <label className={styles["lbl-login"]} id={styles["lbl-Username"]}> Username </label>
-            <input type="text" name="username" id={styles["tf-username"]} className={styles["tf-login"]} required />
+        <form className={styles["form"]} onSubmit={handleLogin}>
+            <label className={styles["lbl-form"]} id={styles["lbl-Username"]}> Username </label>
+            <input type="text" name="username" id={styles["tf-username"]} className={styles["tf-form"]} required />
 
-            <label  className={styles["lbl-login"]} id={styles["lbl-Password"]}> Password </label>
-            <input type="password" name="password" id={styles["tf-password"]} className={styles["tf-login"]} required/>
+            <label  className={styles["lbl-form"]} id={styles["lbl-Password"]}> Password </label>
+            <input type="password" name="password" id={styles["tf-password"]} className={styles["tf-form"]} required/>
 
             {error ? <div>{error}</div> : null}
 
-            <button className={styles.button}>
+            <button className={styles['btn-form']}>
                 <embed 
                 className={styles["loginIcon-embed"]}
                 id={styles["icon-Login"]}
                 src={`${BASE_URL}/assets/arrow_right.svg`} />
             </button>
+            <a 
+            className={styles['link-register']}
+            onClick={handleRegister}>
+                Register here</a>
+            <a className={styles['forgotPassword']}>Forgot password?</a>
         </form>
     </div>
 }
