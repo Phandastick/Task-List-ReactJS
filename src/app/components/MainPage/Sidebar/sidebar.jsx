@@ -2,11 +2,7 @@
 import styles from './Sidebar.module.css'
 import SidebarPresets from './SidebarPresets'
 import SidebarUser from './SidebarUser'
-
-import { useState } from 'react';
 import AddListToolTip from './AddListTooltip';
-import { listsContext } from '../../../contexts/Contexts';
-const BASE_URL = import.meta.env.VITE_BASE_URL
 
 export default function Sidebar() {
     // console.log(username);

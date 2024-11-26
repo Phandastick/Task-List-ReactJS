@@ -1,8 +1,45 @@
-/* #region main content WRITE CSS HERE TASHA */
+/* #region main content */
 .main-content {
     grid-row: 2;
     grid-row-end: 4;
     grid-column: 2;
 }
+
+.Task-wrapper {
+  width: 100%;
+  height: 100%;
+
+  display:flex;
+  flex-direction: column;
+}
+
+
+.addBtn {
+  padding:20px;
+  width:5vw;
+  transition:300ms;
+
+  position: sticky;
+  bottom: 20px; /* makes it stick to bottom of screen */
+  margin: 10px 10px 10px auto; /* fills up space on the left */
+  outline: none;
+  border:0;
+  border-radius: 20px;
+  background-color: var(--bg-button);
+  opacity: 75%;
+}
+
+.addBtn:hover{
+  width: 5.5vw;
+  opacity: 90%;
+  margin: 7px 7px 7px auto;
+}
+
+#embed-addTask{
+  width: 100%;
+  pointer-events: none;
+  opacity: inherit;
+}
+
   
   /* #endregion */

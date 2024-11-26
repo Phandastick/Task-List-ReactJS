@@ -46,7 +46,12 @@ export default function LoginForm() {
 
             {error ? <div>{error}</div> : null}
 
-            <button className={styles.button}>PRESS ME!</button>
+            <button className={styles.button}>
+                <embed 
+                className={styles["loginIcon-embed"]}
+                id={styles["icon-Login"]}
+                src={`${BASE_URL}/assets/arrow_right.svg`} />
+            </button>
         </form>
     </div>
 }

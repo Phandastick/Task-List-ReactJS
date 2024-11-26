@@ -1,6 +1,6 @@
 import TaskListSection from './TaskListSection.jsx';
 
-import { usernameContext, taskUpdateContext } from '../../../../contexts/Contexts.jsx';
+import { usernameContext, tasksUpdateContext } from '../../../../contexts/Contexts.jsx';
 import styles from './Todo.module.css';
 import { useContext, useState, useEffect } from 'react';
 
@@ -11,24 +11,25 @@ export default function Todo(props){
     const {currentUsername} = useContext(usernameContext);
     const [taskArray, setTaskArray] = useState([]);
     const [listnames, setListnames] = useState(null);
+    const filterMode = props.filterMode
 
     //flag
     const [isLoading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const { useTasksUpdate, setTasksUpdate } = useContext(taskUpdateContext)
+    const { useTasksUpdate, setTasksUpdate } = useContext(tasksUpdateContext)
     
     useEffect(()=>{
         const url = `${BASE_URL}/api/doGetTasks?username=${currentUsername}`
         const fetchData = async () => {
             try{
                 const res = await fetch(url)
-                const data = await res.json()
-                if(data.status != 200){
+                if(res.status != 200){
                     throw new Error(data.statusText)
                 }
+                const data = await res.json()
 
                 const tasks = data.lists
-                console.log(tasks)
+                // console.log(tasks)
                 setTaskArray(tasks)
             } catch(err){
                 console.error(err)
@@ -57,18 +58,19 @@ export default function Todo(props){
     return (
         <div className={styles["tasks-container"]}>
             {
-                taskArray.map((item) => {
-                    if(item.tasks === undefined || item.tasks == ""){
+                taskArray.map((taskList) => {
+                    if(taskList.tasks === undefined || taskList.tasks == [] || taskList.tasks.length < 1){
                         return
+                    } else {
+                        return(
+                            <TaskListSection
+                                filter={filterMode}
+                                listname={taskList.groupname}
+                                tasks={taskList.tasks} //array of individual tasks
+                                key = {taskList.groupname}
+                            />
+                        )
                     }
-                    return(
-                    <TaskListSection
-                        filter={filterMode}
-                        listname={item.groupname}
-                        tasks={item.tasks} //array of individual tasks
-                        key = {item.groupname}
-                    />
-                    )
                 })
             }
         </div>

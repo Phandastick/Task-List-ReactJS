@@ -72,7 +72,7 @@ listsRouter.post('/doPostNewList', async (req, res) => {
 
     let groupname = data.groupname;
     let filename = data.filename;
-    let username = req.headers.username;
+    let username = data.username;
 
     // console.log('Adding list:', groupname, ', for account', username)
 

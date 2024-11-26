@@ -14,21 +14,21 @@ function MainContent() {
     const openModal = () => { setModalState(true) }
     const closeModal = () => { setModalState(false) }
     return(
-        <>
-        <div className={styles["Task-wrapper"]} id='Task-wrapper'>
-            {
-                getView(useView)
-            }
-            <BtnAddTask 
-                openAddTaskModal={openModal}
+        <div className={styles['main-content']}>
+            <div className={styles["Task-wrapper"]} id='Task-wrapper'>
+                {
+                    getView(useView)
+                }
+                <BtnAddTask 
+                    openAddTaskModal={openModal}
+                />
+            </div>
+            <ModalAddTask 
+                setModalState = {setModalState}
+                modalState = {isModelOpen}
+                setUpdateTasksFlag = {setTaskUpdate}
             />
         </div>
-        <ModalAddTask 
-            setModalState = {setModalState}
-            modalState = {isModelOpen}
-            setUpdateTasksFlag = {setTaskUpdate}
-        />
-        </>
     )
 }
 

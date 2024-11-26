@@ -39,10 +39,10 @@ tasksRouter.post('/doPostNewTask', async (req, res) => {
     // console.log(req.body)
     let data = req.body
     let taskitems = data.tasks[0]
+    let username = data.username
 
     try {
         let tasks = await db.collection("tasks")
-        let username = req.headers.username
         // console.log(username)
 
         let validate = await tasks.findOne({ name: username })

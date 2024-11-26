@@ -1,44 +1,49 @@
 import SidebarRow from './SidebarRow';
 import React, { useState, useEffect, useContext } from 'react';
 import styles from './Sidebar.module.css'
-import { usernameContext } from '../../../contexts/Contexts';
+import { listsContext, listsUpdateContext, usernameContext } from '../../../contexts/Contexts';
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 
 export default function SidebarUser(props){
-    const [list, setlist] = useState(null)
+    const [sidebarLists, setSidebarLists] = useState(null)
     const {currentUsername} = useContext(usernameContext)
 
-    const updateFlag = props.updateFlag;
-    const setUpdateFlag = props.setUpdateFlag;
+    const {useListsUpdate, setListsUpdate} = useContext(listsUpdateContext)
+    const {useLists, setLists} = useContext(listsContext)
     const [loading, setLoading] = useState(true); // State for loading status
     const [error, setError] = useState(null); // State for error handling
 
     // setUsername("lucas")
 
-    const url = `${BASE_URL}/api/doGetLists?username=${currentUsername}`
     useEffect(() => {
+        setError(null)
+        setLoading(true)
         // console.log('Fetchin GET url', url) 
         const fetchData = async () => {
             try{
+                const url = `${BASE_URL}/api/doGetLists?username=${currentUsername}`
                 const res = await fetch(url)
                 if(res.status != 200){
                     throw new Error(res.statusText)
                 }
                 const data = await res.json()
                 const lists = data.lists
-                setlist(lists)
+                setLists(lists)
             } catch(err){
                 console.error(err)
                 setError(err.message)
             } finally {
-                if(updateFlag)
-                    setUpdateFlag(false)
+                setListsUpdate(false);
                 setLoading(false)
             }
         }
         fetchData();
-    }, [updateFlag])
+    }, [useListsUpdate])
+
+    useEffect(()=>{
+        setSidebarLists(useLists)
+    }, [useLists])
 
     if (error) {
         return <div> {error}</div>
@@ -51,7 +56,7 @@ export default function SidebarUser(props){
     return (
         <div className={styles["sidebar-user"]}>
             {
-                list.map((item, index) => {
+                sidebarLists.map((item, index) => {
                     const className = `sidebar-user-${index + 1}`;
                     return <SidebarRow
                         text={item.groupname}

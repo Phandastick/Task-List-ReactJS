@@ -7,24 +7,29 @@
 }
 
 .login-container{
-    padding: 0 50px 0 0;
+    margin-top: 10px;
+    background-color: var(--bg-color);
 }
 
 .login-head {
     font-weight: 600;
     font-size: 6rem;
+    margin-right: 50px;
 }
 
 .frm-login {
     height: 100%;
-    min-width: auto;
-    width: 400px;
-    background-color: va(--bg-color);
+    width: 100%;
 
     display: flex;
     flex-direction: column;
-    padding: 70px 0 0 15px;
+    margin-top: 70px;
 }
+
+.lbl-login {
+    margin-left: 5%;
+}
+
 
 .tf-login {
     font-family: inherit;
@@ -38,6 +43,7 @@
     height: 2.5rem;
     width: 85%;
 
+    margin-left: 5%;
     margin-bottom: 20px;
     transition: 200ms;
     
@@ -49,8 +55,26 @@
 
 
 .button {
-    width: auto;
-    height:100px;
+    outline: none;
+    width: 7em;
+    margin-top: 50px;
+    align-self: center;
+
+    border-radius: 15px;
+    border: 8px solid var(--bg-item2);
+    background-color: transparent;
+
+    transition: 150ms;
+
+    &:hover {
+        width: 7.5em;
+        margin-top:47.5px;
+    }
+}
+
+#icon-Login {
+    width: 100%;
+    pointer-events: none;
 }
 
 .image-container, img{

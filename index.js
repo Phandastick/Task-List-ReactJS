@@ -9,6 +9,7 @@ const BASE_URL = process.env.BASE_URL
 
 //server static files (react frontend)
 app.use('/', express.static('./public'));
+app.use('/', express.static('./dist'));
 app.use(express.json())
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 

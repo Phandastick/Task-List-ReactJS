@@ -1,8 +1,7 @@
 import Modal from 'react-modal';
 import styles from './Modal.module.css'
 import { useContext, useEffect, useState } from 'react';
-import { usernameContext, listsContext, tasksContext } from '../../../contexts/Contexts';
-import { tasksFetch } from '../../../hooks/fetchAPI'
+import { usernameContext, listsContext, tasksUpdateContext } from '../../../contexts/Contexts';
 const BASE_URL = import.meta.env.VITE_BASE_URL
 
 //https://reactcommunity.org/react-modal/
@@ -12,10 +11,16 @@ export default function ModalAddList(props) {
     Modal.setAppElement(document.getElementById('root'))
     const modalState = props.modalState
     const {useLists} = useContext(listsContext)
-    const setTasksUpdate = useContext(tasksContext); // sets update flag 
+    const [listsState, setLists] = useState(['Loading lists...'])
+
+    const {setTasksUpdate} = useContext(tasksUpdateContext); // sets update flag 
     const {currentUsername} = useContext(usernameContext)
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
+
+    useEffect(()=>{
+        setLists(useLists)
+    },[useLists])
     
     const openModal = () => {
         props.setModalState(true)
@@ -36,32 +41,41 @@ export default function ModalAddList(props) {
             // console.log(key, value);
             data[key] = value
         });
-        
-        const url = `${BASE_URL}/api/doPostNewTask`;
-        const payload = {
-            groupname: data.listname,
-            tasks: [{
-                name: data.name,
-                desc: data.desc,
-                date: data.date
-            }]
-        }
-        const headers = {
-            'Content-type': 'application/json'
-        }
 
-        const res = await fetch(url, {
-            data: JSON.stringify(payload),
-            headers:headers,
-            method: "post"
-        })
-        if(res.status == 200){
-            setUpdateTasks(true)
-        } else {
-            setError(res.statusText)
+        try {
+            const url = `${BASE_URL}/api/doPostNewTask`;
+            const payload = {
+                username: currentUsername,
+                groupname: data.listname,
+                tasks: [{
+                    name: data.name,
+                    desc: data.desc,
+                    date: data.date
+                }]
+            }
+            const headers = {
+                'Content-type': 'application/json'
+            }
+
+            const res = await fetch(url, {
+                body: JSON.stringify(payload),
+                headers:headers,
+                method: "post"
+            })
+
+            if(res.status == 200){
+                setTasksUpdate(true)
+                closeModal()
+            } else {
+                throw new Error(res.statusText)
+            }
+            
+        } catch (error) {
+            setError(error.message)
+        } finally {
+            setTimeout(()=>{console.log("elo there")}, 500)
+            setLoading(false);
         }
-        setTimeout(()=>{console.log("elo there")}, 500)
-        setLoading(false);
     }
 
     return (
@@ -81,21 +95,23 @@ export default function ModalAddList(props) {
             </button>
 
             <form className={styles.form} name="AddTaskForm" onSubmit={submitList} >
-                <label htmlFor="name">Task Name</label>
+                <label htmlFor="name"> Task Name </label>
                 <input type='text' id="name" name="name" className={styles["modal-tf"]} required/>
-                <label htmlFor="desc">Task Description</label>
+
+                <label htmlFor="desc"> Task Description </label>
                 <input type='text' id="desc" name="desc" className={styles["modal-tfdesc"]} required/>
-                <label htmlFor="date">Task Duedate</label>
+
+                <label htmlFor="date"> Task Duedate </label>
                 <input type='text' id="date" name="date" className={styles["modal-tf"]} required/>
 
                 <select className={styles["ddl-listname"]} name='listname'>
                     {
-                        useLists.map((listname, index) => {
+                        listsState.map((list, index) => {
                             return(
                                 <option 
-                                value={listname}
+                                value={list.groupname}
                                 key={"Modal-ddl-" + index}>
-                                    {listname}
+                                    {list.groupname}
                                 </option>
                             )
                         })
