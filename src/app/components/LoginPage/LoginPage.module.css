@@ -8,7 +8,7 @@
 
 .login-container{
     margin-top: 10px;
-    background-color: var(--bg-color);
+    /* background-color: var(--bg-color); */
 }
 
 .login-head {
@@ -41,7 +41,7 @@
 
     border: none;
     border-radius: 5px;
-    background: var(--bg-item);
+    /* background: var(--bg-item); */
 
     font-size: 2rem;
     font-weight: 350;
@@ -101,7 +101,7 @@
     width:100%;
     height:100%;
     top: 0;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0), var(--bg-color) 70%);
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), var(--bg-color) 90%);
     pointer-events: none; /* Allows clicks to pass through */
 }
 
