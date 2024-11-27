@@ -1,10 +1,11 @@
 import SidebarRow from './SidebarRow';
 import React, { useState, useEffect, useContext } from 'react';
 import styles from './Sidebar.module.css'
-import { listsContext, listsUpdateContext, usernameContext } from '../../../contexts/Contexts';
+import { listsContext, listsUpdateContext, usernameContext } from '@Contexts';
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 
+//TODO: Implement edit and delete operations
 export default function SidebarUser(props){
     const [sidebarLists, setSidebarLists] = useState(null)
     const {currentUsername} = useContext(usernameContext)
@@ -29,7 +30,12 @@ export default function SidebarUser(props){
                 }
                 const data = await res.json()
                 const lists = data.lists
-                setLists(lists)
+
+                if(lists != undefined || lists.length > 0){
+                    setLists(lists)
+                } else if(lists == undefined || lists.length < 1){
+                    setError("No lists found for this user, please add new lists before adding tasks :D")
+                }
             } catch(err){
                 console.error(err)
                 setError(err.message)

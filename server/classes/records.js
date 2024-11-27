@@ -127,7 +127,6 @@ export const addTask = (newList, username) => {
         count++;
     }
     if(!found){
-        //TODO: list does not exist
         const response = {
             status: 400,
             statusText: "List is not found"

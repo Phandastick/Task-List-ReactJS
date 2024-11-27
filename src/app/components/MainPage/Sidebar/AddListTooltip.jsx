@@ -1,7 +1,7 @@
 import { Tooltip } from "react-tooltip"
 import styles from './Sidebar.module.css'
 import { useContext, useState } from "react";
-import { listsUpdateContext, usernameContext } from '../../../contexts/Contexts'
+import { listsUpdateContext, usernameContext } from '@Contexts'
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -27,6 +27,7 @@ export default function AddListToolTip(props){
         }
     }
 
+    //TODO: Add UI for icon choosing
     return(
         <Tooltip 
             id="add-list-tooltip"

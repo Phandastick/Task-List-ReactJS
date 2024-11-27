@@ -24,6 +24,7 @@ tasksRouter.get('/doGetTasks', async (req, res) => {
         return
     }
 
+    //FIXME: check if tasks are empty
     const listArray = result.lists
     const response = {
         lists: listArray

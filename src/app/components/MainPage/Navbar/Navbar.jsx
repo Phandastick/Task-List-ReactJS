@@ -1,5 +1,6 @@
 //import css with a variable for it to be a module
 import styles from './Navbar.module.css';
+import Navbox from './Navbox';
 
 function getDateList(){
     
@@ -35,25 +36,6 @@ function getDateList(){
     // console.log(dateDict)
     return dateDict
 }
-
-function Navbox({day}){
-    let navbarClass, today = new Date().getDate();
-    // let day = props.day;
-    if(day.date == today){
-        navbarClass = 'navbar-item-today';
-    } else {
-        navbarClass = 'navbar-item';    
-    }
-
-    // console.log(day);
-
-    return (
-        <div className = {styles[navbarClass]} key = {day.date}>
-            <a className={styles["navbar-dates"]}>{day.date}</a>
-            <a className={styles["navbar-days"]}>{day.name}</a>
-        </div>
-    )
-};
 
 function Navbar () {
     const dateDict = getDateList()

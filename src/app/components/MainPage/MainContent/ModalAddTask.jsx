@@ -1,7 +1,7 @@
 import Modal from 'react-modal';
 import styles from './Modal.module.css'
 import { useContext, useEffect, useState } from 'react';
-import { usernameContext, listsContext, tasksUpdateContext } from '../../../contexts/Contexts';
+import { usernameContext, listsContext, tasksUpdateContext } from '@Contexts';
 const BASE_URL = import.meta.env.VITE_BASE_URL
 
 //https://reactcommunity.org/react-modal/
