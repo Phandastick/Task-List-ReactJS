@@ -1,7 +1,6 @@
 import SidebarRow from './SidebarRow';
 import styles from './Sidebar.module.css'
 import React, { useState, useEffect } from 'react';
-import { ESModulesRunner } from 'vite/runtime';
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export default function SidebarPresets(){
@@ -11,8 +10,7 @@ export default function SidebarPresets(){
 
     useEffect(() => {
         // const port = 6969
-        const url = `${BASE_URL}/api/doGetLists`
-        console.log("Effect")
+        const url = `${BASE_URL}/api/doGetDefaultLists`
         
         const fetchData = async () => {
             try {
@@ -25,7 +23,7 @@ export default function SidebarPresets(){
                 }
 
                 const data = await res.json();
-                const listnames = data
+                const listnames = data.lists
                 // console.log(listnames)
                 setlist(listnames)
             } catch(err){
@@ -52,11 +50,11 @@ export default function SidebarPresets(){
                 list.map((item, index) => {
                     const className = `sidebar-preset-${index + 1}`;
                     return <SidebarRow
-                        text={item.name}
-                        icon={item.file}
-                        className={className}
+                        text={item.groupname}
+                        icon={item.filename}
+                        className={styles['sidebar-preset']}
                         idName={className}
-                        key={index + 1}
+                        key={"Preset-" + index}
                     />
                 })
             }

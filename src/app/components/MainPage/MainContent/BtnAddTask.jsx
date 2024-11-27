@@ -1,4 +1,4 @@
-import styles from "./Todo.module.css"
+import styles from "./MainContent.module.css"
 
 export default function BtnAddTask({openAddTaskModal}){
     const handleAddTask = () => {

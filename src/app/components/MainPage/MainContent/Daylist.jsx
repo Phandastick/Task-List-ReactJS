@@ -1,9 +1,11 @@
 import Todo from './Todo/Todo.jsx'
 
-export default function Daylist() {
+export default function Daylist(props) {
     //TODO: Add different views
     
     return(
-        <Todo />
+        <Todo 
+            filter = {props.filter}
+        />
     )
 }

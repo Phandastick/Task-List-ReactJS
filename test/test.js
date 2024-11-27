@@ -75,8 +75,6 @@ const getTaskLists = (username) => {
     })
 }
 
-console.log(getDateList())
-
 const testData = {
     "groupname": "New Project",
     "tasks": [
@@ -108,6 +106,19 @@ const newData = {
 // testData.tasks.push(newData.tasks)
 // console.log(testData.tasks);
 
+function insertTask (){
+    const insertDoc = 
+    {
+        $push: {}
+    }
+    insertDoc.$push = {
+        listname: "tasks"
+    }
+    
+    console.log(insertDoc)
+}
+
+insertTask();
 
 
 // let listname = 0; // listname is explicitly set to undefined

@@ -12,8 +12,8 @@ function getDateList(){
         dayofweek = 6
     }
 
-    console.log(dayofweek)
-    console.log(todayDate)
+    // console.log(dayofweek)
+    // console.log(todayDate)
     date.setDate(todayDate - dayofweek) // get monday
     // console.log(date.getDate())
 

@@ -6,7 +6,7 @@ function SidebarRow({ text, icon, className, idName }) {
             className={`${className} ${styles['sidebar-item-icon']}`}
             src={`/assets/${icon}.svg`}
         />
-        <a className={`${className} sidebar-item-text`}>{text}</a>
+        <a className={styles[className, 'sidebar-item-text']}>{text}</a>
     </div>
 }
 

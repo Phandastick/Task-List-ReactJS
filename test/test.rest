@@ -1,10 +1,10 @@
 ### Get list
 GET http://localhost:6969/api/doGetLists?username=User2
 
-
+  
 ### get default
-GET http://localhost:6969/api/doGetList
-s
+GET http://localhost:6969/api/doGetDefaultLists
+
 
 ### get tasks
 GET http://localhost:6969/api/doGetTasks?username=User2
@@ -18,38 +18,47 @@ GET http://localhost:6969/api/doGetIcons
 GET http://localhost:6969/api/login/doGetBgImage
 
 
-
-### Post new User
+### post login
 POST http://localhost:6969/api/login/doSignIn
 Content-Type: application/json
 
 {
-  "username": "User7",
+  "username": "User1",
+  "password": "123"
+}
+
+
+### Post new User
+POST http://localhost:6969/api/login/doPostNewUser
+Content-Type: application/json
+
+{
+  "username": "User1",
   "password": "123"
 }
 
 ### Post list
 POST http://localhost:6969/api/doPostNewList
 Content-Type: application/json
-username: error
+username: paddles
 
 {
-    "groupname": "Questionable list",
-    "filename": "question"
+    "groupname": "coding",
+    "filename": "geometric_coding"
 }
 
-###post req
+###post new task
 POST http://localhost:6969/api/doPostNewTask
 Content-Type: application/json
-username: User2
+username: paddles
 
 {
-  "groupname": "Outdoor Activities",
+  "groupname": "coding",
   "tasks": [
     {
-      "name": "Structural progress",
-      "date": "2025-02-01",
-      "desc": "Schedule and conduct the project kickoff meeting with all stakeholders to outline project goals and expectations."
+      "name": "Finish endpoint developments",
+      "date": "1st Dec 2024",
+      "desc": "Finish all endpoints needed in task list and use in frontend"
     }
   ]
 }

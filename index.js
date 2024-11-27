@@ -12,11 +12,13 @@ app.use('/', express.static('./dist'));
 app.use(express.json())
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
-app.use(
-    cors({
-        origin:"http://localhost:5173", 
-    }
-));
+// app.use(
+//     cors({
+//         origin:["http://localhost:5173", "http://localhost:5174"]
+//     }
+// ));
+app.use(cors())
+
 // app.use(listsRouter)
 app.use('/api', listsRouter)
 app.use('/api', tasksRouter)

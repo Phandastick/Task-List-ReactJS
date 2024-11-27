@@ -1,25 +1,22 @@
-import BtnAddTask from './BtnAddTask';
-import ModalAddTask from '../ModalAddTask.jsx';
 import TaskListSection from './TaskListSection.jsx';
 
-import { usernameContext } from '../../../../contexts/Contexts.jsx';
+import { usernameContext, tasksUpdateContext } from '../../../../contexts/Contexts.jsx';
 import styles from './Todo.module.css';
 import { useContext, useState, useEffect } from 'react';
 
 const BASE_URL = import.meta.env.VITE_BASE_URL
 
-export default function Todo(){
+export default function Todo(props){
     // const tasks = props.tasks; //array
     const {currentUsername} = useContext(usernameContext);
-    const [taskArray, setTaskArray] = useState(null);
+    const [taskArray, setTaskArray] = useState([]);
     const [listnames, setListnames] = useState(null);
+    const filterMode = props.filterMode
 
     //flag
-    const [isModelOpen, setModalState] = useState(false);
-    const [updateListsFlag, setUpdateFlag] = useState(false);
-    const [filterMode, setFiltermode] = useState("Day");
     const [isLoading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const { useTasksUpdate, setTasksUpdate } = useContext(tasksUpdateContext)
     
     useEffect(()=>{
         const url = `${BASE_URL}/api/doGetTasks?username=${currentUsername}`
@@ -27,36 +24,25 @@ export default function Todo(){
             try{
                 const res = await fetch(url)
                 if(res.status != 200){
-                    throw new Error(res.statusText)
+                    throw new Error(data.statusText)
                 }
-
                 const data = await res.json()
 
-                const tasks = data.body.lists
+                const tasks = data.lists
+                // console.log(tasks)
                 setTaskArray(tasks)
-                setLists(tasks, setListnames);
-
             } catch(err){
                 console.error(err)
                 setError(err.message)
             } finally {
-                setUpdateFlag(false)
+                if(useTasksUpdate)
+                    setTasksUpdate(false)
                 setLoading(false)
             }
         }
         fetchData();
-    }, [updateListsFlag])
+    }, [useTasksUpdate])
 
-    const setLists = (taskList, setList) => {
-        const lists = [];
-        taskList.forEach(list => {
-            lists.push(list.groupname)
-        });
-        setList(lists)
-    }
-
-    const openModal = () => { setModalState(true) }
-    const closeModal = () => { setModalState(false) }
     if (isLoading) {
         return <div>Loading tasks, please wait...</div>;
     }
@@ -69,34 +55,24 @@ export default function Todo(){
         );
     }
 
-    return (<>
-        <div className={styles["Task-wrapper"]} id='Task-wrapper'>
+    return (
+        <div className={styles["tasks-container"]}>
             {
-                taskArray.map((item) => {
-                    if(item.tasks === undefined || item.tasks == ""){
+                taskArray.map((taskList) => {
+                    if(taskList.tasks === undefined || taskList.tasks == [] || taskList.tasks.length < 1){
                         return
+                    } else {
+                        return(
+                            <TaskListSection
+                                filter={filterMode}
+                                listname={taskList.groupname}
+                                tasks={taskList.tasks} //array of individual tasks
+                                key = {taskList.groupname}
+                            />
+                        )
                     }
-                    return(
-                    <TaskListSection
-                        filter={filterMode}
-                        listname={item.groupname}
-                        tasks={item.tasks} //array of individual tasks
-                        key = {item.groupname}
-                    />
-                    )
                 })
             }
-            <BtnAddTask 
-                openAddTaskModal={openModal}
-            />
         </div>
-        <ModalAddTask 
-            setModalState = {setModalState}
-            modalState = {isModelOpen}
-            listName = {listnames[0]}
-            updateFlag = {setUpdateFlag}
-            lists = {listnames}
-        />
-        </>
     )
 }
