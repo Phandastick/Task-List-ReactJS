@@ -35,6 +35,12 @@
     margin-left: 5%;
 }
 
+.txt-register-message {
+    display: block;
+    margin-left: 5%;
+}
+
+
 
 .tf-form {
     font-family: inherit;
@@ -84,7 +90,6 @@
     width: 100%;
     pointer-events: none;
 }
-
 .image-container, img{
     position:absolute;
     width:100%;

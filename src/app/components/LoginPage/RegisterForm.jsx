@@ -1,17 +1,37 @@
 import { useState } from 'react';
 import styles from './LoginPage.module.css'
 
-
+const BASE_URL = import.meta.env.VITE_BASE_URL
 
 export default function RegisterForm({setRegister}) {
-    const [error, setError] = useState(null);
+    const [message, setMessage] = useState(null);
 
     const goToLogin = () => {
         setRegister(false);
     }
 
     function reConfirmPassword(){
-        setError("Your passwords does not match!")
+        setMessage("Your passwords does not match!")
+    }
+
+    async function registerFetch(username, password) {
+        const url = `${BASE_URL}/api/login/doPostNewUser`
+        const headers = {
+            'Content-type': 'application/json'
+        }
+        const payload = {
+            username: username,
+            password: password
+        }
+
+        const res = await fetch(url,{
+                headers: headers,
+                body: JSON.stringify(payload),
+                method: 'post'
+            }
+        )
+
+        return res
     }
 
     const handleSubmitUser = async (e) => {
@@ -27,17 +47,15 @@ export default function RegisterForm({setRegister}) {
         //do login
         console.log("Confirming login for",username)
         try {
-        const result = await fetchLogin(username, password);
-        
-        if(result){
-            window.sessionStorage.setItem('username', currentUsername)
-            setCurrentUsername(username)
-            setLogin(true)
-        } else {
-            throw new Error()
-        }
+            const result = await registerFetch(username, password);
+            
+            if(result.status == 200){
+                setMessage("User successfully added!")
+            }else {
+                throw new Error(result.statusText)
+            }
         } catch (err) {
-            setError("Username or password incorrect!")
+            setMessage(err.message)
         }
     }
 
@@ -46,19 +64,19 @@ export default function RegisterForm({setRegister}) {
             <h1 className={styles["login-head"]}>Register</h1>
             <a onClick={goToLogin} className={styles["text-backtologin"]}>&lt; Back to login</a>
 
-            <form className={styles.form}>
+            <form className={styles.form} onSubmit={handleSubmitUser}>
                 <label className={styles['lbl-form']} name="username">Username</label>
-                <input className={styles['tf-form']} type="text"></input>
+                <input className={styles['tf-form']} name="username" type="text" required></input>
 
                 <label className={styles['lbl-form']} name="password">Password</label>
-                <input className={styles['tf-form']} type="text"></input>
+                <input className={styles['tf-form']} name="password" type="password" required></input>
 
                 <label className={styles['lbl-form']} name="confirm-password">Confirm Password</label>
-                <input className={styles['tf-form']} type="text"></input>
+                <input className={styles['tf-form']} name="confirm-password" type="password" required></input>
 
-                {error ? <a className='txt-register-error'>{error}</a> : null}
+                {message ? <a className={styles['txt-register-message']}>{message}</a> : null}
 
-                <button className={styles['btn-form']} onClick={handleSubmitUser}></button>
+                <button className={styles['btn-form']}></button>
             </form>
         </div>
     )
