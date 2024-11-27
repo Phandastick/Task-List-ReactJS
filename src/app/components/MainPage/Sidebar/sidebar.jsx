@@ -13,8 +13,10 @@ export default function Sidebar() {
     }
 
     return (
-        <div className={`${styles.sidebar} containers`}>
-            <h1>To-do List</h1> <OptionsButton />
+        <div className={styles['containers', 'sidebar']}>
+            <div className={styles['sidebar-header-div']}>
+                <h1>To-do List</h1> <OptionsButton/>
+            </div>
             <SidebarPresets />
             <div className={styles["sidebar-divider"]}>
                 <hr className={styles["sidebar-divider-line"]} />

@@ -99,7 +99,7 @@ export default function ModalAddList(props) {
                 <input type='text' id="name" name="name" className={styles["modal-tf"]} required/>
 
                 <label htmlFor="desc"> Task Description </label>
-                <input type='text' id="desc" name="desc" className={styles["modal-tfdesc"]} required/>
+                <textarea type='text' id="desc" name="desc" className={styles["modal-tfdesc"]} required/>
 
                 <label htmlFor="date"> Task Duedate </label>
                 <input type='text' id="date" name="date" className={styles["modal-tf"]} required/>

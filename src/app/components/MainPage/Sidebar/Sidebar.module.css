@@ -13,10 +13,20 @@
     flex-wrap: wrap;
 }
 
+.sidebar-header-div {
+    display: flex;
+    flex-wrap: nowrap;
+
+}
+
 .sidebar h1 {
     font-size:3.2em;
-    text-wrap: nowrap;
-    margin: 10px 0 0 5px;
+    text-wrap: wrap;
+    margin: 20px 0 0 20px;
+    padding-left: 10px;  
+    display:block;
+    border-left: 5px solid var(--c7);
+    ;
 }
 
 .sidebar-divider {

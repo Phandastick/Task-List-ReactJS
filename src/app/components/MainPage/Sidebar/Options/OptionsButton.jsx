@@ -6,10 +6,7 @@ import { loginContext } from "@/app/contexts/Contexts";
 const BASE_URL = import.meta.env.VITE_BASE_URL
 
 export default function OptionsButton() {
-    const {username} = useContext(usernameContext);
     const [showList, setShowList] = useState(false)
-
-
     
     const handleShowList = () => {
         if(showList){
@@ -50,23 +47,15 @@ function Menu() {
     }
     return ( //TODO: add profile settings, theme
         <div className={styles["options-container"]}>
-        <menu className={styles["options-menu"]}>
-            <li>
-                <button className={styles["btn-options"]} onClick={handleShowSettings}>
-                    Profile 
-                </button>
-            </li>
-            <li>
-                <button className={styles["btn-options"]} onClick={switchTheme}>
-                    { useTheme }
-                </button>
-            </li>
-            <li>
-                <button className={styles["btn-options"]} onClick={handleLogout}>
-                    Logout
-                </button>
-            </li>
-        </menu>
+            <button className={styles["btn-options"]} onClick={handleShowSettings}>
+                Profile 
+            </button>
+            <button className={styles["btn-options"]} onClick={switchTheme}>
+                { useTheme }
+            </button>
+            <button className={styles["btn-options"]} onClick={handleLogout}>
+                Logout
+            </button>
         </div>
     )
 }

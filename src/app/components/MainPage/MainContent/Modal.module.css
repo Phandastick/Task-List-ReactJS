@@ -55,10 +55,14 @@ form label {
 }
 
 .modal-tf, .modal-tfdesc, .ddl-listname {
-    height: 2rem;
+    height: 2.1rem;
     margin: 10px 0 20px 0;
     padding: 0;
+
+    font-size:large;
+    font-weight: 500;
 }
+
 .modal-tfdesc {
     height: 4rem;
 }

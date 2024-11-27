@@ -16,7 +16,7 @@
 
 .addBtn {
   padding:20px;
-  width:5vw;
+  width:8rem;
   transition:300ms;
 
   position: sticky;
@@ -30,7 +30,7 @@
 }
 
 .addBtn:hover{
-  width: 5.5vw;
+  width: 9rem;
   opacity: 90%;
   margin: 7px 7px 7px auto;
 }
