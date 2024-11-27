@@ -4,7 +4,7 @@ import ModalAddTask from './ModalAddTask.jsx';
 
 import styles from './MainContent.module.css'
 import { useState, useEffect, useContext } from 'react'
-import { taskUpdateContext } from '../../../contexts/Contexts.jsx';
+import { taskUpdateContext } from '@Contexts';
 
 function MainContent() {
     const [useView, setView] = useState('daylist') // daylist

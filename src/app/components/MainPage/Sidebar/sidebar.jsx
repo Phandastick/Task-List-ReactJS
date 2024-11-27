@@ -3,6 +3,7 @@ import styles from './Sidebar.module.css'
 import SidebarPresets from './SidebarPresets'
 import SidebarUser from './SidebarUser'
 import AddListToolTip from './AddListTooltip';
+import OptionsButton from './Options/OptionsButton'
 
 export default function Sidebar() {
     // console.log(username);
@@ -13,7 +14,7 @@ export default function Sidebar() {
 
     return (
         <div className={`${styles.sidebar} containers`}>
-            <h1>To-do List</h1>
+            <h1>To-do List</h1> <OptionsButton />
             <SidebarPresets />
             <div className={styles["sidebar-divider"]}>
                 <hr className={styles["sidebar-divider-line"]} />

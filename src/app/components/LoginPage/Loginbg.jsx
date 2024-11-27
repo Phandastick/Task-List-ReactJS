@@ -10,6 +10,7 @@ export default function Loginbg() {
   useEffect(() => {
     const getBgImage = async () => {
       try {
+        //TODO: Set new image on timed interval
         // const url = `${BASE_URL}/api/login/doGetBgImage`
         // const res = await fetch(url)
         // const data = await res.json()

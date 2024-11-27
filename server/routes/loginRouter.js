@@ -90,6 +90,7 @@ loginRouter.delete('/doDeleteNewUser', async (req, res) => {
 //#endregion
 
 loginRouter.get('/doGetBgImage', async (req, res) => {
+    // FIXME: add image to server cache, limit fetches to set time interval
     console.log("Called login bg image")
     const params = new URLSearchParams({
         query: "Green Background",

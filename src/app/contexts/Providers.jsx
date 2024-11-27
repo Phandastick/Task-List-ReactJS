@@ -1,13 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { usernameContext, 
         loginContext, 
         listsUpdateContext, 
         listsContext, 
         tasksUpdateContext, 
-        tasksContext 
-        } from './Contexts';
-
-const BASE_URL = import.meta.env.VITE_BASE_URL
+        tasksContext,
+        themeContext
+        } from '@Contexts';
 
 export default function Providers({children}) {
     const [currentUsername, setCurrentUsername] = useState('default')
@@ -16,6 +15,7 @@ export default function Providers({children}) {
     const [useLists, setLists] = useState([]);
     const [useTasksUpdate, setTasksUpdate] = useState(false);
     const [useTasks, setTasks] = useState([]);
+    const [useTheme, setTheme] = useState('Dark');
 
 
     return(
@@ -25,7 +25,9 @@ export default function Providers({children}) {
         <listsContext.Provider value={{useLists, setLists}}>
         <tasksUpdateContext.Provider value={{useTasksUpdate, setTasksUpdate}}>
         <tasksContext.Provider value={{useTasks, setTasks}}>
+        <themeContext.Provider value={{useTheme, setTheme}}>
             {children}
+        </themeContext.Provider>
         </tasksContext.Provider>
         </tasksUpdateContext.Provider>
         </listsContext.Provider>

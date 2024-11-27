@@ -54,6 +54,7 @@ listsRouter.get('/doGetLists', async (req, res) => {
                 }
                 payload.lists.push(list)
             })
+            //FIXME: lists does not exist
             payload.statusText = "Lists retrieved successfully"
             console.log(payload)
             res.status(200).json(payload)

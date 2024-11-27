@@ -4,7 +4,7 @@ import Navbar from './Navbar/Navbar.jsx'
 import MainContent from './MainContent/mainContent'
 import Sidebar from './Sidebar/sidebar'
 
-import { usernameContext } from '../../contexts/Contexts'
+import { usernameContext } from '@Contexts'
 import { useContext, useEffect } from 'react'
 
 

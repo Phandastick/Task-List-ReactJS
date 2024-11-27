@@ -1,6 +1,6 @@
 import TaskListSection from './TaskListSection.jsx';
 
-import { usernameContext, tasksUpdateContext } from '../../../../contexts/Contexts.jsx';
+import { usernameContext, tasksUpdateContext } from '@Contexts';
 import styles from './Todo.module.css';
 import { useContext, useState, useEffect } from 'react';
 

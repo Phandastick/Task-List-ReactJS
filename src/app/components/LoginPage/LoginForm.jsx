@@ -2,17 +2,19 @@
 import styles from './LoginPage.module.css'
 
 import { useContext, useEffect, useState } from "react";
-import { loginContext,usernameContext } from "../../contexts/Contexts";
+import { loginContext,usernameContext } from "@Contexts";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL
 
 export default function LoginForm({setRegister}) {
     const [error, setError] = useState(null)
+    const [useDisableBtn, setDisableBtn] = useState(false);
 
     const {setLogin} = useContext(loginContext)
     const {currentUsername, setCurrentUsername} = useContext(usernameContext)
 
     const handleLogin = async (e) => {
+        setDisableBtn(true);
         e.preventDefault()
         const data = new FormData(e.target)
         const username = data.get("username")
@@ -21,22 +23,27 @@ export default function LoginForm({setRegister}) {
         //do login
         console.log("Confirming login for",username)
         try {
-        const result = await fetchLogin(username, password);
-        
-        if(result){
-            window.sessionStorage.setItem('username', currentUsername)
-            setCurrentUsername(username)
-            setLogin(true)
-        } else {
-            throw new Error()
-        }
+            const result = await fetchLogin(username, password);
+            
+            if(result){
+                setCurrentUsername(username)
+                setLogin(true)
+            } else {
+                throw new Error()
+            }
         } catch (err) {
             setError("Username or password incorrect!")
+        } finally {
+            setDisableBtn(false);
         }
     }
 
     const handleRegister = () => {
         setRegister(true);
+    }
+
+    const handleForgetPassword = () => {
+        window.alert("Well too bad >:)")
     }
 
     return <div className={styles['login-container']}>
@@ -50,7 +57,7 @@ export default function LoginForm({setRegister}) {
 
             {error ? <div>{error}</div> : null}
 
-            <button className={styles['btn-form']}>
+            <button className={styles['btn-form']} disabled={useDisableBtn}>
                 <embed 
                 className={styles["loginIcon-embed"]}
                 id={styles["icon-Login"]}
@@ -60,7 +67,7 @@ export default function LoginForm({setRegister}) {
             className={styles['link-register']}
             onClick={handleRegister}>
                 Register here</a>
-            <a className={styles['forgotPassword']}>Forgot password?</a>
+            <a className={styles['forgotPassword']} onClick={handleForgetPassword}>Forgot password?</a>
         </form>
     </div>
 }
