@@ -7,7 +7,7 @@ export const loginRouter = Router();
 //get user
 loginRouter.post('/doSignIn', async (req, res) => {
     const data = req.body
-    // console.log("Login from: ", data)
+    console.log("Login from: ", data)
     const username = data.username
     const password = data.password
     const response = {};
@@ -37,7 +37,6 @@ loginRouter.post('/doPostNewUser', async (req, res) => {
     const data = req.body
     const username = data.username
     const password = data.password
-    const response = {}
 
     console.log("Posting new user:")
     console.log("Username:", username)

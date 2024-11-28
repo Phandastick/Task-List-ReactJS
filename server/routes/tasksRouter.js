@@ -9,7 +9,7 @@ export const tasksRouter = Router()
 tasksRouter.get('/doGetTasks', async (req, res) => {
     let username = req.query.username
 
-    console.log('Fetched tasks from username:', username)
+    console.log('Fetching tasks from username:', username)
     // let response;
     // response = getTasks(username);
 
@@ -36,7 +36,7 @@ tasksRouter.get('/doGetTasks', async (req, res) => {
 })
 
 tasksRouter.post('/doPostNewTask', async (req, res) => {
-    console.log('Received POST request at /doPostTask wtih:')
+    console.log('Received POST request at /doPostNewTask')
     // console.log(req.body)
     let data = req.body
     let taskitems = data.tasks[0]
@@ -47,7 +47,7 @@ tasksRouter.post('/doPostNewTask', async (req, res) => {
         // console.log(username)
 
         let validate = await tasks.findOne({ name: username })
-        console.log(validate);
+        // console.log(validate);
         if (!validate) { //checks for username's list existance
             throw new Error("User is not found!")
         } else if (typeof data.groupname !== 'string' || data.groupname.includes('$') || data.groupname.includes('.')) {
@@ -93,7 +93,7 @@ tasksRouter.post('/doPostNewTask', async (req, res) => {
         // console.log(insertDoc)
 
         let result = await tasks.updateOne(query, insertDoc, options)
-        console.log(result)
+        // console.log(result)
 
         if (result.acknowledged) {
             if (result.modifiedCount > 0 || result.upsertedCount > 0)

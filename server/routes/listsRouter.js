@@ -34,7 +34,7 @@ listsRouter.get('/doGetDefaultLists', async (req, res) => {
 
 listsRouter.get('/doGetLists', async (req, res) => {
     let username = req.query.username
-    // console.log('Fetched username:',username)
+    console.log('Fetched lists username:',username)
 
     let lists = await db.collection("tasks")
     let result = await lists.findOne({ name: username })
@@ -66,7 +66,6 @@ listsRouter.get('/doGetLists', async (req, res) => {
 });
 
 listsRouter.post('/doPostNewList', async (req, res) => {
-    console.log("\nReceived POST req at /doPostNewList")
     // console.log(req.body);
     // console.log(req.headers);
     let data = req.body
@@ -74,8 +73,9 @@ listsRouter.post('/doPostNewList', async (req, res) => {
     let groupname = data.groupname;
     let filename = data.filename;
     let username = data.username;
+    // console.log("Posting new list: "+groupname)
 
-    // console.log('Adding list:', groupname, ', for account', username)
+    console.log('Adding list:', groupname, ', for account', username)
 
     const tasks = await db.collection("tasks");
 
@@ -154,4 +154,4 @@ listsRouter.get('/doGetIcons', (req, res) => {
     }
 
     res.status(response.status).json(payload);
-});
+}); 

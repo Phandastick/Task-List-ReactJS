@@ -15,18 +15,17 @@
 
 .sidebar-header-div {
     display: flex;
-    flex-wrap: nowrap;
-
+    align-items: center;
+    padding: 20px 0 0 20px;
+    width: 100%;
 }
 
 .sidebar h1 {
     font-size:3.2em;
     text-wrap: wrap;
-    margin: 20px 0 0 20px;
     padding-left: 10px;  
     display:block;
     border-left: 5px solid var(--c7);
-    ;
 }
 
 .sidebar-divider {
@@ -47,13 +46,6 @@
     margin: 5px 0;
 }
 
-#embed-addBtn {
-    width: 100%;
-    padding-right: 10px;
-    transition:150ms;
-    pointer-events: none;
-}
-
 .add-list-header {
     font-size: 14px;
     margin-top :0;
@@ -72,11 +64,19 @@
 
     border:0;
     background-color: transparent;
+    transition: 200ms;
 
     &:hover {
         width: 3.2rem;
         z-index: 0;
     }
+}
+
+#embed-addBtn {
+    width: 100%;
+    padding-right: 2px;
+    transition:150ms;
+    pointer-events: none;
 }
 
 
