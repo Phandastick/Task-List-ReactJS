@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import db from '../db/connection.js';
+import fs from 'node:fs'
 
 export const listsRouter = Router()
 
@@ -34,7 +35,7 @@ listsRouter.get('/doGetDefaultLists', async (req, res) => {
 
 listsRouter.get('/doGetLists', async (req, res) => {
     let username = req.query.username
-    console.log('Fetched lists username:',username)
+    console.log('Fetched lists username:', username)
 
     let lists = await db.collection("tasks")
     let result = await lists.findOne({ name: username })
@@ -144,10 +145,15 @@ listsRouter.patch('/doPatchList', async (req, res) => {
 
 // #endregion
 
-listsRouter.get('/doGetIcons', (req, res) => {
+listsRouter.get('/doGetIcons', async (req, res) => {
     const icons = [] // list names array
 
     //search all icons
+    const filepath = '/assets'
+    const data = await fs.readdirSync(filepath);
+    if (data > 0) {
+
+    }
 
     const payload = {
         icons: icons

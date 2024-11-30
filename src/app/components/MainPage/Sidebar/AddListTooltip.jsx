@@ -40,6 +40,7 @@ export default function AddListToolTip(props){
             <p className={styles["add-list-header"]}>Add List:</p>
             <form className="form-addList" onSubmit={handleSubmit}>
                 <input type="text" className={styles["input-addList"]} id="input-addList"/>
+                <IconList />
             </form>
         </Tooltip>
     )
