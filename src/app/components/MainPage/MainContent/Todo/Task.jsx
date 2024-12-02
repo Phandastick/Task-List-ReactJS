@@ -3,7 +3,7 @@ import styles from './Todo.module.css'
 
 export default function Task({data}){
     //TODO: Add onclick function to expand
-    [useHover, setHover] = useState(false)
+    const [useHover, setHover] = useState(false)
 
     return(
         <div className={styles["Task-group"]} id={`Task-group--item-${data.name}`}>
@@ -23,11 +23,11 @@ export default function Task({data}){
 function editDeleteButtons(data) {
 
     const handleEdit = () => {
-
+        openModal('edit')
     }
 
     const handleDelete = () => {
-
+        
     }
 
     return (

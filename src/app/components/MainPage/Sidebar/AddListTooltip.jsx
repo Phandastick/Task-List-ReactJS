@@ -7,7 +7,7 @@ import { listsUpdateContext, usernameContext } from '@Contexts'
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-export default function AddListToolTip(props){
+export default function AddListToolTip(){
     // const icons = getIcons();
     const {currentUsername} = useContext(usernameContext);
     const {setListsUpdate} = useContext(listsUpdateContext);

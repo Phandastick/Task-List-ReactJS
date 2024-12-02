@@ -12,7 +12,6 @@ export default function IconList() {
     const [error, setError] = useState(null)
 
     useEffect(() => {
-
         const getData = async () => {
             setSelectedIcon(null)
             document.getElementById("hdf-listicon").value = ""

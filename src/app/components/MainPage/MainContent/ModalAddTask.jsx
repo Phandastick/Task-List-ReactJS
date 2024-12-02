@@ -11,7 +11,7 @@ export default function ModalAddList(props) {
     Modal.setAppElement(document.getElementById('root'))
     const modalState = props.modalState
     const {useLists} = useContext(listsContext)
-    const [listsState, setLists] = useState(['Loading lists...'])
+    const [listsState, setLists] = useState(null)
 
     const {setTasksUpdate} = useContext(tasksUpdateContext); // sets update flag 
     const {currentUsername} = useContext(usernameContext)
