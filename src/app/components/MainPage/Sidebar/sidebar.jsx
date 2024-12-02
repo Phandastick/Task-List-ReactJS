@@ -9,7 +9,7 @@ export default function Sidebar() {
     // console.log(username);
     function focusField(){
         let tf = document.getElementById('input-addList');
-        tf.focus()
+        tf.focus();
     }
 
     return (

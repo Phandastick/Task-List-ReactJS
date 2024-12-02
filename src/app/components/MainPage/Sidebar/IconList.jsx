@@ -12,7 +12,11 @@ export default function IconList() {
     const [error, setError] = useState(null)
 
     useEffect(() => {
+
         const getData = async () => {
+            setSelectedIcon(null)
+            document.getElementById("hdf-listicon").value = ""
+            
             const url = `${BASE_URL}/api/doGetIcons`
             const res = await fetch(url);
             if(res.status != 200){
@@ -34,6 +38,7 @@ export default function IconList() {
     }, [])
 
     const handleChangeIcon = (iconname) => {
+        setError(null);
         setSelectedIcon(iconname);
         document.getElementById('hdf-listicon').value = iconname;
     }
@@ -46,7 +51,7 @@ export default function IconList() {
 
     if(loading) {
         return (
-            <div>Loading...</div>
+            <div>Loading icons...</div>
         )
     }
 

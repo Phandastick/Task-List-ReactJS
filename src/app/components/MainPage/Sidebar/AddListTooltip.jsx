@@ -2,7 +2,7 @@ import { Tooltip } from "react-tooltip"
 import IconList from './IconList'
 
 import styles from './Sidebar.module.css'
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { listsUpdateContext, usernameContext } from '@Contexts'
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -15,22 +15,28 @@ export default function AddListToolTip(props){
 
     async function handleSubmit(e) {
         //stop redirect 
+        setError(null);
         e.preventDefault();
         
         let listName = e.target[0].value;
-        let filename = 'cross';
+        let filename = document.getElementById("hdf-listicon").value;
         // console.log(`New list ${listName}Submitted!`)
+
+        if(filename == undefined || filename == "") {
+            setError("Please choose an icon!")
+            return
+        }
 
         const res = await postList(listName, filename, currentUsername)
         if(res.status == 200){
             setListsUpdate(true);
         } else {
-            const error = await res.text()
-            setError(error)
+            const errortext = await res.text()
+            setError(errortext)
         }
     }
 
-    //TODO: Add UI for icon choosing
+    //FIXME: Remove error after unfocused tooltip
     return(
         <Tooltip 
             id="add-list-tooltip"
