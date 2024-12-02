@@ -4,6 +4,8 @@ import { listsRouter } from './server/routes/listsRouter.js';
 import { tasksRouter } from './server/routes/tasksRouter.js';
 import { loginRouter } from './server/routes/loginRouter.js';
 
+export const base_dir = import.meta.dirname;
+
 const app = express()
 const BASE_URL = process.env.BASE_URL
 

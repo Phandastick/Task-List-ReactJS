@@ -1,4 +1,6 @@
 import { Tooltip } from "react-tooltip"
+import IconList from './IconList'
+
 import styles from './Sidebar.module.css'
 import { useContext, useState } from "react";
 import { listsUpdateContext, usernameContext } from '@Contexts'
@@ -23,7 +25,8 @@ export default function AddListToolTip(props){
         if(res.status == 200){
             setListsUpdate(true);
         } else {
-            setError(res.statusText)
+            const error = await res.text()
+            setError(error)
         }
     }
 
@@ -37,11 +40,16 @@ export default function AddListToolTip(props){
             data-tooltip-position-strategy="fixed"
             clickable={true}
         >
-            <p className={styles["add-list-header"]}>Add List:</p>
-            <form className="form-addList" onSubmit={handleSubmit}>
-                <input type="text" className={styles["input-addList"]} id="input-addList"/>
-                <IconList />
-            </form>
+            <div className={styles["tooltip-wrapper"]}>
+                <p className={styles["add-list-header"]}>Add List:</p>
+                <form className="form-addList" onSubmit={handleSubmit}>
+                    <input type="text" className={styles["input-addList"]} id="input-addList" required/>
+                    <IconList />
+                    { error ? <label className={styles["frm-addList-error"]}> {error + " :("} </label> : null}
+                    <button className={styles["btn-submit-addlist"]}>Submit list</button>
+                    <input type="hidden" id="hdf-listicon" name="icon" value="crois.png"/>
+                </form>
+            </div>
         </Tooltip>
     )
 }

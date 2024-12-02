@@ -51,7 +51,7 @@ export default function SidebarUser(props){
     }, [useLists])
 
     if (error) {
-        return <div> {error}</div>
+        return <div>{error}</div>
     }
 
     if (loading) {

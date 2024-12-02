@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react"
-
+import styles from './Sidebar.module.css'
 
 const BASE_URL = import.meta.env.VITE_BASE_URL
 
 export default function IconList() {
     const updateIcons = false;
     const [useIcons, setIcons] = useState([])
+    const [useSelectedIcon, setSelectedIcon] = useState(null);
 
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
@@ -18,11 +19,11 @@ export default function IconList() {
                 setError(res.statusText)
                 return
             }
-            const data = res.json();
-            const iconList = data.lists;
+            const data = await res.json();
+            const iconList = data.icons;
 
-            if(iconList.length < 1 || iconList == undefined){
-                setError("There is no icons fetched!")
+            if(iconList == undefined || iconList.length < 1){
+                setError("No icons available for now!")
                 return
             }
 
@@ -30,11 +31,16 @@ export default function IconList() {
             setLoading(false);
         };
         getData();
-    }, [updateIcons])
+    }, [])
+
+    const handleChangeIcon = (iconname) => {
+        setSelectedIcon(iconname);
+        document.getElementById('hdf-listicon').value = iconname;
+    }
     
     if(error) {
         return (
-            <div> Error fetching list icons: {error}</div>
+            <div style={{textWrap:true}}> Error fetching list icons: {error}</div>
         )
     }
 
@@ -45,15 +51,21 @@ export default function IconList() {
     }
 
     return (
-        <div>
+        <div className={styles["icons-container"]}>
         {
-            useIcons.map((icon) => {
-                <button className={styles["btn-icons"]} key={icon.name}>
-                    <embed 
-                    src={`/assets/${icon.name}`}
-                    className={styles["embed-icons"]}
-                    />
-                </button>
+            useIcons.map((icon, index) => {
+                return(
+                    <button 
+                    className={useSelectedIcon === icon ? styles["btn-icons-active"] : styles["btn-icons"]}
+                    type="button"
+                    onClick={() => { handleChangeIcon(icon) }} 
+                    key={index}>
+                        <embed 
+                        src={`/assets/userIcons/${icon}`}
+                        className={styles["embed-icons"]}
+                        />
+                    </button>
+                )
             })
         }
         </div>

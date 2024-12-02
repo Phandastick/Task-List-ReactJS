@@ -1,5 +1,7 @@
 import { readFile } from 'fs';
 import { parse } from 'csv-parse';
+import { base_dir } from '../index.js';
+import fs from 'node:fs'
 
 function getDateList(){
     var date = new Date()
@@ -116,8 +118,25 @@ function insertTask (){
     console.log(insertDoc)
 }
 
-insertTask();
+// insertTask();
 
+async function getIcons(){
+    const icons = [] // list names array
+    
+    //search all icons
+    const filepath = `${base_dir}/public/assets`
+    const data = await fs.readdirSync(filepath);
+    console.log(data)
+    if (data > 0) {
+        
+    }
+
+    const payload = {
+        icons: icons
+    }
+}
+
+getIcons()
 
 // let listname = 0; // listname is explicitly set to undefined
 // let username = "username"; // username is a string

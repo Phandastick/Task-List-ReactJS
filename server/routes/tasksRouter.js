@@ -1,4 +1,3 @@
-import { getTasks, addTask } from '../classes/records.js'
 import db from '../db/connection.js'
 
 import { Router } from 'express'
@@ -9,7 +8,7 @@ export const tasksRouter = Router()
 tasksRouter.get('/doGetTasks', async (req, res) => {
     let username = req.query.username
 
-    console.log('Fetching tasks from username:', username)
+    // console.log('Fetching tasks from username:', username)
     // let response;
     // response = getTasks(username);
 
@@ -36,7 +35,7 @@ tasksRouter.get('/doGetTasks', async (req, res) => {
 })
 
 tasksRouter.post('/doPostNewTask', async (req, res) => {
-    console.log('Received POST request at /doPostNewTask')
+    // console.log('Received POST request at /doPostNewTask')
     // console.log(req.body)
     let data = req.body
     let taskitems = data.tasks[0]
