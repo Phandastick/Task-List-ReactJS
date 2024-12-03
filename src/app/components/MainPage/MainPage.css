@@ -1,8 +1,7 @@
 .app-wrapper {
   display: grid;
   grid-template-columns: auto 80vw;
-  grid-template-rows: 169px auto;
-  min-height: 100vh;
+  grid-template-rows: 169px;
 }
 
 .header-seperator {
@@ -12,7 +11,7 @@
   border-width: 2.5px;
   margin:0;
   width:100%;
-  height:1%;
+  border-bottom: none;
 }
 
 .vertical-seperator {
