@@ -24,7 +24,7 @@
     z-index: -1;
 }
 
-:hover.Task-group {
+.Task-group:hover {
     padding:15px;
     min-height: 200px;
     height: auto;

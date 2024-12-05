@@ -1,12 +1,19 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './Todo.module.css'
 
 export default function Task({data}){
     //TODO: Add onclick function to expand
     const [useHover, setHover] = useState(false)
 
+    // useEffect(() => {
+    //     const taskGroup = document.getElementById(`Task-group--item-${data.name}`)
+    //     taskGroup.addEventListener('mouseenter', () => { setHover(true) })
+    //     taskGroup.addEventListener('mouseleave', () => { setHover(false) })
+    // } , [])
+
+
     return(
-        <div className={styles["Task-group"]} id={`Task-group--item-${data.name}`}>
+        <div className={styles["Task-group"]} id={`Task-grou-item-${data.name}`}>
             <div className={styles["Task-group-details"]}>
                 <div className={`${styles["Task-group-item"]} ${styles.checkbox}`} id={styles[`Task-group-item-${data.checkbox}`]}></div>
                 <div className={styles["Task-group-item", 'Task-group-name', 'name']} id={styles[`Task-group-item-${data.name}`]}>{data.name}</div>
@@ -27,13 +34,12 @@ function editDeleteButtons(data) {
     }
 
     const handleDelete = () => {
-        
+        const payload = {};
     }
 
     return (
         <>
             <button onClick={handleEdit} id={styles['btn-edit']} class={styles["btn-editdelete"]}></button>
-
             <button onClick={handleDelete} id={styles['btn-delete']} class={styles["btn-editdelete"]}></button>
         </>
     )

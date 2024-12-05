@@ -1,7 +1,7 @@
 /* #region main content */
 .main-content {
     grid-row: 2;
-    grid-row-end: 4;
+    grid-row-end: 3;
     grid-column: 2;
 }
 
@@ -19,9 +19,11 @@
   width:8rem;
   transition:300ms;
 
-  position: sticky;
+  position: fixed;
   bottom: 20px; /* makes it stick to bottom of screen */
-  margin: auto 10px 10px auto; /* fills up space on the left and top*/
+  right: 20px;
+  margin: 10px 10px 10px auto; /* fills up space on the left and top*/
+
   outline: none;
   border:0;
   border-radius: 20px;
@@ -31,8 +33,7 @@
   &:hover {
     width: 9rem;
     opacity: 90%;
-    margin: auto 7px 7px auto;
-
+    margin: 7px 7px 7px auto;
   }
 }
 #embed-addTask{

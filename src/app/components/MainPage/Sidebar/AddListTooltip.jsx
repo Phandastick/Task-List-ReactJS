@@ -37,6 +37,7 @@ export default function AddListToolTip(){
     }
 
     //FIXME: Remove error after unfocused tooltip
+    //FIXME: Rerendering after list submitted
     return(
         <Tooltip 
             id="add-list-tooltip"
