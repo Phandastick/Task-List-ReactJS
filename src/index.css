@@ -28,9 +28,15 @@
   font-family: "Open Sans", sans-serif;
 }
 
+:root, body, #root{
+  height: auto;
+  /* overflow-y: scroll; */
+}
+
 body {
   background-color: var(--bg-color);
-  min-height: 100vh;
+  /* min-height: 100vh;
+  height: 100%; */
 }
 
 a{

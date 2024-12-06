@@ -3,7 +3,7 @@ import BtnAddTask from './BtnAddTask';
 import ModalAddTask from './ModalAddTask.jsx';
 
 import styles from './MainContent.module.css'
-import { useState, useEffect, useContext } from 'react'
+import { useState, useContext } from 'react'
 import { taskUpdateContext } from '@Contexts';
 
 function MainContent() {

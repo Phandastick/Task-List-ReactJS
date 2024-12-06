@@ -8,13 +8,13 @@ const BASE_URL = import.meta.env.VITE_BASE_URL
 
 
 export default function ModalAddList(props) {
-    Modal.setAppElement(document.getElementById('root'))
+    Modal.setAppElement(document.getElementById('root'));
     const modalState = props.modalState
-    const {useLists} = useContext(listsContext)
-    const [listsState, setLists] = useState(['Loading lists...'])
+    const {useLists} = useContext(listsContext);
+    const [listsState, setLists] = useState(['Loading lists...']);
 
     const {setTasksUpdate} = useContext(tasksUpdateContext); // sets update flag 
-    const {currentUsername} = useContext(usernameContext)
+    const {currentUsername} = useContext(usernameContext);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
 
@@ -22,12 +22,8 @@ export default function ModalAddList(props) {
         setLists(useLists)
     },[useLists])
     
-    const openModal = () => {
-        props.setModalState(true)
-    }
-    const closeModal = () => {
-        props.setModalState(false)
-    }
+    const openModal = () => { props.setModalState(true) }
+    const closeModal = () => { props.setModalState(false) }
 
     async function submitList(e) {
         setLoading(true);
@@ -84,8 +80,7 @@ export default function ModalAddList(props) {
     isOpen={modalState}
     styles= {styles}
     onAfterOpen={() => document.body.style.overflow = 'hidden'}
-    onAfterClose={() => document.body.style.overflow = 'unset'}
-    >
+    onAfterClose={() => document.body.style.overflow = 'unset'}>
         <div className={styles["modal-wrapper"]}>
             <div className={styles["modal-header"]}>Add new task</div>
             <button className={styles["modal-button-close"]}
@@ -99,7 +94,7 @@ export default function ModalAddList(props) {
                 <input type='text' id="name" name="name" className={styles["modal-tf"]} required/>
 
                 <label htmlFor="desc"> Task Description </label>
-                <input type='text' id="desc" name="desc" className={styles["modal-tfdesc"]} required/>
+                <textarea type='text' id="desc" name="desc" className={styles["modal-tfdesc"]} required/>
 
                 <label htmlFor="date"> Task Duedate </label>
                 <input type='text' id="date" name="date" className={styles["modal-tf"]} required/>

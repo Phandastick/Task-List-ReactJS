@@ -29,6 +29,10 @@ export default function Todo(props){
                 const data = await res.json()
 
                 const tasks = data.lists
+
+                if(tasks.length < 1 || tasks == undefined){
+                    setError("No tasks found for " + currentUsername)
+                }
                 // console.log(tasks)
                 setTaskArray(tasks)
             } catch(err){
@@ -50,7 +54,7 @@ export default function Todo(props){
     if (error) {
         return (
             <div>
-                <p>Error fetching tasks: {error}</p>
+                <p>Error encountered!: {error}</p>
             </div>
         );
     }

@@ -30,11 +30,10 @@ export default function SidebarUser(props){
                 }
                 const data = await res.json()
                 const lists = data.lists
-
-                if(lists != undefined || lists.length > 0){
-                    setLists(lists)
-                } else if(lists == undefined || lists.length < 1){
+                if(lists == undefined || lists.length < 1){
                     setError("No lists found for this user, please add new lists before adding tasks :D")
+                } else if(lists != undefined || lists.length > 0){
+                    setLists(lists)
                 }
             } catch(err){
                 console.error(err)
@@ -52,7 +51,7 @@ export default function SidebarUser(props){
     }, [useLists])
 
     if (error) {
-        return <div> {error}</div>
+        return <div>{error}</div>
     }
 
     if (loading) {

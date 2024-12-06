@@ -38,7 +38,6 @@ loginRouter.post('/doPostNewUser', async (req, res) => {
     const data = req.body
     const username = data.username
     const password = data.password
-    const response = {}
 
     console.log("Posting new user:")
     console.log("Username:", username)

@@ -1,5 +1,7 @@
 import { Router } from 'express'
 import db from '../db/connection.js';
+import fs from 'node:fs'
+import { base_dir } from '../../index.js';
 
 export const listsRouter = Router()
 
@@ -34,15 +36,19 @@ listsRouter.get('/doGetDefaultLists', async (req, res) => {
 
 listsRouter.get('/doGetLists', async (req, res) => {
     let username = req.query.username
-    // console.log('Fetched username:',username)
+    // console.log('Fetched lists username:', username)
 
     let lists = await db.collection("tasks")
     let result = await lists.findOne({ name: username })
 
     if (!result) {
-        res.status(404).send("User's lists not found!")
+        res.status(404).send("User not found!")
     } else {
         const userLists = result.lists
+        if(userLists == undefined || userLists.length < 1) {
+            res.status(200).json({lists:[]})
+            return
+        }
         let list = {}, payload = {
             lists: []
         };
@@ -66,7 +72,6 @@ listsRouter.get('/doGetLists', async (req, res) => {
 });
 
 listsRouter.post('/doPostNewList', async (req, res) => {
-    console.log("\nReceived POST req at /doPostNewList")
     // console.log(req.body);
     // console.log(req.headers);
     let data = req.body
@@ -74,8 +79,9 @@ listsRouter.post('/doPostNewList', async (req, res) => {
     let groupname = data.groupname;
     let filename = data.filename;
     let username = data.username;
+    // console.log("Posting new list: "+groupname)
 
-    // console.log('Adding list:', groupname, ', for account', username)
+    console.log('Adding list:', groupname, ', for account', username)
 
     const tasks = await db.collection("tasks");
 
@@ -144,14 +150,18 @@ listsRouter.patch('/doPatchList', async (req, res) => {
 
 // #endregion
 
-listsRouter.get('/doGetIcons', (req, res) => {
+listsRouter.get('/doGetIcons', async (req, res) => {
     const icons = [] // list names array
 
     //search all icons
-
+    const filepath = `${base_dir}/public/assets/userIcons`
+    const data = await fs.readdirSync(filepath); //returns array of filenames
+    if (data.length < 1) {
+        res.status(400).send("Icons not found")
+    }
     const payload = {
-        icons: icons
+        icons: data
     }
 
-    res.status(response.status).json(payload);
-});
+    res.status(200).json(payload);
+}); 

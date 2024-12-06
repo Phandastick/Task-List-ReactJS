@@ -9,12 +9,14 @@ export default function Sidebar() {
     // console.log(username);
     function focusField(){
         let tf = document.getElementById('input-addList');
-        tf.focus()
+        tf.focus();
     }
 
     return (
-        <div className={`${styles.sidebar} containers`}>
-            <h1>To-do List</h1> <OptionsButton />
+        <div className={styles['containers', 'sidebar']}>
+            <div className={styles['sidebar-header-div']}>
+                <h1>To-do List</h1> <OptionsButton/>
+            </div>
             <SidebarPresets />
             <div className={styles["sidebar-divider"]}>
                 <hr className={styles["sidebar-divider-line"]} />

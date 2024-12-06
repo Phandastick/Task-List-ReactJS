@@ -24,7 +24,7 @@
     z-index: -1;
 }
 
-:hover.Task-group {
+.Task-group:hover {
     padding:15px;
     min-height: 200px;
     height: auto;
@@ -38,11 +38,13 @@
 }
 
 .name{
+    font-size: x-large;
+    font-weight: 500;
     transition: 300ms;
 }
 
 :hover.Task-group .name{
-    font-weight: 400;
+    font-weight: 600;
     font-size: 48px;
 }
 
