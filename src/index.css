@@ -30,7 +30,7 @@
 
 :root, body, #root{
   height: auto;
-  /* overflow-y: scroll; */
+  overflow-y: scroll;
 }
 
 body {
