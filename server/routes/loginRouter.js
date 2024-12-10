@@ -89,49 +89,72 @@ loginRouter.delete('/doDeleteNewUser', async (req, res) => {
 //#endregion
 
 loginRouter.get('/doGetBgImage', async (req, res) => {
-    // FIXME: add image to server cache, limit fetches to set time interval
     console.log("Called login bg image")
-    const params = new URLSearchParams({
-        query: "Green Background",
-        orientation: "landscape"
-    })
-    const headers = {
-        Authorization: 'Client-ID ' + process.env.UNSPLASH_CLIENT_KEY,
-        'Accept-Version': 'v1'
+
+    const utility = await db.collection("utility");
+
+    const results = await utility.findOne({type:"image-login-bg"})
+    // console.log(results);
+    var imgData = results.imgData
+    if(results){
+        const currentTime= new Date()
+        let updatedLast = results.updatedLast
+        console.log("Last Updated at:",updatedLast)
+        if(!updatedLast) {
+            updatedLast = new Date().getTime();
+        }
+        let updatedLastMinutes = updatedLast/60/1000
+        let nowMinutes = currentTime.getTime()/60/1000
+        let timeDifference = nowMinutes - updatedLastMinutes;
+        console.log("Time Difference:",timeDifference)
+
+        // if(timeDifference > 10) {
+        if(timeDifference > 10 || !imgData) {
+            imgData = await newImg();
+        }
+
+        let imgJson = {
+            urls: imgData.urls,
+            user: imgData.user,
+            links: imgData.links,
+        };
+        res.status(200).json(imgJson);
+    } else {
+        res.status(500).send("Something went wrong!")
     }
-    const url = process.env.UNSPLASH_URL + '/photos/random?' + params.toString()
-    console.log(url)
-    const response = {}
 
-    try {
-        const res = await fetch(url, { headers: headers });
-
-        if (res.status != 200) {
-            throw new Error(res.statusText);
+    async function newImg(){
+        console.log("Generating new image...")
+        const params = new URLSearchParams({
+            query: "Green Background",
+            orientation: "landscape"
+        })
+        const headers = {
+            Authorization: 'Client-ID ' + process.env.UNSPLASH_CLIENT_KEY,
+            'Accept-Version': 'v1'
         }
-        // console.log(res)
+        const url = process.env.UNSPLASH_URL + '/photos/random?' + params.toString()
+        // console.log(url)
+        
+        const response = await fetch(url, { headers: headers });
 
+        if (response.status != 200) {
+            throw new Error(response.statusText);
+        };
 
-        const data = await res.json()
+        const imgData = await response.json();
+        // console.log(imgData)
 
-        // console.log(data)
-        const urls = data.urls;
-        const authUser = data.user
-        const links = data.links
-        // console.log(authUser)
+        utility.updateOne({ type:"image-login-bg"},
+            { //update json
+                $set: {
+                    imgData: imgData,
+                    updatedLast: new Date().getTime()
+                }
+            },
+            { upsert: true }
+        );
 
-        response.status = 200
-        response.statusText = "OK"
-        response.body = {
-            urls: urls,
-            user: authUser,
-            links: links,
-        }
-    } catch (err) {
-        response.status = 400
-        response.statusText = err.text
-        console.error(err)
-    } finally {
-        res.status(response.status).send(response)
+        return imgData;
     }
 });
