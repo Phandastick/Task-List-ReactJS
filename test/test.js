@@ -2,6 +2,7 @@ import { readFile } from 'fs';
 import { parse } from 'csv-parse';
 import { base_dir } from '../index.js';
 import fs from 'node:fs'
+import { ConnectionPoolClearedEvent } from 'mongodb';
 
 function getDateList(){
     var date = new Date()
@@ -138,7 +139,48 @@ async function getIcons(){
     }
 }
 
-getIcons()
+// getIcons()
+
+
+function timeDifference() {
+    const date1 = new Date();
+    const date2 = new Date();
+
+    date2.setTime(date1.getTime()+30*60*1000)
+
+    console.log(date1.getTime())
+    console.log(date2.getTime())
+
+    const currentTime = date1.getTime()/60/1000
+    console.log(date2.getTime()/60/1000-currentTime)
+}
+
+// timeDifference()
+
+function bgImage() {
+    console.log("Called login bg image")
+    if(true){
+        const currentTime= new Date()
+        const updatedLast = 1733796847778;
+        let updateLastMinutes = updatedLast/60/1000
+        let nowMinutes = currentTime.getTime()/60/1000
+        let timeDifference = nowMinutes - updateLastMinutes;
+
+        console.log("Time difference", timeDifference)
+        if(timeDifference > 10) {
+            console.log("Time difference bigger than 10")
+        }
+
+
+        // res.status(200).json(imgJson);
+    }
+
+    function newImg (){
+        console.log("hi")
+    }
+}
+
+bgImage();
 
 // let listname = 0; // listname is explicitly set to undefined
 // let username = "username"; // username is a string

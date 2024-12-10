@@ -19,6 +19,7 @@ export default function Todo(props){
     const { useTasksUpdate, setTasksUpdate } = useContext(tasksUpdateContext)
     
     useEffect(()=>{
+        setError(null)
         const url = `${BASE_URL}/api/doGetTasks?username=${currentUsername}`
         const fetchData = async () => {
             try{

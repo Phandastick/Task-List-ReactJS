@@ -64,7 +64,6 @@ export default function RegisterForm({setRegister}) {
             
             if(result.status == 200){
                 setMessage("User successfully added!");
-                //TODO: Redirect user to login after a timeout
                 setTimeout(() => {
                     goToLogin();
                 },1000)
