@@ -41,6 +41,8 @@ tasksRouter.post('/doPostNewTask', async (req, res) => {
     let taskitems = data.tasks[0]
     let username = data.username
 
+    console.log("Posting new task for:",username,"\n"+data)
+
     try {
         let tasks = await db.collection("tasks")
         // console.log(username)
@@ -64,7 +66,7 @@ tasksRouter.post('/doPostNewTask', async (req, res) => {
             res.status(400).send("List not found!")
             return
         }
-
+        
         const newDoc = {
             name: taskitems.name,
             desc: taskitems.desc,
