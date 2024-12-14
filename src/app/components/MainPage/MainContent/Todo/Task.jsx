@@ -1,46 +1,56 @@
 import { useEffect, useState } from 'react';
 import styles from './Todo.module.css'
 
+//TODO: Add ID for each task as a new field
+
 export default function Task({data}){
     //TODO: Add onclick function to expand
     const [useHover, setHover] = useState(false)
 
-    // useEffect(() => {
-    //     const taskGroup = document.getElementById(`Task-group--item-${data.name}`)
-    //     taskGroup.addEventListener('mouseenter', () => { setHover(true) })
-    //     taskGroup.addEventListener('mouseleave', () => { setHover(false) })
-    // } , [])
-
-
     return(
-        <div className={styles["Task-group"]} id={`Task-grou-item-${data.name}`}>
+        <div className={styles["Task-group"]} id={`Task-grou-item-${data.name}`}
+            onMouseEnter={() => {
+                setHover(true);
+            }}
+            onMouseLeave={() => {
+                setHover(false);
+            }}>
             <div className={styles["Task-group-details"]}>
                 <div className={`${styles["Task-group-item"]} ${styles.checkbox}`} id={styles[`Task-group-item-${data.checkbox}`]}></div>
                 <div className={styles["Task-group-item", 'Task-group-name', 'name']} id={styles[`Task-group-item-${data.name}`]}>{data.name}</div>
                 <div className={`${styles["Task-group-item"]} ${styles.desc}`} id={styles[`Task-group-item-${data.desc}`]}>{data.desc}</div>
             </div>
             <div className={styles.date}>
-                {useHover ? editDeleteButtons(data) : null}
+                {/* {useHover ? editDeleteButtons(data) : null} */}
+                {editDeleteButtons(data, useHover)}
                 {data.date}
             </div>
         </div>
     );
 };
 
-function editDeleteButtons(data) {
+function editDeleteButtons(data, useHover) {
+
+    const id = data.objectID;
 
     const handleEdit = () => {
-        openModal('edit')
+        console.log("Handling editing for task")
+        // openModal('edit')
     }
-
+    
     const handleDelete = () => {
-        const payload = {};
+        console.log("Handling deleting for task")
+        const payload = {}; 
     }
 
     return (
         <>
-            <button onClick={handleEdit} id={styles['btn-edit']} class={styles["btn-editdelete"]}></button>
-            <button onClick={handleDelete} id={styles['btn-delete']} class={styles["btn-editdelete"]}></button>
+            <button onClick={handleEdit} id={styles['btn-edit']} class={styles["btn-edit"]} hidden={!useHover}>
+                <embed src='/assets/edit.svg' id={styles['embed-edit']}/>
+            </button>
+            <button onClick={handleDelete} id={styles['btn-delete']} class={styles["btn-delete"]} hidden={!useHover}>
+                <embed src='/assets/delete.svg' id={styles['embed-delete']}/>
+            </button>
         </>
     )
 }

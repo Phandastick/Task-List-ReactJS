@@ -4,6 +4,11 @@ import { Router } from 'express'
 
 export const tasksRouter = Router()
 
+//TODO: Add ID for each task when posting new tasks
+//TODO: Post task should accept Time as optional, Date as needed
+//TODO: fetch all including ID's
+//TODO: check if all tasks has an ID, or else add one when fetching tasks
+
 //#region task operations
 tasksRouter.get('/doGetTasks', async (req, res) => {
     let username = req.query.username
@@ -18,7 +23,7 @@ tasksRouter.get('/doGetTasks', async (req, res) => {
     }
 
     const result = await tasks.findOne(query)
-    if(!result){
+    if (!result) {
         res.status(400).send("Tasks not found")
         return
     }
@@ -41,7 +46,7 @@ tasksRouter.post('/doPostNewTask', async (req, res) => {
     let taskitems = data.tasks[0]
     let username = data.username
 
-    console.log("Posting new task for:",username,"\n"+data)
+    console.log("Posting new task for:", username, "\n" + data)
 
     try {
         let tasks = await db.collection("tasks")
@@ -66,7 +71,7 @@ tasksRouter.post('/doPostNewTask', async (req, res) => {
             res.status(400).send("List not found!")
             return
         }
-        
+
         const newDoc = {
             name: taskitems.name,
             desc: taskitems.desc,

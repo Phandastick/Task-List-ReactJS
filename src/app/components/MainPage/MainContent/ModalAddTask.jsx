@@ -5,6 +5,10 @@ import { usernameContext, listsContext, tasksUpdateContext } from '@Contexts';
 const BASE_URL = import.meta.env.VITE_BASE_URL
 
 //https://reactcommunity.org/react-modal/
+//TODO: Implement date/time with proper implementation
+// - should be optional for adding tasks
+// - used to display tasks in the calander
+// - handles time as well
 
 
 export default function ModalAddList(props) {
