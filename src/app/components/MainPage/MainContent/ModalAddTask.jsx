@@ -39,8 +39,22 @@ export default function ModalAddList(props) {
         const form = new FormData(e.target)
         form.forEach((value, key) => {
             // console.log(key, value);
-            data[key] = value
-        });
+            if(key == "datetime"){ //<value>: "2022-04-18T09:30"
+                if (value == undefined || value == null || value.length < 1) { // if date is not available
+                    data[date] = "n/a"; // YYYY-MM-DD
+                    data[time] = "n/a"; //eg 10:30 (24 hour clock)
+                    return
+                }
+                let datetimeArray = value.split('T');
+                const taskDate = datetimeArray[0];
+                const taskTime = datetimeArray[1];
+
+                data[date] = taskDate; // YYYY-MM-DD
+                data[time] = taskTime; //eg 10:30 (24 hour clock)
+            } else {
+                data[key] = value
+            } 
+        }); // put form data into data json
 
         try {
             const url = `${BASE_URL}/api/doPostNewTask`;
@@ -100,13 +114,13 @@ export default function ModalAddList(props) {
                 <label htmlFor="desc"> Task Description </label>
                 <textarea type='text' id="desc" name="desc" className={styles["modal-tfdesc"]} required/>
 
-                <label htmlFor="date"> Task Duedate </label>
-                <input type='text' id="date" name="date" className={styles["modal-tf"]} required/>
+                <label htmlFor="datetime"> Task Duedate </label>
+                <input type='datetime-local' id="datetime" name="datetime" className={styles["modal-datetime"]}/>
 
                 <select className={styles["ddl-listname"]} name='listname'>
-                    {
+                    {//Drop down list of task lists
                         listsState.map((list, index) => {
-                            return(
+                            return( //individual options
                                 <option 
                                 value={list.groupname}
                                 key={"Modal-ddl-" + index}>

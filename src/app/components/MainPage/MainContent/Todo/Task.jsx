@@ -45,10 +45,10 @@ function editDeleteButtons(data, useHover) {
 
     return (
         <>
-            <button onClick={handleEdit} id={styles['btn-edit']} class={styles["btn-edit"]} hidden={!useHover}>
+            <button onClick={handleEdit} id={styles['btn-edit']} className={styles["btn-edit"]} hidden={!useHover}>
                 <embed src='/assets/edit.svg' id={styles['embed-edit']}/>
             </button>
-            <button onClick={handleDelete} id={styles['btn-delete']} class={styles["btn-delete"]} hidden={!useHover}>
+            <button onClick={handleDelete} id={styles['btn-delete']} className={styles["btn-delete"]} hidden={!useHover}>
                 <embed src='/assets/delete.svg' id={styles['embed-delete']}/>
             </button>
         </>
