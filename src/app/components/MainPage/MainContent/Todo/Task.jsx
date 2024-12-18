@@ -4,7 +4,6 @@ import styles from './Todo.module.css'
 //TODO: Add ID for each task as a new field
 
 export default function Task({data}){
-    //TODO: Add onclick function to expand
     const [useHover, setHover] = useState(false)
 
     return(

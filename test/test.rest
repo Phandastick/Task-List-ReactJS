@@ -50,17 +50,39 @@ username: paddles
 ###post new task
 POST http://localhost:6969/api/doPostNewTask
 Content-Type: application/json
-username: paddles
 
 {
-  "groupname": "coding",
+  "username": "test1",
+  "groupname": "criossant",
   "tasks": [
     {
-      "name": "Finish endpoint developments",
-      "date": "1st Dec 2024",
-      "desc": "Finish all endpoints needed in task list and use in frontend"
+      "name": "Finish endpoint developments 2",
+      "date": "1st January 1999",
+      "desc": "Do something else with the endpoints YAY"
     }
   ]
+}
+
+### Update Task
+PATCH http://localhost:6969/api/doUpdateTask/1734493356023
+Content-Type: application/json
+
+{
+  "username": "test1",
+  "groupname": "criossant",
+  //"ID": "1734493356023",
+  "updateName": "New Name name name ",
+  "updateDesc": "New Description desc",
+  "updateDate": "New Date date"
+}
+
+
+### Delete Task
+DELETE http://localhost:6969/api/doDeleteTask/1734493356023
+Content-Type: application/json
+
+{
+  name:
 }
 
 ### unsplash test
