@@ -82,7 +82,9 @@ DELETE http://localhost:6969/api/doDeleteTask/1734493356023
 Content-Type: application/json
 
 {
-  name:
+  "username": "test1",
+  "groupname": "criossant",
+  "taskname": "New Name name name "
 }
 
 ### unsplash test

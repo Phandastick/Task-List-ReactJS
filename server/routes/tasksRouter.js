@@ -135,10 +135,11 @@ tasksRouter.delete('/doDeleteTask/:taskID', async (req, res) => {
     const validationquery = {
         name: username,
         "lists.groupname": queryGroupname,
-        "lists.groupname.ID": queryID
+        "lists.tasks.ID": queryID,
     }
 
     const validate = await taskCollection.findOne(validationquery);
+    console.log(JSON.stringify(validate))
     
     if(!validate){
         res.status(404).send("Task not Found");
@@ -147,7 +148,7 @@ tasksRouter.delete('/doDeleteTask/:taskID', async (req, res) => {
 
     var found = false;
     validate.lists.forEach(list => {
-        list.forEach(task => {
+        list.tasks.forEach(task => {
             if(task.name == taskName) {
                 found = true;
             }
@@ -159,6 +160,11 @@ tasksRouter.delete('/doDeleteTask/:taskID', async (req, res) => {
         return
     }
 
+    const query = {
+        name: username,
+        "lists.groupname": queryGroupname,
+    }
+
     const deleteQuery = {
         $pull: {
             'lists.$.tasks': {
@@ -167,7 +173,7 @@ tasksRouter.delete('/doDeleteTask/:taskID', async (req, res) => {
         }
     }
 
-    const result = await taskCollection.updateOne(deleteQuery);
+    const result = await taskCollection.updateOne(query, deleteQuery);
 
     if(result.acknowledged) {
         if (result.modifiedCount > 0) {
