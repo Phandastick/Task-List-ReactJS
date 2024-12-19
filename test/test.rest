@@ -40,7 +40,7 @@ Content-Type: application/json
 ### Post list
 POST http://localhost:6969/api/doPostNewList
 Content-Type: application/json
-username: paddles
+username: test1
 
 {
     "groupname": "coding",
@@ -54,37 +54,32 @@ Content-Type: application/json
 {
   "username": "test1",
   "groupname": "criossant",
-  "tasks": [
-    {
-      "name": "Finish endpoint developments 2",
-      "date": "1st January 1999",
-      "desc": "Do something else with the endpoints YAY"
-    }
-  ]
+  "name": "New Task Name",
+  "date": "1st January 1999",
+  "desc": "Do something else with the endpoints YAY"
 }
 
 ### Update Task
-PATCH http://localhost:6969/api/doUpdateTask/1734493356023
+PATCH http://localhost:6969/api/doUpdateTask/1734565853105
 Content-Type: application/json
 
 {
   "username": "test1",
   "groupname": "criossant",
   //"ID": "1734493356023",
-  "updateName": "New Name name name ",
-  "updateDesc": "New Description desc",
-  "updateDate": "New Date date"
+  "name": "New NEW task name :D",
+  "desc": "New Description",
+  "date": "New Date date"
 }
 
-
 ### Delete Task
-DELETE http://localhost:6969/api/doDeleteTask/1734493356023
+DELETE http://localhost:6969/api/doDeleteTask/1734565853105
 Content-Type: application/json
 
 {
   "username": "test1",
   "groupname": "criossant",
-  "taskname": "New Name name name "
+  "taskname": "New Task Name"
 }
 
 ### unsplash test

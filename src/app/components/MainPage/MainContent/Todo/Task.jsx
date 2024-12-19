@@ -1,13 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styles from './Todo.module.css'
+import { editModalDataContext, modalModeContext, modalStateContext } from '@/app/contexts/Contexts';
 
 //TODO: Add ID for each task as a new field
 
-export default function Task({data}){
+export default function Task(props){
+    const {setModalState} = useContext(modalStateContext);
+    const {setModalMode} = useContext(modalModeContext)
+    const {setEditData} = useContext(editModalDataContext);
+
     const [useHover, setHover] = useState(false)
 
+    const data = props.data
+
     return(
-        <div className={styles["Task-group"]} id={`Task-grou-item-${data.name}`}
+        <div className={styles["Task-group"]} id={`Task-group-item-${data.name}`}
             onMouseEnter={() => {
                 setHover(true);
             }}
@@ -20,21 +27,28 @@ export default function Task({data}){
                 <div className={`${styles["Task-group-item"]} ${styles.desc}`} id={styles[`Task-group-item-${data.desc}`]}>{data.desc}</div>
             </div>
             <div className={styles.date}>
-                {/* {useHover ? editDeleteButtons(data) : null} */}
-                {editDeleteButtons(data, useHover)}
+                {editDeleteButtons(data, useHover, setModalState, setEditData, setModalMode)}
                 {data.date}
             </div>
         </div>
     );
 };
 
-function editDeleteButtons(data, useHover) {
-
-    const id = data.objectID;
+function editDeleteButtons(data, useHover, setModalState, setEditData, setModalMode) {
+    const ID = data.ID;
+    let editData = {
+        name: data.name,
+        desc: data.desc,
+        date: data.date,
+        taskID: ID,
+        groupname: data.listname
+    }
 
     const handleEdit = () => {
         console.log("Handling editing for task")
-        // openModal('edit')
+        setModalMode("Edit")
+        setModalState(true);
+        setEditData(editData)
     }
     
     const handleDelete = () => {

@@ -43,10 +43,12 @@ tasksRouter.post('/doPostNewTask', async (req, res) => {
     // console.log('Received POST request at /doPostNewTask')
     // console.log(req.body)
     let data = req.body
-    let taskitems = data.tasks[0]
+    let taskname = data.name
+    let taskdate = data.date
+    let taskdesc = data.desc
     let username = data.username
 
-    console.log("Posting new task for:", username, "\n" + data)
+    console.log("Posting new task for:", username, "\n" + JSON.stringify(data))
 
     try {
         let tasks = await db.collection("tasks")
@@ -60,15 +62,27 @@ tasksRouter.post('/doPostNewTask', async (req, res) => {
             throw new Error('Invalid query groupname');
         }
 
-        let found = false;
-        validate.lists.forEach(element => {
-            if (element.groupname == data.groupname) {
-                found = true
+        let listfound = false;
+        let taskfound = false;
+        // console.log(validate)
+        validate.lists.forEach(list => {
+            if (list.groupname == data.groupname) {
+                listfound = true;
+
+                list.tasks.forEach(task => {
+                    if(task.name == taskname) {
+                        taskfound = true;
+                    }
+                })
             }
         });
 
-        if (!found) { // check if list exists to be inserted
+        if (!listfound) { // check if list exists to be inserted
             res.status(400).send("List not found!")
+            return
+        }
+        if(taskfound) {
+            res.status(400).send("Duplicate task found!")
             return
         }
 
@@ -76,14 +90,14 @@ tasksRouter.post('/doPostNewTask', async (req, res) => {
 
         const newDoc = {
             ID: newID,
-            name: taskitems.name,
-            desc: taskitems.desc,
-            date: taskitems.date,
+            name: taskname,
+            desc: taskdesc,
+            date: taskdate,
         }
 
 
         const lists = validate.lists
-        //if list already exists
+        //if task already exists
         let query = {
             name: username,
             "lists.groupname": data.groupname
@@ -139,7 +153,7 @@ tasksRouter.delete('/doDeleteTask/:taskID', async (req, res) => {
     }
 
     const validate = await taskCollection.findOne(validationquery);
-    console.log(JSON.stringify(validate))
+    console.log("Validation for deletion: " +  "\n" + JSON.stringify(validate))
     
     if(!validate){
         res.status(404).send("Task not Found");
@@ -177,6 +191,7 @@ tasksRouter.delete('/doDeleteTask/:taskID', async (req, res) => {
 
     if(result.acknowledged) {
         if (result.modifiedCount > 0) {
+            console.log("Deletion successful for task", queryID)
             res.status(200).send("Deletion successful")
         } else {
             res.status(400).send("Task not found!")
@@ -214,9 +229,9 @@ tasksRouter.patch('/doUpdateTask/:taskID', async (req, res) => {
     }
 
     // updated records
-    const updateName = data.updateName;
-    const updateDesc = data.updateDesc;
-    const updateDate = data.updateDate;
+    const updateName = data.name;
+    const updateDesc = data.desc;
+    const updateDate = data.date;
 
     //do updateOne() using groupname and task id
 
@@ -243,7 +258,7 @@ tasksRouter.patch('/doUpdateTask/:taskID', async (req, res) => {
 
     if(results.acknowledged){
         if(results.matchedCount > 0) {
-            res.status(202).send("Task Successfully updated")
+            res.status(202).send("Task Successfully patched")
         } else {
             res.status(404).send("Somehow your task was not found")
         }

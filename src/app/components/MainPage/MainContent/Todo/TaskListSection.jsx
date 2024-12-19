@@ -2,7 +2,10 @@ import styles from './Todo.module.css'
 import Task from './Task.jsx'
 
 
-export default function TaskListSection({filter, listname, tasks}) {
+export default function TaskListSection(props) {
+    const filter = props.filter;
+    const listname = props.listname;
+    const tasks = props.tasks;
 
     return(
     <>
@@ -11,6 +14,7 @@ export default function TaskListSection({filter, listname, tasks}) {
         </div>
         {
             tasks.map((jsonTask,index)=>{
+                jsonTask.listname = listname
                 return(
                     <Task data={jsonTask} key={listname + "-" + index}/>
                 )

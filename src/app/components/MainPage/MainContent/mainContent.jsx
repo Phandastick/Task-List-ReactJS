@@ -4,16 +4,21 @@ import ModalAddTask from './ModalAddTask.jsx';
 
 import styles from './MainContent.module.css'
 import { useState, useContext } from 'react'
-import { taskUpdateContext } from '@Contexts';
+import { taskUpdateContext,modalStateContext, editModalDataContext } from '@Contexts';
 
 function MainContent() {
-    const [useView, setView] = useState('daylist') // daylist
-    const [isModelOpen, setModalState] = useState(false);
     const {setTaskUpdate} = useContext(taskUpdateContext)
+
+    const [useView, setView] = useState('daylist') // daylist
+    const [useModelOpen, setModalState] = useState(false);
+    const [useEditData, setEditData] = useState(null);
 
     const openModal = () => { setModalState(true) }
     const closeModal = () => { setModalState(false) }
+
     return(
+        <modalStateContext.Provider value = {{useModelOpen, setModalState}}>
+        <editModalDataContext.Provider value = {{useEditData, setEditData}}>
         <div className={styles['main-content']}>
             <div className={styles["Task-wrapper"]} id='Task-wrapper'>
                 {
@@ -25,10 +30,12 @@ function MainContent() {
             </div>
             <ModalAddTask 
                 setModalState = {setModalState}
-                modalState = {isModelOpen}
+                modalState = {useModelOpen}
                 setUpdateTasksFlag = {setTaskUpdate}
             />
         </div>
+        </editModalDataContext.Provider>
+        </modalStateContext.Provider>
     )
 }
 
