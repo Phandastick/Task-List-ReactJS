@@ -74,6 +74,7 @@ export default function ModalAddList(props) {
             let url, method;
             let originalGroupname = document.getElementById('hdf-form-groupname').value
             if(useModalMode == "New") { //New Task
+                originalGroupname = data.groupname
                 url = `${BASE_URL}/api/doPostNewTask`;
                 method = "post";
             } else if (useModalMode == "Edit") { //Edited task
@@ -101,7 +102,7 @@ export default function ModalAddList(props) {
                 method: method
             })
 
-            if(res.status == 202){
+            if(res.status == 202 || res.status == 200){
                 setTasksUpdate(true)
                 closeModal()
             } else {
