@@ -66,3 +66,33 @@
 
     transition: 500ms;
 }
+
+.btn-delete { /* positioning */
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.btn-edit { /* positioning */
+    position: absolute;
+    top: 0;
+    right: calc(3rem + 10px);
+}
+
+.btn-edit, .btn-delete {
+    width: 3rem;
+    background-color: var(--bg-dark);
+    /* background-color: red; */
+
+    border: none;
+    border-radius: 15px;
+    padding: 10px;
+    transform: translateX(15px) translateY(-1.5rem);
+    z-index: 2;
+}
+
+#embed-edit, #embed-delete {
+    pointer-events: none;
+    width: 100%;
+    color: var(--c7);
+}
