@@ -22,8 +22,8 @@ const newTaskDate = "12th December"
 
 const query = {
     "name": username,                     // Match the user
-    "lists.groupname": queryGroupname,      // Match the group by name
-    "lists.tasks.ID": queryID      // Match the task by ID
+    "lists.groupname": queryGroupname,    // Match the group by name
+    "lists.tasks.ID": queryID             // Match the task by ID
 };
 
 // const query = {
@@ -32,23 +32,23 @@ const query = {
 //     'lists.tasks.ID': '1734493356023'
 // };
 
-// const updateDoc = {
-//     $set: {
-//         'lists.$[list].tasks.$[task].name': newTaskName,
-//         'lists.$[list].tasks.$[task].desc': newTaskDesc,
-//         'lists.$[list].tasks.$[task].date': newTaskDate
-//     }
-// };
-
-const deleteQuery = {
-    $pull: {
-        "lists.$.tasks":{
-            ID: queryID
-        }
+const updateDoc = {
+    $set: {
+        'lists.$[list].tasks.$[task].name': newTaskName,
+        'lists.$[list].tasks.$[task].desc': newTaskDesc,
+        'lists.$[list].tasks.$[task].date': newTaskDate
     }
-}
+};
 
-const result = db.tasks.findOne(query);
+// const deleteQuery = {
+//     $pull: {
+//         "lists.$.tasks":{
+//             ID: queryID
+//         }
+//     }
+// }
+
+// const result = db.tasks.findOne(query);
 // const result = db.tasks.updateOne(
 //     query,
 //     updateDoc,
@@ -60,9 +60,7 @@ const result = db.tasks.findOne(query);
 //     }
 // );
 
-// const result = db.tasks.updateOne(query, deleteQuery);
-
-
+const result = db.tasks.updateOne(query, updateDoc);
 
 console.log(query);
 // console.log(deleteQuery);

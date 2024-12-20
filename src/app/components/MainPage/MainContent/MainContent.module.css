@@ -16,7 +16,7 @@
 
 .addBtn {
   padding:20px;
-  width:8rem;
+  width:5rem;
   transition:300ms;
 
   position: fixed;
@@ -31,7 +31,7 @@
   opacity: 75%;
 
   &:hover {
-    width: 9rem;
+    width: 6rem;
     opacity: 90%;
     margin: 7px 7px 7px auto;
   }

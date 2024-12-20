@@ -1,5 +1,5 @@
 ### Get list
-GET http://localhost:6969/api/doGetLists?username=testuser
+GET http://localhost:6969/api/doGetLists?username=test1
 
   
 ### get default
@@ -7,7 +7,7 @@ GET http://localhost:6969/api/doGetDefaultLists
 
 
 ### get tasks
-GET http://localhost:6969/api/doGetTasks?username=User2
+GET http://localhost:6969/api/doGetTasks?username=test1
 
 
 ### get icons
@@ -40,9 +40,9 @@ Content-Type: application/json
 ### Post list
 POST http://localhost:6969/api/doPostNewList
 Content-Type: application/json
-username: test1
 
 {
+    "username": "test1"
     "groupname": "coding",
     "filename": "geometric_coding"
 }

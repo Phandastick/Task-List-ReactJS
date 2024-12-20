@@ -34,8 +34,6 @@ tasksRouter.get('/doGetTasks', async (req, res) => {
         lists: listArray
     }
     res.status(200).json(response)
-
-
     // res.status(response.status).json(response);
 })
 
@@ -47,6 +45,7 @@ tasksRouter.post('/doPostNewTask', async (req, res) => {
     let taskdate = data.date
     let taskdesc = data.desc
     let username = data.username
+    let groupname = data.groupname
 
     console.log("Posting new task for:", username, "\n" + JSON.stringify(data))
 
@@ -58,7 +57,7 @@ tasksRouter.post('/doPostNewTask', async (req, res) => {
         // console.log(validate);
         if (!validate) { //checks for username's list existance
             throw new Error("User is not found!")
-        } else if (typeof data.groupname !== 'string' || data.groupname.includes('$') || data.groupname.includes('.')) {
+        } else if (typeof groupname !== 'string' || groupname.includes('$') || groupname.includes('.')) {
             throw new Error('Invalid query groupname');
         }
 
@@ -66,7 +65,7 @@ tasksRouter.post('/doPostNewTask', async (req, res) => {
         let taskfound = false;
         // console.log(validate)
         validate.lists.forEach(list => {
-            if (list.groupname == data.groupname) {
+            if (list.groupname == groupname) {
                 listfound = true;
 
                 list.tasks.forEach(task => {
@@ -100,7 +99,7 @@ tasksRouter.post('/doPostNewTask', async (req, res) => {
         //if task already exists
         let query = {
             name: username,
-            "lists.groupname": data.groupname
+            "lists.groupname": groupname
         }
         let insertDoc = {
             $push: {
@@ -109,7 +108,7 @@ tasksRouter.post('/doPostNewTask', async (req, res) => {
         };
         let options = {
             arrayFilters: [{
-                "i.groupname": data.groupname
+                "i.groupname": groupname
             }]
         }
 
@@ -128,6 +127,75 @@ tasksRouter.post('/doPostNewTask', async (req, res) => {
         }
     } catch (error) {
         res.status(400).send(error.message)
+    }
+})
+
+tasksRouter.patch('/doUpdateTask/:taskID', async (req, res) => {
+    //get id of task and groupname
+
+    const data = req.body;
+    const queryID = parseInt(req.params.taskID);
+    
+    const username = data.username;
+    const queryGroupname = data.groupname;
+
+    //TODO; Change groupname / move task to new list
+    const newGroupname = data.newGroupname;
+
+    let validationquery = {
+        "name": username,
+        "lists.groupname": queryGroupname,
+        "lists.tasks.ID": queryID
+    }
+
+    console.log(validationquery)
+
+    const tasks = await db.collection("tasks");
+    const validate = await tasks.findOne(validationquery)
+
+    console.log(JSON.stringify(validate))
+
+    if(!validate){
+        res.status(404).send("Task not found")
+        return
+    }
+
+    // updated records
+    const updateName = data.name;
+    const updateDesc = data.desc;
+    const updateDate = data.date;
+
+    //do updateOne() using groupname and task id
+
+    const updateDoc = {
+        $set: {
+            'lists.$[list].tasks.$[task].name': updateName,
+            'lists.$[list].tasks.$[task].desc': updateDesc,
+            'lists.$[list].tasks.$[task].date': updateDate
+        }
+    };
+
+    const results = await tasks.updateOne(
+        validationquery,
+        updateDoc,
+        {
+            "arrayFilters": [
+                { 'list.groupname': queryGroupname },
+                { 'task.ID': queryID }
+            ]
+        }
+    )
+
+    console.log(results);
+
+    if(results.acknowledged){
+        if(results.matchedCount > 0) {
+            res.status(202).send("Task Successfully patched")
+        } else {
+            res.status(404).send("Somehow your task was not found")
+        }
+    } else {
+        res.status(502).send("Something went wrong with query")
     }
 })
 
@@ -201,70 +269,5 @@ tasksRouter.delete('/doDeleteTask/:taskID', async (req, res) => {
     }
 })
 
-tasksRouter.patch('/doUpdateTask/:taskID', async (req, res) => {
-    //get id of task and groupname
-
-    const data = req.body;
-    const queryID = parseInt(req.params.taskID);
-    
-    const username = data.username;
-    const queryGroupname = data.groupname;
-
-    let validationquery = {
-        "name": username,
-        "lists.groupname": queryGroupname,
-        "lists.tasks.ID": queryID
-    }
-
-    console.log(validationquery)
-
-    const tasks = await db.collection("tasks");
-    const validate = await tasks.findOne(validationquery)
-
-    console.log(JSON.stringify(validate))
-
-    if(!validate){
-        res.status(404).send("Task not found")
-        return
-    }
-
-    // updated records
-    const updateName = data.name;
-    const updateDesc = data.desc;
-    const updateDate = data.date;
-
-    //do updateOne() using groupname and task id
-
-    const updateDoc = {
-        $set: {
-            'lists.$[list].tasks.$[task].name': updateName,
-            'lists.$[list].tasks.$[task].desc': updateDesc,
-            'lists.$[list].tasks.$[task].date': updateDate
-        }
-    };
-
-    const results = await tasks.updateOne(
-        validationquery,
-        updateDoc,
-        {
-            "arrayFilters": [
-                { 'list.groupname': queryGroupname },
-                { 'task.ID': queryID }
-            ]
-        }
-    )
-
-    console.log(results);
-
-    if(results.acknowledged){
-        if(results.matchedCount > 0) {
-            res.status(202).send("Task Successfully patched")
-        } else {
-            res.status(404).send("Somehow your task was not found")
-        }
-    } else {
-        res.status(502).send("Something went wrong with query")
-    }
-})
 
 //#endregion

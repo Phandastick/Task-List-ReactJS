@@ -1,12 +1,14 @@
 import { useContext } from "react";
 import styles from "./MainContent.module.css"
-import { modalModeContext } from "@/app/contexts/Contexts";
+import { editModalDataContext, modalModeContext } from "@/app/contexts/Contexts";
 
 export default function BtnAddTask({ openAddTaskModal }) {
     const {setModalMode} = useContext(modalModeContext)
+    const {setEditData} = useContext(editModalDataContext)
 
     const handleAddTask = () => {
         openAddTaskModal();
+        setEditData(null);
         setModalMode("New");
     }
 
