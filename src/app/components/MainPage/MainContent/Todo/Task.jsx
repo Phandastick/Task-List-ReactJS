@@ -1,6 +1,8 @@
 import { useContext, useEffect, useState } from 'react';
 import styles from './Todo.module.css'
-import { editModalDataContext, modalModeContext, modalStateContext } from '@/app/contexts/Contexts';
+import { editModalDataContext, modalModeContext, modalStateContext, tasksUpdateContext, usernameContext } from '@/app/contexts/Contexts';
+
+const BASE_URL = import.meta.env.VITE_BASE_URL
 
 //TODO: Add ID for each task as a new field
 
@@ -8,10 +10,13 @@ export default function Task(props){
     const {setModalState} = useContext(modalStateContext);
     const {setModalMode} = useContext(modalModeContext)
     const {setEditData} = useContext(editModalDataContext);
+    const {currentUsername} = useContext(usernameContext);
+    const {setTasksUpdate} = useContext(tasksUpdateContext);
 
     const [useHover, setHover] = useState(false)
 
     const data = props.data
+    data.username = currentUsername;
 
     return(
         <div className={styles["Task-group"]} id={`Task-group-item-${data.name}`}
@@ -27,33 +32,54 @@ export default function Task(props){
                 <div className={`${styles["Task-group-item"]} ${styles.desc}`} id={styles[`Task-group-item-${data.desc}`]}>{data.desc}</div>
             </div>
             <div className={styles.date}>
-                {editDeleteButtons(data, useHover, setModalState, setEditData, setModalMode)}
+                {editDeleteButtons(data, useHover, setModalState, setEditData, setModalMode, setTasksUpdate)}
                 {data.date}
             </div>
         </div>
     );
 };
 
-function editDeleteButtons(data, useHover, setModalState, setEditData, setModalMode) {
+function editDeleteButtons(data, useHover, setModalState, setEditData, setModalMode, setTasksUpdate) {
     const ID = data.ID;
-    let editData = {
+    let taskData = {
         name: data.name,
         desc: data.desc,
         date: data.date,
         taskID: ID,
-        groupname: data.listname
+        groupname: data.listname,
+        username: data.username
     }
 
     const handleEdit = () => {
         console.log("Handling editing for task")
         setModalMode("Edit")
         setModalState(true);
-        setEditData(editData)
+        setEditData(taskData)
     }
     
     const handleDelete = () => {
         console.log("Handling deleting for task")
-        const payload = {}; 
+        deleteData(taskData);
+    }
+
+    async function deleteData(task) {
+        const {taskID, groupname, username, name} = task;
+
+        const url = `${BASE_URL}/api/doDeleteTask/${taskID}`
+        const payload = {
+            username: username,
+            groupname: groupname,
+            taskname: name
+        }
+
+        const res = await fetch(url, {
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify(payload),
+            method: "DELETE"
+        })
+        if(res.status == 200){ //deletion successful
+            setTasksUpdate(true);
+        }
     }
 
     return (

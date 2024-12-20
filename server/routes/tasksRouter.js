@@ -64,7 +64,7 @@ tasksRouter.post('/doPostNewTask', async (req, res) => {
         let listfound = false;
         let taskfound = false;
         // console.log(validate)
-        validate.lists.forEach(list => {
+        validate.lists.forEach(list => { //vaidate that the right task is in the right list
             if (list.groupname == groupname) {
                 listfound = true;
 
@@ -94,8 +94,6 @@ tasksRouter.post('/doPostNewTask', async (req, res) => {
             date: taskdate,
         }
 
-
-        const lists = validate.lists
         //if task already exists
         let query = {
             name: username,

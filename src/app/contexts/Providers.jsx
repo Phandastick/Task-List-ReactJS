@@ -12,10 +12,10 @@ import { usernameContext,
 export default function Providers({children}) {
     const [currentUsername, setCurrentUsername] = useState('default')
     const [isLogin, setLogin] = useState(false);
-    const [useListsUpdate, setListsUpdate] = useState(false);
-    const [useLists, setLists] = useState([]);
-    const [useTasksUpdate, setTasksUpdate] = useState(false);
-    const [useTasks, setTasks] = useState([]);
+    const [useListsUpdate, setListsUpdate] = useState(false); //Update flag for updating lists
+    const [useLists, setLists] = useState([]); //Lists content
+    const [useTasksUpdate, setTasksUpdate] = useState(false); //Update flag for tasks UI
+    const [useTasks, setTasks] = useState([]); //Tasks content
     const [useTheme, setTheme] = useState('Dark');
     const [useModalMode, setModalMode] = useState(null);
 
