@@ -10,7 +10,6 @@ export default function Todo(props){
     // const tasks = props.tasks; //array
     const {currentUsername} = useContext(usernameContext);
     const [taskArray, setTaskArray] = useState([]);
-    const [listnames, setListnames] = useState(null);
     const filterMode = props.filterMode
 
     //flag
@@ -70,7 +69,7 @@ export default function Todo(props){
                         return(
                             <TaskListSection
                                 filter={filterMode}
-                                listname={taskList.groupname}
+                                groupname={taskList.groupname}
                                 tasks={taskList.tasks} //array of individual tasks
                                 key = {taskList.groupname}
                             />

@@ -18,16 +18,16 @@ export default function AddListToolTip(){
         setError(null);
         e.preventDefault();
         
-        let listName = e.target[0].value;
+        let groupname = e.target[0].value;
         let filename = document.getElementById("hdf-listicon").value;
-        // console.log(`New list ${listName}Submitted!`)
+        // console.log(`New list ${groupname}Submitted!`)
 
         if(filename == undefined || filename == "") {
             setError("Please choose an icon!")
             return
         }
 
-        const res = await postList(listName, filename, currentUsername)
+        const res = await postList(groupname, filename, currentUsername)
         if(res.status == 200){
             setListsUpdate(true);
         } else {

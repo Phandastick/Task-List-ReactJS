@@ -18,6 +18,15 @@ export default function Task(props){
     const data = props.data
     data.username = currentUsername;
 
+    const formatDate = date => {
+        let dateArray = date.split("T")
+        let formattedDate = `${dateArray[0]}`;
+        
+        return formattedDate
+    }
+
+    const formattedDate = formatDate(data.date)
+
     return(
         <div className={styles["Task-group"]} id={`Task-group-item-${data.name}`}
             onMouseEnter={() => {
@@ -33,7 +42,7 @@ export default function Task(props){
             </div>
             <div className={styles.date}>
                 {editDeleteButtons(data, useHover, setModalState, setEditData, setModalMode, setTasksUpdate)}
-                {data.date}
+                {formattedDate}
             </div>
         </div>
     );
@@ -46,7 +55,7 @@ function editDeleteButtons(data, useHover, setModalState, setEditData, setModalM
         desc: data.desc,
         date: data.date,
         taskID: ID,
-        groupname: data.listname,
+        groupname: data.groupname,
         username: data.username
     }
 

@@ -23,10 +23,23 @@ export default function ModalAddList(props) {
     const [listsState, setLists] = useState(['Loading lists...']);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
+    
+    const [useTitle, setTitle] = useState("Add new task")
+    const [useBtnText, setBtnText] = useState("Add Task")
 
     useEffect(()=>{ //sets the lists in dropdown
         setLists(useLists)
     },[useLists])
+
+    useEffect(() => {
+        if(useModalMode == "New") {
+            setTitle("Add New Task")
+            setBtnText("Add Task")
+        } else if (useModalMode == "Edit") {
+            setTitle("Edit Task")
+            setBtnText("Edit Task")
+        }
+    }, [useModalMode])
     
     const openModal = () => { 
         props.setModalState(true) 
@@ -59,6 +72,7 @@ export default function ModalAddList(props) {
 
         try {
             let url, method;
+            let originalGroupname = document.getElementById('hdf-form-groupname').value
             if(useModalMode == "New") { //New Task
                 url = `${BASE_URL}/api/doPostNewTask`;
                 method = "post";
@@ -72,7 +86,7 @@ export default function ModalAddList(props) {
 
             const payload = {
                 username: currentUsername,
-                groupname: data.listname, //data.listname is chosen value from the dropdown
+                groupname: originalGroupname, //data.groupname is chosen value from the dropdown
                 name: data.name,
                 desc: data.desc,
                 date: data.date
@@ -87,7 +101,7 @@ export default function ModalAddList(props) {
                 method: method
             })
 
-            if(res.status == 200){
+            if(res.status == 202){
                 setTasksUpdate(true)
                 closeModal()
             } else {
@@ -119,7 +133,7 @@ export default function ModalAddList(props) {
     onAfterOpen={() => document.body.style.overflow = 'hidden'}
     onAfterClose={() => document.body.style.overflow = 'unset'}>
         <div className={styles["modal-wrapper"]}>
-            <div className={styles["modal-header"]}>Add new task</div>
+            <div className={styles["modal-header"]}>{useTitle}</div>
             <button className={styles["modal-button-close"]}
                 onClick={closeModal}>
                 <embed id={styles["closeBtn"]} 
@@ -136,7 +150,7 @@ export default function ModalAddList(props) {
                 <label htmlFor="datetime"> Task Duedate </label>
                 <input type='datetime-local' id="form-date" name="date" className={styles["modal-datetime"]} defaultValue={useEditData ? useEditData.date : ""} />
 
-                <select className={styles["ddl-listname"]} name='listname' id='form-ddl' defaultValue={useEditData ? useEditData.groupname : ""}>
+                <select className={styles["ddl-groupname"]} name='groupname' id='form-ddl' defaultValue={useEditData ? useEditData.groupname : ""}>
                     {//Drop down list of task lists
                         listsState.map((list, index) => {
                             return( //individual options
@@ -151,9 +165,10 @@ export default function ModalAddList(props) {
                 </select>
 
                 <button 
-                    className={styles["modal-addBtn"]}
-                    disabled={loading}
-                >Add task</button>
+                className={styles["modal-addBtn"]}
+                disabled={loading}>
+                    {useBtnText}
+                </button>
 
                 {error ? <div>{error}</div> : null}   
                 

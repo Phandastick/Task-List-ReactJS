@@ -219,7 +219,7 @@ tasksRouter.delete('/doDeleteTask/:taskID', async (req, res) => {
     }
 
     const validate = await taskCollection.findOne(validationquery);
-    console.log("Validation for deletion: " +  "\n" + JSON.stringify(validate))
+    // console.log("Validation for deletion: " +  "\n" + JSON.stringify(validate))
     
     if(!validate){
         res.status(404).send("Task not Found");

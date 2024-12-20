@@ -57,7 +57,7 @@ form label {
     font-size: 1.5rem;
 }
 
-.modal-tf, .modal-tfdesc, .ddl-listname, .modal-datetime {
+.modal-tf, .modal-tfdesc, .ddl-groupname, .modal-datetime {
     height: 1.5rem;
     margin: 10px 0 20px 0;
     padding: 0;
