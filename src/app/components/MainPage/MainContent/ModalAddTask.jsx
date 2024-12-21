@@ -26,18 +26,25 @@ export default function ModalAddList(props) {
     
     const [useTitle, setTitle] = useState("Add new task")
     const [useBtnText, setBtnText] = useState("Add Task")
+    const [useDisableDropdown, setDisableDropdown] = useState(false);
 
     useEffect(()=>{ //sets the lists in dropdown
         setLists(useLists)
     },[useLists])
 
     useEffect(() => {
-        if(useModalMode == "New") {
+        if(useModalMode == "New") { //if new task
             setTitle("Add New Task")
             setBtnText("Add Task")
-        } else if (useModalMode == "Edit") {
+            if(useDisableDropdown) {
+                setDisableDropdown(false)
+            }
+        } else if (useModalMode == "Edit") { // if eiting task
             setTitle("Edit Task")
             setBtnText("Edit Task")
+            if(!useDisableDropdown) {
+                setDisableDropdown(true)
+            }
         }
     }, [useModalMode])
     
@@ -151,7 +158,7 @@ export default function ModalAddList(props) {
                 <label htmlFor="datetime"> Task Duedate </label>
                 <input type='datetime-local' id="form-date" name="date" className={styles["modal-datetime"]} defaultValue={useEditData ? useEditData.date : ""} />
 
-                <select className={styles["ddl-groupname"]} name='groupname' id='form-ddl' defaultValue={useEditData ? useEditData.groupname : ""}>
+                <select className={styles["ddl-groupname"]} name='groupname' id='form-ddl' defaultValue={useEditData ? useEditData.groupname : ""} disabled = {useDisableDropdown}>
                     {//Drop down list of task lists
                         listsState.map((list, index) => {
                             return( //individual options
