@@ -1,0 +1,137 @@
+.Page {
+    width: 100%;
+    height:100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.login-container{
+    margin-top: 10px;
+    /* background-color: var(--bg-color); */
+}
+
+.login-head {
+    font-weight: 600;
+    font-size: 6rem;
+    margin-right: 50px;
+}
+
+.form {
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    margin-top: 7vh;
+}
+
+.text-backtologin {
+    /* margin: 20px 0 30px 5%; */
+    display:block;
+}
+
+.lbl-form {
+    margin-left: 5%;
+}
+
+.txt-register-message {
+    display: block;
+    margin-left: 5%;
+}
+
+
+
+.tf-form {
+    font-family: inherit;
+
+    border: none;
+    border-radius: 5px;
+    /* background: var(--bg-item); */
+
+    font-size: 2rem;
+    font-weight: 350;
+    height: 2.5rem;
+    width: 85%;
+
+    margin-left: 5%;
+    margin-bottom: 20px;
+    transition: 200ms;
+    
+
+    &:focus{
+        outline: 4px solid var(--border-highlight);
+    }
+}
+
+
+.btn-form {
+    outline: none;
+    width: 7em;
+    height:7em;
+    align-self: center;
+    justify-self: baseline;
+    margin-top:50px;
+
+    border-radius: 15px;
+    border: 8px solid var(--bg-item2);
+    background-color: var(--bg-color);
+
+    transition: 150ms;
+
+    &:hover {
+        width: 7.5em;
+        height: 7.5em;
+        margin-top:47.5px;
+    }
+
+    &:disabled {
+        background-color: var(--bg-disabled);
+    }
+}
+
+#icon-Login {
+    width: 100%;
+    pointer-events: none;
+}
+
+
+
+.image-container, img{
+    position:absolute;
+    width:100%;
+    height:100%;
+    left:0;
+    top:0;
+
+    z-index: -1;
+}
+
+.image-container::after {
+    content: '';
+    position: absolute;
+    width:100%;
+    height:100%;
+    top: 0;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), var(--bg-color) 90%);
+    pointer-events: none; /* Allows clicks to pass through */
+}
+
+.bg-image {
+    display:block;
+}
+
+.bg-image-att {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+
+    padding: 10px;
+    border: none;
+
+    color: var(--text-color);
+    font-weight: 500;
+
+    background-color:rgb(172, 219, 221);
+    opacity: 70%;
+}

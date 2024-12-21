@@ -7,18 +7,20 @@
     "type": "git",
     "url": "https://github.com/Phandastick/Task-List-ReactJS.git"
   },
+  "proxy": "http://localhost:6969",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "start": "nodemon -r dotenv/config ./index.js"
+    "start": "nodemon --ignore 'public/*' --ignore README -r dotenv/config ./index.js"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "csv": "^6.3.10",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
-    "nodemon": "^3.1.7",
+    "mongodb": "^6.10.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-modal": "^3.16.1",
@@ -34,7 +36,7 @@
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.12",
     "globals": "^15.9.0",
-    "netlify-cli": "^17.37.2",
-    "vite": "^5.4.10"
+    "nodemon": "^3.1.7",
+    "vite": "^5.4.8"
   }
 }

@@ -1,0 +1,68 @@
+
+.Task-header {
+    font-weight: 650;
+    font-size: 56px;
+    padding:15px;
+    padding-bottom: 0px;
+
+    color: var(--text-color);
+}
+
+.Task-group {
+    border-radius: 10px;
+    margin: 1.5% 1%;
+
+    position: relative;
+
+    background-color: var(--bg-item);
+
+    z-index: 0;
+    transition: 500ms;
+}
+
+.Task-group:not(.name, .Task-group){
+    z-index: -1;
+}
+
+.Task-group:hover {
+    padding:15px;
+    min-height: 200px;
+    height: auto;
+    max-height: 1000vh;
+
+    background-color: var(--item-highlight);
+}
+
+.Task-group-details {
+    padding: 20px 35px; 
+}
+
+.name{
+    font-size: x-large;
+    font-weight: 500;
+    transition: 300ms;
+}
+
+:hover.Task-group .name{
+    font-weight: 600;
+    font-size: 48px;
+}
+
+.date {
+    width: 15%;
+    background-color: var(--item-highlight);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    height: 100%;
+    
+    border-bottom-right-radius:10px;
+    border-top-right-radius: 10px;
+
+    transition: 500ms;
+}

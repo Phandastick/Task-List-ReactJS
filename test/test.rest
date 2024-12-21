@@ -1,13 +1,69 @@
-GET http://localhost:6969/api/doGetTaskLists?username=error
+### Get list
+GET http://localhost:6969/api/doGetLists?username=testuser
+
+  
+### get default
+GET http://localhost:6969/api/doGetDefaultLists
 
 
+### get tasks
+GET http://localhost:6969/api/doGetTasks?username=User2
 
 
-### Post req
-POST http://localhost:6969/api/doPostNewList
+### get icons
+GET http://localhost:6969/api/doGetIcons
+
+
+### get login image
+GET http://localhost:6969/api/login/doGetBgImage
+
+
+### post login
+POST http://localhost:6969/api/login/doSignIn
 Content-Type: application/json
 
 {
-    "name": "Task Name",
-    "username": "error"
+  "username": "User1",
+  "password": "123"
 }
+
+
+### Post new User
+POST http://localhost:6969/api/login/doPostNewUser
+Content-Type: application/json
+
+{
+  "username": "User1",
+  "password": "123"
+}
+
+### Post list
+POST http://localhost:6969/api/doPostNewList
+Content-Type: application/json
+username: paddles
+
+{
+    "groupname": "coding",
+    "filename": "geometric_coding"
+}
+
+###post new task
+POST http://localhost:6969/api/doPostNewTask
+Content-Type: application/json
+username: paddles
+
+{
+  "groupname": "coding",
+  "tasks": [
+    {
+      "name": "Finish endpoint developments",
+      "date": "1st Dec 2024",
+      "desc": "Finish all endpoints needed in task list and use in frontend"
+    }
+  ]
+}
+
+### unsplash test
+GET https://api.unsplash.com/photos/random?query=Wallpaper&orientation=portrait
+Authorization: Client-ID {{$dotenv %UNSPLASH_CLIENT_KEY}}
+Accept-Version: v1

@@ -11,10 +11,15 @@
   --c7: #28363D;
 
   --bg-color: var(--c1);
+  --bg-caret: var(--c2);
   --bg-item: var(--c2);
-  --bg-item2: var(--c4);
+  --bg-item2: var(--c3);
+  --bg-button: var(--c4);
+  --bg-disabled: var(--c7);
   --item-outline: var(--c5);
   --item-highlight: var(--c5);
+
+  --border-highlight: var(--c5);
 
   --accent: var(--c5);
 
@@ -23,6 +28,28 @@
   font-family: "Open Sans", sans-serif;
 }
 
+:root, body, #root{
+  height: auto;
+  /* overflow-y: scroll; */
+}
+
 body {
   background-color: var(--bg-color);
+  /* min-height: 100vh;
+  height: 100%; */
+}
+
+a{
+  font-size: 1em;
+  font-weight: 500;
+}
+
+a:link {
+  color: var(--c6);
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+  color: var(--c6)
 }

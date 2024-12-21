@@ -1,0 +1,174 @@
+.sidebar {
+    grid-column: 1;
+    grid-row: 1/3;
+
+    /* min-height: 500px; */
+    /* height: 100%; */
+
+    margin-left: 5px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+.sidebar-header-div {
+    display: flex;
+    align-items: center;
+    padding: 20px 0 0 20px;
+    width: 100%;
+}
+
+.sidebar h1 {
+    font-size:3.2em;
+    text-wrap: wrap;
+    padding-left: 10px;  
+    display:block;
+    border-left: 5px solid var(--c7);
+}
+
+.sidebar-divider {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.sidebar-divider-line {   
+    border-width: 2px;
+    height: 2px;
+    flex: 1;
+    margin: 0;
+    width: auto;
+}
+
+
+
+.sidebar-addBtn {
+    padding:0;
+    margin:0;
+    width:3rem;
+    outline: none;
+
+    border:0;
+    background-color: transparent;
+    transition: 200ms;
+
+    &:hover {
+        width: 3.2rem;
+        z-index: 0;
+    }
+}
+
+#embed-addBtn {
+    width: 100%;
+    padding-right: 2px;
+    transition:150ms;
+    pointer-events: none;
+}
+
+.add-list-tooltip {
+    z-index: 99;
+}
+
+.tooltip-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    width: 180px;
+}
+
+.add-list-header {
+    font-size: 14px;
+    margin-top :0;
+    margin-bottom: 5px;
+}
+
+.input-addList {
+    margin: 5px 0;
+}
+
+.icons-container {
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.btn-icons, .btn-icons-active{
+    width: 40px;
+    height:40px;
+    margin: 2px;
+    padding: 5px;
+
+    border: 1.5px solid var(--bg-button);
+    background-color: var(--bg-item);   
+    border-radius: 2px;
+}
+
+.btn-icons-active {
+    margin: 1.5px;
+    background-color: var(--bg-item2);
+}
+ 
+.embed-icons {
+    pointer-events: none;
+    width: 100%;
+    height:100%;
+}
+
+.btn-submit-addlist {
+    width: 100%;
+    height: 2em;
+    margin: 20px 5px 0 5px;
+
+    font-weight: 500;
+
+    background: var(--bg-item);
+    border: none;
+    border-radius: 10px;
+}
+
+.frm-addList-error {
+    font-weight: 300;
+    color: #faa;
+    font-size: 14px;
+}
+
+
+.sidebar-presets {
+    margin: 10px 0 5px 10px;
+    width: 100%;
+}
+
+.sidebar-user {
+    margin: 10px 0 5px 10px;
+    width: 100%;
+}
+
+.sidebar-item {
+    border: 0;
+    border-radius: 5px;
+  
+    padding: 0 7.5px;
+    margin: 5px 20px 5px 0;
+    min-height: 2.5em;
+    display: flex;
+    align-items: center;
+
+    color: var(--text-color);
+    font-size: 1.5em;
+    transition-duration: 250ms;
+}
+
+.sidebar-item:hover {
+    background-color: var(--item-highlight);
+    cursor: pointer;
+}
+
+.sidebar-item-icon {
+    width: 2em;
+    padding-right: 10px;
+}
+
+.sidebar-item-text {
+    padding-right:5px;
+    margin: 5px 0;
+}
