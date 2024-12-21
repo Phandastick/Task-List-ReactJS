@@ -1,9 +1,11 @@
 .modal {
     position: sticky;
     inset :0;
-    margin: 10rem auto auto auto;
+    margin: auto;
+    padding: 0 5px 20px 5px;
     width: 38rem;
     height: fit-content;
+    min-height: auto;
 
     border-radius: 5px;
     background-color: var(--bg-color);
@@ -12,9 +14,10 @@
 .modal-wrapper {
     display:flex;
     flex-direction: column;
+    margin-top:50px;
 
     padding: 20px;
-    height:100%;
+    min-height:100%;
 }
 
 .modal-header {
@@ -54,8 +57,8 @@ form label {
     font-size: 1.5rem;
 }
 
-.modal-tf, .modal-tfdesc, .ddl-listname {
-    height: 2.1rem;
+.modal-tf, .modal-tfdesc, .ddl-groupname, .modal-datetime {
+    height: 1.5rem;
     margin: 10px 0 20px 0;
     padding: 0;
 

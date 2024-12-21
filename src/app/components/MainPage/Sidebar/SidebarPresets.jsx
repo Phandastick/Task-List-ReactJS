@@ -23,9 +23,9 @@ export default function SidebarPresets(){
                 }
 
                 const data = await res.json();
-                const listnames = data.lists
-                // console.log(listnames)
-                setlist(listnames)
+                const groupnames = data.lists
+                // console.log(groupnames)
+                setlist(groupnames)
             } catch(err){
                 console.error(err)
                 setError(err.message)
