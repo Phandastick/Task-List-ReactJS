@@ -35,6 +35,8 @@
 
 .Task-group-details {
     padding: 20px 35px; 
+    width: 85%;
+    white-space: pre-wrap;
 }
 
 .name{
