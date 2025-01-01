@@ -1,6 +1,6 @@
 import styles from './Sidebar.module.css'
 
-function SidebarRow({ text, icon, className, idName }) {
+function SidebarItem({ text, icon, className, idName }) {
 
     return <div id={idName} className={styles['sidebar-item']}>
         <embed
@@ -11,4 +11,4 @@ function SidebarRow({ text, icon, className, idName }) {
     </div>
 }
 
-export default SidebarRow;
+export default SidebarItem;
