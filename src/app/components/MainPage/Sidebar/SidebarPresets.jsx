@@ -54,6 +54,7 @@ export default function SidebarPresets(){
                         icon={item.filename}
                         className={styles['sidebar-preset']}
                         idName={className}
+                        sidebarType="default"
                         key={"Preset-" + index}
                     />
                 })
