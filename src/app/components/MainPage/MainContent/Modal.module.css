@@ -67,7 +67,10 @@ form label {
 }
 
 .modal-tfdesc {
-    height: 4rem;
+    height: auto;
+    max-height: 35vh;
+    resize: none;
+    field-sizing: content;
 }
 
 .modal-closeBtn {
