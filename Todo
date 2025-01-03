@@ -1,15 +1,21 @@
-TODO: 
+TODO:
+
 - UI to choose icon for lists
 
 - Implement forgot password
 
 - Add splash screen for empty tasks for new users
 - Filter by lists
+  - Filter by multiple lists
+  - Tags?
+  - Task must be part of a list, optionally a tag
 - Filter by dates
 
 CRUD:
-C
 
+- Add edit and delete function for lists
+-
 
 FIXME:
-- 
+
+-

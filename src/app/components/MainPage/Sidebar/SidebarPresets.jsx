@@ -1,4 +1,4 @@
-import SidebarRow from './SidebarRow';
+import SidebarItem from './SidebarItem';
 import styles from './Sidebar.module.css'
 import React, { useState, useEffect } from 'react';
 const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -49,11 +49,12 @@ export default function SidebarPresets(){
             {
                 list.map((item, index) => {
                     const className = `sidebar-preset-${index + 1}`;
-                    return <SidebarRow
+                    return <SidebarItem
                         text={item.groupname}
                         icon={item.filename}
                         className={styles['sidebar-preset']}
                         idName={className}
+                        sidebarType="default"
                         key={"Preset-" + index}
                     />
                 })

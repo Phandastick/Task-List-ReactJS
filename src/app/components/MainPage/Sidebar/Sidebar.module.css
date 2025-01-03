@@ -146,6 +146,7 @@
 .sidebar-item {
     border: 0;
     border-radius: 5px;
+    position: relative;
   
     padding: 0 7.5px;
     margin: 5px 20px 5px 0;
@@ -171,4 +172,29 @@
 .sidebar-item-text {
     padding-right:5px;
     margin: 5px 0;
+}
+
+.btn-sidebarItem {
+    width: 2.5rem;
+    background-color: var(--bg-dark);
+    /* background-color: red; */
+
+    border: none;
+    border-radius: 15px;
+    padding: 7.5px;
+    transform: translateX(15px) translateY(-1.5rem);
+    z-index: 2;
+
+    /* position of buttons */
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+#btn-edit {
+    right: calc(2.5rem + 5px);
+}
+
+.sidebar-icon{
+    width: 100%;
 }
