@@ -14,7 +14,7 @@ export default function Task(props){
     const {setTasksUpdate} = useContext(tasksUpdateContext);
 
     const [useHover, setHover] = useState(false)
-
+    
     const data = props.data
     data.username = currentUsername;
 
@@ -38,13 +38,16 @@ export default function Task(props){
             <div className={styles["Task-group-details"]}>
                 <div className={`${styles["Task-group-item"]} ${styles.checkbox}`} id={styles[`Task-group-item-${data.checkbox}`]}></div>
                 <div className={styles["Task-group-item", 'Task-group-name', 'name']} id={styles[`Task-group-item-${data.name}`]}>{data.name}</div>
+
                 <div className={`${styles["Task-group-item"]} ${styles.desc}`} id={styles[`Task-group-item-${data.desc}`]}
-                    hidden={!useHover}>{data.desc}</div>
+                    hidden={!useHover}
+                    >{data.desc}</div>
             </div>
-            <div className={styles.date}>
-                {editDeleteButtons(data, useHover, setModalState, setEditData, setModalMode, setTasksUpdate)}
+            {editDeleteButtons(data, useHover, setModalState, setEditData, setModalMode, setTasksUpdate)}
+            {formattedDate ? <div className={styles.date}>
                 {formattedDate}
-            </div>
+            </div> : null
+            }
         </div>
     );
 };

@@ -1,4 +1,4 @@
-import SidebarRow from './SidebarRow';
+import SidebarItem from './SidebarItem';
 import React, { useState, useEffect, useContext } from 'react';
 import styles from './Sidebar.module.css'
 import { listsContext, listsUpdateContext, usernameContext } from '@Contexts';
@@ -63,7 +63,7 @@ export default function SidebarUser(props){
             {
                 sidebarLists.map((item, index) => {
                     const className = `sidebar-user-${index + 1}`;
-                    return <SidebarRow
+                    return <SidebarItem
                         text={item.groupname}
                         icon={item.filename}
                         className={styles['sidebar-user']}
