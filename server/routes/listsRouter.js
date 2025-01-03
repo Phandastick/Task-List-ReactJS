@@ -142,11 +142,62 @@ listsRouter.post('/doPostNewList', async (req, res) => {
 });
 
 listsRouter.delete('/doDeleteList', async (req, res) => {
+    const data = req.body
+    const username = data.username
+    const listname = data.groupname
+    
+    const lists = await db.collection("tasks")
+
+    const validation = await lists.findOne({
+        "name": username,
+        "lists.groupname": oldName
+    })
+
     res.sendStatus(502)
 });
 
 listsRouter.patch('/doPatchList', async (req, res) => {
-    res.sendStatus(502)
+
+    const data = req.body
+    const username = data.username
+    const oldName = data.oldName
+    const newName = data.newName
+
+    const lists = await db.collection("tasks")
+
+    const validation = await lists.findOne({
+        "name": username,
+        "lists.groupname": oldName
+    })
+
+    if(!validation){
+        res.status(404).send("Invalid List!")
+    }
+
+    const updateResults = await db.updateOne(
+        {
+            "name": username
+        },
+        { //set new list, positional operator is there to filter
+            $set: {
+            "lists.$[lists].groupname":newName
+            }
+        },
+        {
+            arrayFilters: [ //filter for existing list
+            {
+                "lists.groupname": oldName
+            }
+            ]
+        }
+    )
+
+    if (updateResults.acknowledged == true && updateResults.matchedCount > 0 ){
+        if (updateResults.modifiedCount > 0 ){
+            return res.status(200).send("List updated.")
+        }
+    }
+    res.sendStatus(400)
 });
 
 // #endregion
@@ -163,4 +214,4 @@ listsRouter.get('/doGetIcons', async (req, res) => {
     }
 
     res.status(200).json(payload);
-}); 
+});
