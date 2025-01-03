@@ -3,7 +3,11 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "proxy": "http://localhost:5000",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Phandastick/Task-List-ReactJS.git"
+  },
+  "proxy": "http://localhost:6969",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

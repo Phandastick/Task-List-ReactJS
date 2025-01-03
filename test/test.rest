@@ -42,9 +42,29 @@ POST http://localhost:6969/api/doPostNewList
 Content-Type: application/json
 
 {
-    "username": "test1"
+    "username": "test1",
     "groupname": "coding",
     "filename": "geometric_coding"
+}
+
+### Patch list
+PATCH http://localhost:6969/api/doPatchList
+Content-Type: application/json
+
+{
+  "username": "test1",
+  "oldName": "",
+  "newName"
+}
+
+### Delete list
+PATCH http://localhost:6969/api/doDeleteList
+Content-Type: application/json
+
+{
+  "username": "test1",
+  "oldName": "",
+  "newName"
 }
 
 ###post new task

@@ -1,6 +1,7 @@
 import { Router } from "express";
 import db from '../db/connection.js'
 
+// route = /api/login
 export const loginRouter = Router();
 
 // #region login details
