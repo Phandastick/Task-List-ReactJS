@@ -1,8 +1,11 @@
 import styles from './Sidebar.module.css'
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { usernameContext } from '@/app/contexts/Contexts';
 
 function SidebarItem({ text, icon, className, idName, sidebarType }) {
     const [hideButtons, setHideButtons] = useState(true);
+    const {currentUsername} = useContext(usernameContext);
+    const groupname = text;
     let displayButtons;
 
     if(sidebarType === 'default'){
@@ -11,8 +14,14 @@ function SidebarItem({ text, icon, className, idName, sidebarType }) {
         displayButtons = true;
     }
 
-    const handleEdit = () => {
-
+    const handleEdit = () => { // edit button clicked
+        //change text into text input
+        let originalName = groupname;
+        
+        // let params = {
+        //     username: currentUsername,
+        //     oldName: groupname
+        // }
     };
 
     const handleDelete = () => {
