@@ -192,10 +192,15 @@
     right: 0;
 }
 
-#btn-edit {
+.btn-edit {
+    right: 3rem;
+}
+
+.add-list-header {
     right: calc(2.5rem + 5px);
 }
 
 .sidebar-icon{
     width: 100%;
+    pointer-events: none;
 }
