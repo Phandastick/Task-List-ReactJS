@@ -1,6 +1,6 @@
 import TaskListSection from './TaskListSection.jsx';
 
-import { usernameContext, tasksUpdateContext } from '@Contexts';
+import { usernameContext, tasksUpdateContext, listsUpdateContext } from '@Contexts';
 import styles from './Todo.module.css';
 import { useContext, useState, useEffect } from 'react';
 
@@ -16,6 +16,7 @@ export default function Todo(props){
     const [isLoading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const { useTasksUpdate, setTasksUpdate } = useContext(tasksUpdateContext)
+    const { useListsUpdate, setListsUpdate } = useContext(listsUpdateContext)
     
     useEffect(()=>{
         setError(null)
@@ -41,11 +42,14 @@ export default function Todo(props){
             } finally {
                 if(useTasksUpdate)
                     setTasksUpdate(false)
+                if(useListsUpdate){
+                    setListsUpdate(false)
+                }
                 setLoading(false)
             }
         }
         fetchData();
-    }, [useTasksUpdate])
+    }, [useTasksUpdate, useListsUpdate])
 
     if (isLoading) {
         return <div>Loading tasks, please wait...</div>;

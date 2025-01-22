@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import styles from './Todo.module.css'
 import { editModalDataContext, modalModeContext, modalStateContext, tasksUpdateContext, usernameContext } from '@/app/contexts/Contexts';
+import { Tooltip } from 'react-tooltip';
 
 const BASE_URL = import.meta.env.VITE_BASE_URL
 
@@ -14,6 +15,7 @@ export default function Task(props){
     const {setTasksUpdate} = useContext(tasksUpdateContext);
 
     const [useHover, setHover] = useState(false)
+    const [useDeleteConfirm, setDeleteConfirm] = useState(false);
     
     const data = props.data
     data.username = currentUsername;
@@ -34,6 +36,7 @@ export default function Task(props){
             }}
             onMouseLeave={() => {
                 setHover(false);
+                setDeleteConfirm(false);
             }}>
             <div className={styles["Task-group-details"]}>
                 <div className={`${styles["Task-group-item"]} ${styles.checkbox}`} id={styles[`Task-group-item-${data.checkbox}`]}></div>
@@ -43,7 +46,7 @@ export default function Task(props){
                     hidden={!useHover}
                     >{data.desc}</div>
             </div>
-            {editDeleteButtons(data, useHover, setModalState, setEditData, setModalMode, setTasksUpdate)}
+            {editDeleteButtons(data, useHover, setModalState, setEditData, setModalMode, setTasksUpdate, useDeleteConfirm, setDeleteConfirm)}
             {formattedDate ? <div className={styles.date}>
                 {formattedDate}
             </div> : null
@@ -52,7 +55,7 @@ export default function Task(props){
     );
 };
 
-function editDeleteButtons(data, useHover, setModalState, setEditData, setModalMode, setTasksUpdate) {
+function editDeleteButtons(data, useHover, setModalState, setEditData, setModalMode, setTasksUpdate, useDeleteConfirm, setDeleteConfirm) {
     const ID = data.ID;
     let taskData = {
         name: data.name,
@@ -69,8 +72,12 @@ function editDeleteButtons(data, useHover, setModalState, setEditData, setModalM
         setModalState(true);
         setEditData(taskData)
     }
-    
+
     const handleDelete = () => {
+        setDeleteConfirm(true);
+    }
+    
+    const handleDeleteConfirm = () => {
         console.log("Handling deleting for task")
         deleteData(taskData);
     }
@@ -100,20 +107,21 @@ function editDeleteButtons(data, useHover, setModalState, setEditData, setModalM
             <button onClick={handleEdit} id={styles['btn-edit']} className={styles["btn-edit"]} hidden={!useHover}>
                 <embed src='/assets/edit.svg' id={styles['embed-edit']}/>
             </button>
-            <button onClick={handleDelete} id={styles['btn-delete']} className={styles["btn-delete"]} hidden={!useHover}>
-                <embed src='/assets/delete.svg' id={styles['embed-delete']}/>
-            </button>
+
+            {
+                useDeleteConfirm ? <>
+                <button onClick={handleDeleteConfirm} id={styles['btn-delete']} className={styles["btn-delete-confirm"]} hidden={!useHover}
+                    data-tooltip-id="warning-tooltip"
+                    data-tooltip-content="Warning: deletes ALL tasks too!"
+                    data-tooltip-place="top"
+                    data-tooltip-variant="warning">
+                    <embed src='/assets/delete.svg' id={styles['embed-delete']}/>
+                </button> 
+                <Tooltip id="warning-tooltip" defaultIsOpen={true}/></>:
+                <button onClick={handleDelete} id={styles['btn-delete']} className={styles["btn-delete"]} hidden={!useHover}>
+                    <embed src='/assets/delete.svg' id={styles['embed-delete']}/>
+                </button>
+            }
         </>
     )
 }
-
-/*
-
-my eyes hurt
-
-{
-    'name': 'Taskname',
-    'date': 'Task due date',
-    'desc': 'Long text whch should decribe the name of the task which is to be tracked and accomplished'
-}
-*/

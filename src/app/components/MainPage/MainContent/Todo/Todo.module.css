@@ -75,6 +75,10 @@
     right: 0;
 }
 
+.btn-delete-confirm {
+    background-color: rgb(255, 75, 75);
+}
+
 .btn-edit { /* positioning */
     position: absolute;
     top: 0;

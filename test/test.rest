@@ -63,7 +63,7 @@ Content-Type: application/json
 
 {
   "username": "test1",
-  "groupname": ""
+  "groupname": "Lists list list"
 }
 
 ###post new task
