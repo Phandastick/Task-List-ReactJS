@@ -110,15 +110,15 @@ function editDeleteButtons(data, useHover, setModalState, setEditData, setModalM
 
             {
                 useDeleteConfirm ? <>
-                <button onClick={handleDeleteConfirm} id={styles['btn-delete']} className={styles["btn-delete-confirm"]} hidden={!useHover}
+                <button onClick={handleDeleteConfirm} className={`${styles["btn-delete-confirm"]} ${styles["btn-delete"]}`} hidden={!useHover}
                     data-tooltip-id="warning-tooltip"
-                    data-tooltip-content="Warning: deletes ALL tasks too!"
-                    data-tooltip-place="top"
+                    data-tooltip-content="Delete task?"
+                    data-tooltip-place="top-start"
                     data-tooltip-variant="warning">
                     <embed src='/assets/delete.svg' id={styles['embed-delete']}/>
                 </button> 
                 <Tooltip id="warning-tooltip" defaultIsOpen={true}/></>:
-                <button onClick={handleDelete} id={styles['btn-delete']} className={styles["btn-delete"]} hidden={!useHover}>
+                <button onClick={handleDelete} className={styles["btn-delete"]} hidden={!useHover}>
                     <embed src='/assets/delete.svg' id={styles['embed-delete']}/>
                 </button>
             }

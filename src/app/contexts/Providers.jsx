@@ -6,7 +6,8 @@ import { usernameContext,
         tasksUpdateContext, 
         tasksContext,
         themeContext,
-        modalModeContext
+        modalModeContext,
+        filterListContext
         } from '@Contexts';
 
 export default function Providers({children}) {
@@ -18,7 +19,7 @@ export default function Providers({children}) {
     const [useTasks, setTasks] = useState([]); //Tasks content
     const [useTheme, setTheme] = useState('Dark');
     const [useModalMode, setModalMode] = useState(null);
-
+    const [useFilterList, setFilterList] = useState([]);
 
     return(
         <usernameContext.Provider value={{currentUsername,setCurrentUsername}}>
@@ -29,7 +30,9 @@ export default function Providers({children}) {
         <tasksContext.Provider value={{useTasks, setTasks}}>
         <themeContext.Provider value={{useTheme, setTheme}}>
         <modalModeContext.Provider value={{useModalMode, setModalMode}}>
+        <filterListContext.Provider value={{useFilterList, setFilterList}}>
             {children}
+        </filterListContext.Provider>
         </modalModeContext.Provider>
         </themeContext.Provider>
         </tasksContext.Provider>

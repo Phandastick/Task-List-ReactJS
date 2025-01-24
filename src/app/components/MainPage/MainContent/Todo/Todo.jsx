@@ -1,6 +1,6 @@
 import TaskListSection from './TaskListSection.jsx';
 
-import { usernameContext, tasksUpdateContext, listsUpdateContext } from '@Contexts';
+import { usernameContext, tasksUpdateContext, listsUpdateContext, filterListContext } from '@Contexts';
 import styles from './Todo.module.css';
 import { useContext, useState, useEffect } from 'react';
 
@@ -9,11 +9,13 @@ const BASE_URL = import.meta.env.VITE_BASE_URL
 export default function Todo(props){
     // const tasks = props.tasks; //array
     const {currentUsername} = useContext(usernameContext);
-    const [taskArray, setTaskArray] = useState([]);
+    const {useFilterList} = useContext(filterListContext);
+    const [useTaskArray, setTaskArray] = useState([]);
+    const [useFilterTasks, setFilterTasks] = useState([])
     const filterMode = props.filterMode
 
     //flag
-    const [isLoading, setLoading] = useState(true);
+    const [isLoading, setLoading] = useState(true); 
     const [error, setError] = useState(null);
     const { useTasksUpdate, setTasksUpdate } = useContext(tasksUpdateContext)
     const { useListsUpdate, setListsUpdate } = useContext(listsUpdateContext)
@@ -36,6 +38,8 @@ export default function Todo(props){
                 }
                 // console.log(tasks)
                 setTaskArray(tasks)
+                setFilterTasks(tasks)
+                debugger
             } catch(err){
                 console.error(err)
                 setError(err.message)
@@ -50,6 +54,16 @@ export default function Todo(props){
         }
         fetchData();
     }, [useTasksUpdate, useListsUpdate])
+
+    useEffect(() => {
+        debugger
+        if(useFilterList.length > 0) { // if filter list has something
+
+        } else {
+            debugger
+            setFilterTasks(useTaskArray)
+        }
+    }, [useFilterList, setTaskArray])
 
     if (isLoading) {
         return <div>Loading tasks, please wait...</div>;
@@ -66,7 +80,7 @@ export default function Todo(props){
     return (
         <div className={styles["tasks-container"]}>
             {
-                taskArray.map((taskList) => {
+                useFilterTasks.map((taskList) => {
                     if(taskList.tasks === undefined || taskList.tasks == [] || taskList.tasks.length < 1){
                         return
                     } else {

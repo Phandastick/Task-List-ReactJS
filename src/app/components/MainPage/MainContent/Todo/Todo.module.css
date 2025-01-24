@@ -69,22 +69,6 @@
     transition: 500ms;
 }
 
-.btn-delete { /* positioning */
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-
-.btn-delete-confirm {
-    background-color: rgb(255, 75, 75);
-}
-
-.btn-edit { /* positioning */
-    position: absolute;
-    top: 0;
-    right: calc(3rem + 10px);
-}
-
 .btn-edit, .btn-delete {
     width: 3rem;
     height: 3.1rem;
@@ -97,6 +81,23 @@
     transform: translateX(15px) translateY(-1.5rem);
     z-index: 2;
 }
+
+.btn-edit { /* positioning */
+    position: absolute;
+    top: 0;
+    right: calc(3rem + 10px);
+}
+
+.btn-delete, .btn-delete-confirm { /* positioning */
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.btn-delete-confirm {
+    background-color: rgb(255, 75, 75);
+}
+
 
 #embed-edit, #embed-delete {
     pointer-events: none;
