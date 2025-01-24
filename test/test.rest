@@ -53,18 +53,17 @@ Content-Type: application/json
 
 {
   "username": "test1",
-  "oldName": "",
-  "newName"
+  "oldGroupname": "new NEW list name name",
+  "newGroupname": "new name?"
 }
 
 ### Delete list
-PATCH http://localhost:6969/api/doDeleteList
+DELETE http://localhost:6969/api/doDeleteList
 Content-Type: application/json
 
 {
   "username": "test1",
-  "oldName": "",
-  "newName"
+  "groupname": "Lists list list"
 }
 
 ###post new task

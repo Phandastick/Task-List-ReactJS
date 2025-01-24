@@ -144,49 +144,75 @@ listsRouter.post('/doPostNewList', async (req, res) => {
 listsRouter.delete('/doDeleteList', async (req, res) => {
     const data = req.body
     const username = data.username
-    const listname = data.groupname
+    const groupname = data.groupname
     
     const lists = await db.collection("tasks")
 
     const validation = await lists.findOne({
         "name": username,
-        "lists.groupname": oldName
+        "lists.groupname": groupname
     })
 
-    res.sendStatus(502)
+    console.log(validation);
+
+    if(!validation){
+        res.status(404).send("List not found!")
+    }
+
+    const results = await lists.updateOne(
+        {
+            name: username
+        }, 
+        {
+            '$pull': {
+                    'lists':{'groupname': groupname}
+                // }
+            }
+        }
+    )
+
+    if(results.acknowledged == true){
+        if(results.modifiedCount > 0){
+            res.status(204).send("List successfully deleted!")
+        } else {
+            res.status(502).send("Something went wrong, query acknowledged but list not deleted.")
+        }
+    } else {
+        res.sendStatus(502);
+    }
 });
 
 listsRouter.patch('/doPatchList', async (req, res) => {
 
     const data = req.body
     const username = data.username
-    const oldName = data.oldName
-    const newName = data.newName
+    const oldGroupname = data.oldGroupname
+    const newGroupname = data.newGroupname
 
     const lists = await db.collection("tasks")
 
     const validation = await lists.findOne({
         "name": username,
-        "lists.groupname": oldName
+        "lists.groupname": oldGroupname
     })
 
     if(!validation){
-        res.status(404).send("Invalid List!")
+        res.status(404).end();
     }
 
-    const updateResults = await db.updateOne(
+    const updateResults = await lists.updateOne(
         {
             "name": username
         },
         { //set new list, positional operator is there to filter
             $set: {
-            "lists.$[lists].groupname":newName
+            "lists.$[lists].groupname":newGroupname
             }
         },
         {
             arrayFilters: [ //filter for existing list
             {
-                "lists.groupname": oldName
+                "lists.groupname": oldGroupname
             }
             ]
         }

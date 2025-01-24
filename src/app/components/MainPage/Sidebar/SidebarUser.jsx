@@ -40,7 +40,7 @@ export default function SidebarUser(props){
                 setError(err.message)
             } finally {
                 setListsUpdate(false);
-                setLoading(false)
+                setLoading(false);
             }
         }
         fetchData();
