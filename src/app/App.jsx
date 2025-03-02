@@ -1,25 +1,15 @@
-import { useState } from 'react'
-import './App.css'
-import Navbar from './components/Navbar/Navbar'
-import MainContent from './components/MainContent/MainContent'
-import Sidebar from './components/Sidebar/Sidebar'
-import { usernameContext } from './contexts'
+import { useContext } from "react";
+import MainPage from "./components/MainPage/MainPage";
+import LoginPage from "./components/LoginPage/LoginPage";
+import { loginContext } from "./contexts/Contexts";
 
+//TODO: Add calendar mode
 
-function App() {
-  const [user, setuser] = useState('error')
+export default function App() {
+    const { isLogin } = useContext(loginContext)
 
-  return (
-    <usernameContext.Provider value={user}>
-    <div className='app-wrapper'>
-      <Sidebar/>
-      <hr className = "header-seperator" />
-      <Navbar/>
-      <hr className="vertical-seperator" />
-      <MainContent/>
-    </div>
-    </usernameContext.Provider>
-  )
+    return (
+        isLogin ? <MainPage /> : <LoginPage />
+    )
+    // return <MainPage /> 
 }
-
-export default App
